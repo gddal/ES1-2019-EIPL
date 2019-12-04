@@ -1,7 +1,7 @@
 package pt.iul.ista.esi;
 
 /**
- * Hello world!
+ * Software para analise de erros de software!
  *
  */
 public class App 
