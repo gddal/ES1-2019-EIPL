@@ -33,7 +33,7 @@ public class AppTest
      */
     public void testApp()
     {
-    	new GUI_janela("Test").open();
+    	App.main(null);
         assertTrue( true );
     }
 }
