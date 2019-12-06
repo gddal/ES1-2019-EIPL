@@ -21,10 +21,21 @@ package pt.iul.ista.esi;
 
 public class App 
 {
-    public static void main( String[] args )
+	public static final String TITLE = "Analise de erros de software";
+	public static final String FILE = "dados.xls";
+
+	
+	/**
+	 * 
+	 * Main method to start application.
+	 *
+	 *
+	 */
+	public static void main( String[] args )
     {
 
-        System.out.println( "Software para analise de erros de software!" );
+		System.out.println(TITLE);
+		new GUI_janela(TITLE).open();
 
     }
 }
