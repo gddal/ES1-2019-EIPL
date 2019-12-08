@@ -21,8 +21,9 @@ package pt.iul.ista.esi;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
-public class Regra {
+public class Regra_exemplo {
 	
 	private String nome;
 	private String expressao;
@@ -49,7 +50,7 @@ public class Regra {
 	 *            int acessos do método a atributos da própria classe.
 	 * 
 	 */
-	public Regra(String nome, String expressao, int loc, int cyclo, int atfd, int laa) {
+	public Regra_exemplo(String nome, String expressao, int loc, int cyclo, int atfd, int laa) {
 		
 		this.nome = nome;
 		this.expressao = expressao;
@@ -226,7 +227,13 @@ public class Regra {
 		//TODO calculo da expressao da regra
         ScriptEngineManager sem = new ScriptEngineManager();
         ScriptEngine se = sem.getEngineByName("JavaScript");
-        Object result = se.eval(this.expressao);
+        Object result = null;
+		try {
+			result = se.eval(this.expressao);
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return Boolean.TRUE.equals(result);
 	}	
 

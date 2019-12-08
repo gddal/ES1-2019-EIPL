@@ -40,26 +40,6 @@ public class Regra {
 
 	public void setExpressao(String expressao) {
 		this.expressao = expressao;
-	}
-	
-//Alterar end
-
-	
-
-	public boolean Testar(Metodo m) {		//Aplicar Teste Metodo e a classe a desenvolver noutra altura
-		//m.getLOC
-		//m.getCyclo
-		//....
-		return true; //TODO
-		
-	}
-
-	public void Apagar() {
-		
-		//TODO
-		
-		
-	}
-	
+	}	
 	
 }
