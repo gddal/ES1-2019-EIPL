@@ -46,9 +46,11 @@ public class RegrasGUI2 {
 	private ArrayList<String> regra = new ArrayList<String>();
 	private String temp = "";
 	private JTextField textField_1;
+	private boolean nomeRegra;
 
 	private ScriptEngineManager factory = new ScriptEngineManager();
 	private ScriptEngine engine = factory.getEngineByName("JavaScript");
+	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -78,9 +80,10 @@ public class RegrasGUI2 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 475, 315);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		nomeRegra = false;
 
 		final JButton btnNewButton = new JButton("LOC");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -90,7 +93,7 @@ public class RegrasGUI2 {
 
 			}
 		});
-		btnNewButton.setBounds(27, 30, 89, 35);
+		btnNewButton.setBounds(27, 47, 89, 35);
 		frame.getContentPane().add(btnNewButton);
 
 		final JButton button = new JButton("CYCLO");
@@ -98,10 +101,9 @@ public class RegrasGUI2 {
 			public void actionPerformed(ActionEvent e) {
 				regra.add(" " + button.getText());
 				textField.setText(showRegra());
-				System.out.println(regra.get(0));
 			}
 		});
-		button.setBounds(27, 76, 89, 35);
+		button.setBounds(27, 93, 89, 35);
 		frame.getContentPane().add(button);
 
 		final JButton button_1 = new JButton("ATFD");
@@ -111,7 +113,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_1.setBounds(27, 122, 89, 35);
+		button_1.setBounds(27, 139, 89, 35);
 		frame.getContentPane().add(button_1);
 
 		final JButton button_2 = new JButton("LAA");
@@ -121,7 +123,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_2.setBounds(27, 168, 89, 35);
+		button_2.setBounds(27, 185, 89, 35);
 		frame.getContentPane().add(button_2);
 
 		final JButton button_3 = new JButton(")");
@@ -131,7 +133,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_3.setBounds(321, 30, 89, 35);
+		button_3.setBounds(342, 48, 89, 35);
 		frame.getContentPane().add(button_3);
 
 		final JButton button_4 = new JButton("(");
@@ -141,7 +143,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_4.setBounds(222, 30, 89, 35);
+		button_4.setBounds(243, 48, 89, 35);
 		frame.getContentPane().add(button_4);
 
 		JButton button_5 = new JButton("AND");
@@ -151,7 +153,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_5.setBounds(222, 76, 89, 35);
+		button_5.setBounds(243, 94, 89, 35);
 		frame.getContentPane().add(button_5);
 
 		JButton button_6 = new JButton("OR");
@@ -161,7 +163,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_6.setBounds(321, 76, 89, 35);
+		button_6.setBounds(342, 94, 89, 35);
 		frame.getContentPane().add(button_6);
 
 		JButton button_7 = new JButton("C");
@@ -171,7 +173,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_7.setBounds(222, 168, 89, 35);
+		button_7.setBounds(243, 185, 89, 35);
 		frame.getContentPane().add(button_7);
 
 		JButton button_8 = new JButton("DELETE");
@@ -181,18 +183,18 @@ public class RegrasGUI2 {
 					String s = regra.remove(regra.size() - 1);
 					regra.add(s.substring(0, s.length() - 1));
 					textField.setText(showRegra());
-					if (regra.get(regra.size() - 1).isEmpty())
+					if (regra.get(regra.size() - 1).isBlank())
 						regra.remove(regra.size() - 1);
 				}
 
 			}
 		});
-		button_8.setBounds(321, 168, 89, 35);
+		button_8.setBounds(342, 185, 89, 35);
 		frame.getContentPane().add(button_8);
 
 		textField = new JTextField();
 		textField.setEditable(false);
-		textField.setBounds(27, 216, 280, 34);
+		textField.setBounds(27, 231, 280, 34);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 
@@ -200,21 +202,24 @@ public class RegrasGUI2 {
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (!textField_1.getText().isEmpty()) {
+					if (!textField_1.getText().isBlank()) {
 						// TODO
 						Regras.clear();
-						Regras.add(new Regras("abc", showRegra()));
-						JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
-						frame.dispose();
-						regra.clear();
-						System.out.println(Regras.get(0).verify(1, 2, 0, 3));
+						if(nomeRegra) {
+							Regras.add(new Regras(textField_2.getText(), showRegra()));
+							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
+							frame.dispose();
+							regra.clear();						
+						} else {
+							JOptionPane.showMessageDialog(frame, "Regra Invalida");
+						}
 					}
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(frame, "Regra Invalida");
 				}
 			}
 		});
-		button_9.setBounds(321, 216, 89, 35);
+		button_9.setBounds(342, 231, 89, 35);
 		frame.getContentPane().add(button_9);
 
 		textField_1 = new JTextField("Valores");
@@ -236,7 +241,7 @@ public class RegrasGUI2 {
 				textField_1.setText("");
 			}
 		});
-		textField_1.setBounds(222, 122, 188, 33);
+		textField_1.setBounds(243, 140, 188, 33);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
@@ -247,7 +252,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_10.setBounds(123, 30, 89, 35);
+		button_10.setBounds(123, 47, 89, 35);
 		frame.getContentPane().add(button_10);
 
 		final JButton button_11 = new JButton(">=");
@@ -257,7 +262,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_11.setBounds(123, 76, 89, 35);
+		button_11.setBounds(123, 93, 89, 35);
 		frame.getContentPane().add(button_11);
 
 		final JButton button_12 = new JButton("<");
@@ -267,7 +272,7 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_12.setBounds(123, 122, 89, 35);
+		button_12.setBounds(123, 139, 89, 35);
 		frame.getContentPane().add(button_12);
 
 		final JButton button_13 = new JButton("<=");
@@ -277,8 +282,29 @@ public class RegrasGUI2 {
 				textField.setText(showRegra());
 			}
 		});
-		button_13.setBounds(123, 168, 89, 35);
+		button_13.setBounds(123, 185, 89, 35);
 		frame.getContentPane().add(button_13);
+		
+		textField_2 = new JTextField();
+		textField_2 = new JTextField("Nome da Regra");
+		textField_2.setForeground(Color.LIGHT_GRAY);
+		textField_2.setToolTipText("Nome da Regra");
+		textField_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				textField_2.setForeground(Color.BLACK);
+				textField_2.setText("");
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!textField_2.getText().isBlank())
+					nomeRegra=true;
+			}
+		});
+		
+		textField_2.setBounds(27, 11, 401, 25);
+		frame.getContentPane().add(textField_2);
+		textField_2.setColumns(10);
 
 	}
 
@@ -287,8 +313,6 @@ public class RegrasGUI2 {
 		for (int i = 0; i < regra.size(); i++) {
 			temp += " " + regra.get(i);
 		}
-		System.out.println(regra.toString());
-		System.out.println(temp);
 		return temp;
 	}
 }
