@@ -19,6 +19,9 @@
 
 package pt.iul.ista.esi;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 public class Regra {
 	
 	private String nome;
@@ -219,8 +222,12 @@ public class Regra {
 	 *
 	 */
 	public boolean calcular(int loc, int cyclo, int atfd, int laa) {
+		
 		//TODO calculo da expressao da regra
-		return true;
+        ScriptEngineManager sem = new ScriptEngineManager();
+        ScriptEngine se = sem.getEngineByName("JavaScript");
+        Object result = se.eval(this.expressao);
+		return Boolean.TRUE.equals(result);
 	}	
 
 }
