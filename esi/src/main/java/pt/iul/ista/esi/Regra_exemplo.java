@@ -115,6 +115,16 @@ public class Regra_exemplo {
 		int atfd = metodo.getAtfd();
 		int laa = metodo.getLaa();
 		
+		if(this.expressao.contains("LOC"))
+			this.expressao = this.expressao.replace("LOC", Integer.toString(loc));			
+		if(this.expressao.contains("CYCLO"))
+			this.expressao = this.expressao.replace("CYCLO", Integer.toString(cyclo));
+		if(this.expressao.contains("ATFD"))
+			this.expressao = this.expressao.replace("ATFD", Integer.toString(atfd));
+		if(this.expressao.contains("LAA"))
+			this.expressao = this.expressao.replace("LAA", Integer.toString(laa));
+
+		
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		boolean result = (boolean) engine.eval(this.expressao);
 

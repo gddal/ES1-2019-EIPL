@@ -107,23 +107,29 @@ public class Regra {
 	 * @return Boolean resultado do calculo da regra.
 	 *
 	 */
-	public boolean calcula(Metodo_exemplo metodo) {
+	public boolean calcula(Metodo_exemplo metodo) throws ScriptException {
 		
 		int loc = metodo.getLoc();
 		int cyclo = metodo.getCyclo();
 		int atfd = metodo.getAtfd();
 		int laa = metodo.getLaa();
+		
+		if(this.expressao.contains("LOC"))
+			this.expressao = this.expressao.replace("LOC", Integer.toString(loc));			
+		if(this.expressao.contains("CYCLO"))
+			this.expressao = this.expressao.replace("CYCLO", Integer.toString(cyclo));
+		if(this.expressao.contains("ATFD"))
+			this.expressao = this.expressao.replace("ATFD", Integer.toString(atfd));
+		if(this.expressao.contains("LAA"))
+			this.expressao = this.expressao.replace("LAA", Integer.toString(laa));
+
+		
+		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+		boolean result = (boolean) engine.eval(this.expressao);
 
 		//TODO calculo da expressao da regra
-        ScriptEngineManager sem = new ScriptEngineManager();
-        ScriptEngine se = sem.getEngineByName("JavaScript");
-        Object result = null;
-		try {
-			result = se.eval(this.expressao);
-		} catch (ScriptException e) {
-			e.printStackTrace();
-		}
-		return Boolean.TRUE.equals(result);
+
+		return result;
 	}	
 
 }

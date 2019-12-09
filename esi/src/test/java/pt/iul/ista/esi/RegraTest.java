@@ -61,8 +61,8 @@ class RegraTest {
 
 	@Test
 	void testCalcula() throws ScriptException {
-		regra = new Regra_exemplo("Regra", "1==1");
-		metodo = new Metodo_exemplo("Metodo",0,0,0,0);
+		regra = new Regra_exemplo("Regra", "LOC==1 && CYCLO==1 && ATFD==1 && LAA==1");
+		metodo = new Metodo_exemplo("Metodo",1,1,1,1);
 		assertTrue(regra.calcula(metodo));
 		regra = new Regra_exemplo("Regra", "1==2");
 		assertFalse(regra.calcula(metodo));
