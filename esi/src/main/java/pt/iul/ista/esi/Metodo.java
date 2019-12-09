@@ -34,7 +34,8 @@ public class Metodo {
 	 * 
 	 */
 	//Construtor
-	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa, boolean is_long_method, boolean iPlasma, boolean pmd, boolean is_feature_envy){
+//	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa, boolean is_long_method, boolean iPlasma, boolean pmd, boolean is_feature_envy){
+	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa){
 		this.methodID = methodID;
 		this.packageName=packageName;
 		this.className=className;
@@ -58,7 +59,7 @@ public class Metodo {
 	 * 
 	 * 
 	 */
-	public int GetmethodID() {
+	public int getMethodID() {
 		return this.methodID;
 	}
 	
@@ -70,7 +71,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public String GetpackageName() {
+	public String getPackageName() {
 		return this.packageName;
 	}
 	
@@ -82,7 +83,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public String GetclassName() {
+	public String getClassName() {
 		return this.className;
 	}
 	
@@ -94,7 +95,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public String GetmethodName() {
+	public String getMethodName() {
 		return this.methodName;
 	}
 	
@@ -106,7 +107,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public int Getloc() {
+	public int getLoc() {
 		return this.loc;
 	}
 	
@@ -118,7 +119,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public int Getcyclo() {
+	public int getCyclo() {
 		return this.cyclo;
 	}
 	
@@ -130,7 +131,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public int Getatfd() {
+	public int getAtfd() {
 		return this.atfd;
 	}
 	
@@ -142,7 +143,7 @@ public class Metodo {
 	 * 
 	 */
 	
-	public double Getlaa() {
+	public double getLaa() {
 		return this.laa;
 	}
 
