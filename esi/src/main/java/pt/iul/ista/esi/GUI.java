@@ -42,16 +42,36 @@ public class GUI extends JPanel{
 	private JButton editarB;
 	
 	
+	/**
+	 * 
+	 * Construtor para classe GUI
+	 *
+	 * @param frame
+	 *            frame do gui.
+	 * @param criarB
+	 *            botão que cria uma janela para aplicar uma nova regra.
+	 * @param eliminarB
+	 *            botão que elimina uma regra.
+	 * @param editarB
+	 *            botão que cria uma janela que edita uma regra existente.
+	 * 
+	 * 
+	 */
+	
 	public GUI() {
 		super(new BorderLayout());
 		frame = new JFrame("GUI");
-		frame.setSize(350, 350);
+		frame.setSize(300, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addFrameContent();
 
 	}
 	
+	
+	/**
+	 * Adiciona conteúdo para GUI.
+	 */
 	
 	private void addFrameContent() {
 		
@@ -83,6 +103,10 @@ public class GUI extends JPanel{
 		add(buttonPane, BorderLayout.PAGE_END);
 	}
 	
+	/**
+	 * Abre a aplicação.
+	 */
+	
 	public void open() {
 
 		frame.setContentPane(this);
@@ -90,8 +114,13 @@ public class GUI extends JPanel{
 
 	}
 	
+	/**
+	 * Classe do botão create.
+	 */
+	
 	class CreateListener implements ActionListener {
 
+		
 		private JButton button;
 
 		
@@ -104,12 +133,16 @@ public class GUI extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			GUI_janela gj = new GUI_janela("Create");
+			Janela gj = new Janela("Create");
 			gj.open();
 			
 		}
 
 	}
+	
+	/**
+	 * Classe do botão delete.
+	 */
 	
 	class EliminarListener implements ActionListener {
 
@@ -130,6 +163,10 @@ public class GUI extends JPanel{
 
 	}
 	
+	/**
+	 * Classe do botão edit.
+	 */
+	
 	class EditarListener implements ActionListener {
 
 		private JButton button;
@@ -143,7 +180,7 @@ public class GUI extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			GUI_janela gj = new GUI_janela("Edit");
+			Janela gj = new Janela("Edit");
 			gj.open();
 			
 		}

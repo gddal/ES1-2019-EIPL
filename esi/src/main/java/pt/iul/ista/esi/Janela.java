@@ -38,7 +38,7 @@ import javax.swing.WindowConstants;
  */
 
 
-public class GUI_janela {
+public class Janela {
 	
 	String[] options = {"Yes","No"};
 	private JFrame frame;
@@ -47,12 +47,22 @@ public class GUI_janela {
 	private JLabel lbl;
 	
 
-	/*
-	 *  @param name - o nome da janela
+	/**
+	 * 
+	 * Construtor para a classe Janela
+	 *
+	 * @param frane
+	 *            jframe frame da classe janela.
+	 * @param name
+	 *            string nome da janela.
+	 * @param panel 
+	 *            jpanel painel "Close Panel" da janela.
+	 * @param lbl
+	 *            jlabel label situado no painel "Close Panel".
 	 * 
 	 */
 	
-	public GUI_janela(String name) {
+	public Janela(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
 		panel = new JPanel();
@@ -77,7 +87,13 @@ public class GUI_janela {
 	}
 
 	/*
-	 * Adicionar o conteudo aqui
+	 * Conteúdos para o GUI da classe janela
+	 * 
+	 *   Adicionar o conteudo aqui
+	 *   
+	 *  	|			|
+	 *  	|			|
+	 *  	V			V
 	 */
 
 	private void addFrameContent() {
@@ -87,7 +103,10 @@ public class GUI_janela {
 	}
 	
 	
-	
+	/**
+	 * Abre a janela.
+	 * 
+	 */
 	public void open() {
 		frame.setVisible(true);
 	}
