@@ -183,7 +183,7 @@ public class RegrasGUI2 {
 					String s = regra.remove(regra.size() - 1);
 					regra.add(s.substring(0, s.length() - 1));
 					textField.setText(showRegra());
-					if (regra.get(regra.size() - 1).isBlank())
+					if (regra.get(regra.size() - 1).isEmpty())
 						regra.remove(regra.size() - 1);
 				}
 
@@ -202,7 +202,7 @@ public class RegrasGUI2 {
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if (!textField_1.getText().isBlank()) {
+					if (!textField_1.getText().isEmpty()) {
 						// TODO
 						Regras.clear();
 						if(nomeRegra) {
@@ -297,7 +297,7 @@ public class RegrasGUI2 {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!textField_2.getText().isBlank())
+				if(!textField_2.getText().isEmpty())
 					nomeRegra=true;
 			}
 		});
