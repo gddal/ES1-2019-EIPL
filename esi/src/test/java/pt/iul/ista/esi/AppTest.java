@@ -1,39 +1,54 @@
+/**
+*
+* Trabalho final de Engenharia de Software I 2019/20
+* 
+* Grupo 85
+* 
+* Projecto Analise de erros de software.
+*
+* @author Miguel Diaz Gonçalves 82493
+* @author Gonçalo Dias do Amaral 83380
+* @author Miguel Carriço 73745
+* @author André Freitas 82361
+* @author Pedro Jones 82946
+* @version 0.01
+*
+*/
+
 package pt.iul.ista.esi;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
+import pt.iul.ista.esi.App;
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-    	App.main(null);
-        assertTrue( true );
-    }
+class AppTest {
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void testApp() {
+	   	App.main(null);
+	   	assertTrue(true);
+	}
+
 }
