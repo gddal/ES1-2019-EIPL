@@ -2,8 +2,6 @@ package pt.iul.ista.esi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import javax.script.ScriptException;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
