@@ -16,7 +16,7 @@
 * @version 0.01
 *
 */
-package pt.iul.ista.esi;
+package pt.iul.ista.esi.testes;
 
 public class Metodo_exemplo {
 
