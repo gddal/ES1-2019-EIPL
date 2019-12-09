@@ -22,7 +22,7 @@ package pt.iul.ista.esi;
 public class App 
 {
 	public static final String TITLE = "Analise de erros de software";
-	public static final String FILE = "dados.xls";
+	public static final String FILE = "Long-Method.xlsx";
 
 	
 	/**
