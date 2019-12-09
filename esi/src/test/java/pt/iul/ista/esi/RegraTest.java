@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class RegraTest {
 
 	private Regra regra;
-	private Metodo_exemplo metodo;
+	private Metodo metodo;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -61,10 +61,16 @@ class RegraTest {
 
 	@Test
 	void testCalcula() throws ScriptException {
-		regra = new Regra("Regra", "LOC==1 && CYCLO==1 && ATFD==1 && LAA==1");
-		metodo = new Metodo_exemplo("Metodo",1,1,1,1);
+		metodo = new Metodo(1,"packageName","className","methodName",81,11,6,0.1);
+		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
 		assertTrue(regra.calcula(metodo));
-		regra = new Regra("Regra", "LOC>1");
+		regra = new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42");
+		assertTrue(regra.calcula(metodo));
+		
+		metodo = new Metodo(1,"packageName","className","methodName",1,1,1,1);
+		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
+		assertFalse(regra.calcula(metodo));
+		regra = new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42");
 		assertFalse(regra.calcula(metodo));
 	}
 
