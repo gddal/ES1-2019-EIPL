@@ -35,7 +35,7 @@ public class App
     {
 
 		System.out.println(TITLE);
-		new GUI_janela(TITLE).open();
+		new Gui().open();
 
     }
 }

@@ -31,7 +31,7 @@ import javax.swing.WindowConstants;
 
 
 
-public class GUI extends JPanel{
+public class Gui extends JPanel{
 	
 	
 	
@@ -58,7 +58,7 @@ public class GUI extends JPanel{
 	 * 
 	 */
 	
-	public GUI() {
+	public Gui() {
 		super(new BorderLayout());
 		frame = new JFrame("GUI");
 		frame.setSize(300, 200);
