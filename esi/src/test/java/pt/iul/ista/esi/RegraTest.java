@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class RegraTest {
 
-	private Regra_exemplo regra;
+	private Regra regra;
 	private Metodo_exemplo metodo;
 	
 	@BeforeAll
@@ -33,13 +33,13 @@ class RegraTest {
 
 	@Test
 	void testGetNome() {
-		regra = new Regra_exemplo("Teste", "True");
+		regra = new Regra("Teste", "LOC==1");
 		assertEquals(regra.getNome(), "Teste");
 	}
 
 	@Test
 	void testSetNome() {
-		regra = new Regra_exemplo("Teste", "True");
+		regra = new Regra("Teste", "LOC==1");
 		assertEquals(regra.getNome(), "Teste");
 		regra.setNome("Regra");
 		assertEquals(regra.getNome(), "Regra");
@@ -47,24 +47,24 @@ class RegraTest {
 
 	@Test
 	void testGetExpressao() {
-		regra = new Regra_exemplo("Teste", "True");
-		assertEquals(regra.getExpressao(), "True");
+		regra = new Regra("Teste", "LOC==1");
+		assertEquals(regra.getExpressao(), "LOC==1");
 	}
 
 	@Test
 	void testSetExpressao() {
-		regra = new Regra_exemplo("Teste", "True");
-		assertEquals(regra.getExpressao(), "True");
-		regra.setExpressao("False");
-		assertEquals(regra.getExpressao(), "False");
+		regra = new Regra("Teste", "LOC==1");
+		assertEquals(regra.getExpressao(), "LOC==1");
+		regra.setExpressao("LOC>1");
+		assertEquals(regra.getExpressao(), "LOC>1");
 	}
 
 	@Test
 	void testCalcula() throws ScriptException {
-		regra = new Regra_exemplo("Regra", "LOC==1 && CYCLO==1 && ATFD==1 && LAA==1");
+		regra = new Regra("Regra", "LOC==1 && CYCLO==1 && ATFD==1 && LAA==1");
 		metodo = new Metodo_exemplo("Metodo",1,1,1,1);
 		assertTrue(regra.calcula(metodo));
-		regra = new Regra_exemplo("Regra", "1==2");
+		regra = new Regra("Regra", "LOC>1");
 		assertFalse(regra.calcula(metodo));
 	}
 

@@ -127,8 +127,6 @@ public class Regra {
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		boolean result = (boolean) engine.eval(this.expressao);
 
-		//TODO calculo da expressao da regra
-
 		return result;
 	}	
 
