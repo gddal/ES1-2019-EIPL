@@ -17,7 +17,7 @@
 *
 */
 
-package pt.iul.ista.esi.testes;
+package pt.iul.ista.esi.exemplos;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
