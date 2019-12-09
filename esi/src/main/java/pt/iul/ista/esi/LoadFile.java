@@ -44,8 +44,8 @@ public class LoadFile {
 
 	public static void main(String[] args) {
 		try {
-			//File excel = new File ("C:/Users/mcarrico/Documents/PESSOAIS/SCHOOL/ECLIPSE/Workspaces/ESI-PRATICAS/ESI - Method/src/dummy.xlsx");
-			FileInputStream fis = new FileInputStream(App.FILE);
+			File excel = new File (App.FILE);
+			FileInputStream fis = new FileInputStream(excel);
 			XSSFWorkbook book = new XSSFWorkbook(fis);
 			XSSFSheet sheet = book.getSheetAt(0);
 
