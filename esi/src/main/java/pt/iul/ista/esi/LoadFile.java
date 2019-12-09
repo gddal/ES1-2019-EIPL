@@ -31,8 +31,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoadFile {
 
-	public static final String SAMPLE_XLSX_FILE_PATH = "C:/Users/mcarrico/Documents/PESSOAIS/SCHOOL/ECLIPSE/Workspaces/ESI-PRATICAS/ESI - Method/src/dummy.xlsx";
-
 	static int MethodID;
 	static String packageName;
 	static String className;
@@ -41,10 +39,7 @@ public class LoadFile {
 	static int CYCLO;
 	static int ATFD;
 	static double LAA;
-	static boolean is_long_method;
-	static boolean iPlasma;
-	static boolean PMD;
-	static boolean is_feature_envy;
+	
 
 
 	public static void main(String[] args) {
