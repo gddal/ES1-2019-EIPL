@@ -38,7 +38,10 @@ public class App {
 	private static final String REGRAS = "regras.cfg";
 
 	// Lista com todas as regras defenidas
-	public final static List<Regra> listaRegras = new ArrayList<>();
+	public static List<Regra> listaRegras = new ArrayList<Regra>();
+
+	// Lista com todas os Metodos
+	public static List<Metodo> listaMetodos = new ArrayList<Metodo>();
 
 	/**
 	 * 
@@ -111,6 +114,9 @@ public class App {
 	 *
 	 */
 	public static void main(String[] args) {
+		
+		listaRegras = App.carregaRegras(REGRAS);
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new Gui().open();
