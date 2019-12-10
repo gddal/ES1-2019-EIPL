@@ -76,7 +76,7 @@ public class Editor {
 	 * @param textField_regra
 	 * 			  jtextfield caixa de texto para atribuir o nome da nova regra.
 	 * @param hasRegraContent
-	 * 			  boolean devolve true se existe conteudo no parametro "textField_regra", caso contrário devolve false. 
+	 * 			  boolean devolve true se existe conteudo no parametro "textField_regra", caso contrario devolve false. 
 	 * 
 	 */
 	public Editor() {
