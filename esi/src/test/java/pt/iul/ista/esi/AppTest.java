@@ -19,11 +19,8 @@ package pt.iul.ista.esi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.script.ScriptException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,6 +33,7 @@ import pt.iul.ista.esi.App;
 class AppTest {
 
 	private List<Regra> listaRegras = new ArrayList<>();
+	private List<Metodo> listaMetodos = new ArrayList<Metodo>();
 	private Regra regra;
 	
 	@BeforeAll
@@ -65,13 +63,13 @@ class AppTest {
 		listaRegras.add(new Regra("is_long_method", "LOC > 80 && CYCLO >10"));
 		listaRegras.add(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42"));
 		App.gravaRegras("teste_regras.tmp",listaRegras);
+		App.gravaRegras("z:/teste_regras.tmp",listaRegras);
 	}
 
 	@Test
 	void testCarregaRegras() {
-//		FileNotFoundException thrown = assertThrows(FileNotFoundException.class, ()-> listaRegras = App.carregaRegras("não_existe.xxx"));
-//		assertTrue(thrown.getMessage().contains("Erro. Ficheiro não_existe.xxx não encontrado."));
 		
+		assertTrue(App.carregaRegras("não_existe.xxx").isEmpty());
 		listaRegras.add(new Regra("is_long_method", "LOC > 80 && CYCLO >10"));
 		listaRegras.add(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42"));
 		App.gravaRegras("teste_regras.tmp",listaRegras);

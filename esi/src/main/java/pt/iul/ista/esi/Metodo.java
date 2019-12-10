@@ -167,10 +167,7 @@ public class Metodo {
         Metodo metodo= (Metodo) objecto; 
           
         // Compara os atibutos  
-        return this.methodID == metodo.getMethodID() &&
-        		this.packageName.equals(metodo.getPackageName()) &&
-                		this.className.equals(metodo.getClassName()) &&
-                		this.methodName.equals(metodo.getMethodName()); 
+        return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
     }
 
 

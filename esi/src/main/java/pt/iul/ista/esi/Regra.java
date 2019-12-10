@@ -103,7 +103,7 @@ public class Regra {
 	 * 
 	 * equals para comparar duas regras.
 	 *
-	 * @param o Object para comparar.
+	 * @param objecto Object para comparar.
 
 	 * @return
 	 *         Boolean verdadeiro se as regras forem iguais falso caso contrário
@@ -126,7 +126,7 @@ public class Regra {
         Regra regra = (Regra) objecto; 
           
         // Compara os atibutos  
-        return this.nome.equals(regra.nome) && this.expressao.equals(regra.expressao); 
+        return this.nome.equals(regra.getNome()) && this.expressao.equals(regra.getExpressao()); 
     }
 
 	/**

@@ -37,7 +37,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 
 public class App {
-	
+
 	// Titulo
 	public static final String TITLE = "Analise de erros de software";
 	// Ficheiro de excel
@@ -55,8 +55,8 @@ public class App {
 	 * 
 	 * Grava num ficheiro todas as regras defenidas listaRegras
 	 * 
-	 * @param file    String nome do ficheiro.
-	 * @param listaRegras    List<Regra> arrayList com as regras.
+	 * @param file        String nome do ficheiro.
+	 * @param listaRegras ArrayList com as regras.
 	 *
 	 */
 	public static void gravaRegras(String file, List<Regra> listaRegras) {
@@ -72,8 +72,8 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro. Ficheiro " + file + " não encontrado.");
 		} finally {
-			assert printwriter != null;
-			printwriter.close();
+			if (printwriter != null)
+				printwriter.close();
 		}
 
 	}
@@ -82,20 +82,20 @@ public class App {
 	 * 
 	 * Garrega para listaRegras todas as regras defenidas no ficheiro
 	 * 
-	 * @param file    String nome do ficheiro.
+	 * @param file String nome do ficheiro.
 	 *
-	 * @return List<Regra> arrayList com as regras.
+	 * @return ArrayList com as regras.
 	 *
 	 */
 	public static List<Regra> carregaRegras(String file) {
 
 		Scanner scanner = null;
 		List<Regra> listaRegras = new ArrayList<>();
-		String line;
-		String[] info;
 
 		try {
 			scanner = new Scanner(new File(file));
+			String line;
+			String[] info;
 
 			while (scanner.hasNextLine()) {
 
@@ -107,21 +107,20 @@ public class App {
 		} catch (FileNotFoundException e) {
 			System.out.println("Erro. Ficheiro " + file + " não encontrado.");
 		} finally {
-			assert scanner != null;
-			scanner.close();
+			if (scanner != null)
+				scanner.close();
 		}
-		
-		return listaRegras;
 
+		return listaRegras;
 	}
 
 	/**
 	 * 
 	 * Garrega para listaMetodos todos os Metodos defenidos no ficheiro Excel
 	 * 
-	 * @param file    String nome do ficheiro.
+	 * @param file String nome do ficheiro.
 	 *
-	 * @return List<Metodos> arrayList com as metodos.
+	 * @return ArrayList com as metodos.
 	 *
 	 */
 	public static List<Metodo> carregaMetodos(String file) {
@@ -137,7 +136,7 @@ public class App {
 		double laa;
 
 		try {
-			File excel = new File (FILE);
+			File excel = new File(FILE);
 			FileInputStream ficheiroInput = new FileInputStream(excel);
 			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);
 			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);
@@ -153,10 +152,10 @@ public class App {
 				Iterator<Cell> iteradorCelula = linhaExcel.cellIterator();
 
 				// Ignora a primeira Linha
-				if(linhaExcel.getRowNum()==0 )
+				if (linhaExcel.getRowNum() == 0)
 					continue;
 
-				Cell celula=iteradorCelula.next();
+				Cell celula = iteradorCelula.next();
 
 				methodID = (int) celula.getNumericCellValue();
 				celula = iteradorCelula.next();
@@ -181,24 +180,24 @@ public class App {
 			livroExcel.close();
 
 		} catch (FileNotFoundException fe) {
-			fe.printStackTrace();
+			return null;
 		} catch (IOException ie) {
-			ie.printStackTrace();
+			return null;
 		}
 		return listaMetodos;
-	}	
-	
+	}
+
 	/**
 	 * 
 	 * Main method to start application.
 	 *
-	 *
+	 * @param args String[] parametros iniciais
 	 */
 	public static void main(String[] args) {
-		
+
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new MenuGui().open();
