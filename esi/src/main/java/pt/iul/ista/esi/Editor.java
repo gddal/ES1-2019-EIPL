@@ -115,7 +115,7 @@ public class Editor {
 	 */
 	private void initialize() {
 		
-//----------------------- Botoes ------------------------------------
+//----------------------- JButton ------------------------------------
 
 		final JButton locB = new JButton("LOC");
 		locB.addActionListener(new ActionListener() {
@@ -289,7 +289,7 @@ public class Editor {
 		lt_eqB.setBounds(123, 185, 89, 35);
 		frame.getContentPane().add(lt_eqB);
 		
-//----------------------- Fim Botoes ------------------------------------
+//----------------------- JTextField ------------------------------------
 		
 		textField = new JTextField();
 		textField.setEditable(false);
