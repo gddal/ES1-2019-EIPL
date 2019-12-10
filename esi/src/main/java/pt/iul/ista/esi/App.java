@@ -1,5 +1,7 @@
 package pt.iul.ista.esi;
 
+import javax.swing.SwingUtilities;
+
 /**
 *
 * Trabalho final de Engenharia de Software I 2019/20
@@ -33,9 +35,11 @@ public class App
 	 */
 	public static void main( String[] args )
     {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new Gui().open();
+			}
 
-		System.out.println(TITLE);
-		new Gui().open();
-
+		});
     }
 }

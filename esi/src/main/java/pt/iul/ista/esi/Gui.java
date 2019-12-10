@@ -27,6 +27,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 
@@ -133,9 +134,12 @@ public class Gui extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			Janela gj = new Janela("Create");
-			gj.open();
-			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					Editor gj = new Editor();
+					gj.open();
+				}
+			});
 		}
 
 	}
@@ -180,9 +184,12 @@ public class Gui extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			Janela gj = new Janela("Edit");
-			gj.open();
-			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					Editor gj = new Editor();
+					gj.open();
+				}
+			});
 		}
 
 	}

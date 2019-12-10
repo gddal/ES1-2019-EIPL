@@ -56,7 +56,7 @@ public class Janela {
 	 * @param name
 	 *            string nome da janela.
 	 * @param panel 
-	 *            jpanel painel "Close Panel" da janela.
+	 *            jpanel painel "Close Panel".
 	 * @param lbl
 	 *            jlabel label situado no painel "Close Panel".
 	 * 
