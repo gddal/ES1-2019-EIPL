@@ -24,7 +24,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 public class Regra {
-	
+
 	private String nome;
 	private String expressao;
 
@@ -32,18 +32,16 @@ public class Regra {
 	 * 
 	 * Construtor para o Objecto Regra
 	 *
-	 * @param nome
-	 *            String nome da regra.
-	 * @param expressao
-	 *            String expressão logica para calculo da regra.
+	 * @param nome      String nome da regra.
+	 * @param expressao String expressão logica para calculo da regra.
 	 * 
 	 */
 	public Regra(String nome, String expressao) {
-		
+
 		this.nome = nome;
 		this.expressao = expressao;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o nome da regra.
@@ -54,7 +52,6 @@ public class Regra {
 	public String getNome() {
 		return nome;
 	}
-
 
 	/**
 	 * 
@@ -71,8 +68,7 @@ public class Regra {
 	 * 
 	 * Setter para o nome da regra.
 	 *
-	 * @param nome
-	 *            String nome da regra.
+	 * @param nome String nome da regra.
 	 * 
 	 */
 	public void setNome(String nome) {
@@ -83,52 +79,88 @@ public class Regra {
 	 * 
 	 * Setter para a expressao de calculo da regra.
 	 *
-	 * @param expressao
-	 *            String expressao de calculo da regra.
+	 * @param expressao String expressao de calculo da regra.
 	 * 
 	 */
 	public void setExpressao(String expressao) {
 		this.expressao = expressao;
-	}	
+	}
+
+	/**
+	 * 
+	 * toStrin para o objeto regra.
+	 *
+	 * @return
+	 *         String Nome_da_regra;Expressao
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return this.nome + ";" + this.expressao;
+	}
+
+	/**
+	 * 
+	 * equals para comparar duas regras.
+	 *
+	 * @param o Object para comparar.
+
+	 * @return
+	 *         Boolean verdadeiro se as regras forem iguais falso caso contrário
+	 * 
+	 */
+	@Override
+	public boolean equals(Object objecto) {
+		
+		// Se é ele proprio return true   
+        if (objecto == this) { 
+            return true; 
+        } 
+  
+        // Testa se é uma regra
+        if (!(objecto instanceof Regra)) { 
+            return false; 
+        } 
+          
+        // typecast para Regra para poder comparar  
+        Regra regra = (Regra) objecto; 
+          
+        // Compara os atibutos  
+        return this.nome.equals(regra.nome) && this.expressao.equals(regra.expressao); 
+    }
 
 	/**
 	 * 
 	 * Calcula o resultado da regra para os valores fornecidos
 	 * 
-	 * @param metodo
-	 *            Metodo O metodo a analisar.
-	 * @param cyclo
-	 *            int complexidade ciclomática.
-	 * @param atfd
-	 *            int acessos do método a métodos de outras classes.
-	 * @param laa
-	 *            int acessos do método a atributos da própria classe.
+	 * @param metodo Metodo O metodo a analisar.
+	 * @param cyclo  int complexidade ciclomática.
+	 * @param atfd   int acessos do método a métodos de outras classes.
+	 * @param laa    int acessos do método a atributos da própria classe.
 	 *
 	 * @return Boolean resultado do calculo da regra.
 	 *
 	 */
 	public boolean calcula(Metodo metodo) throws ScriptException {
-		
+
 		int loc = metodo.getLoc();
 		int cyclo = metodo.getCyclo();
 		int atfd = metodo.getAtfd();
 		double laa = metodo.getLaa();
-		
-		if(this.expressao.contains("LOC"))
-			this.expressao = this.expressao.replace("LOC", Integer.toString(loc));			
-		if(this.expressao.contains("CYCLO"))
+
+		if (this.expressao.contains("LOC"))
+			this.expressao = this.expressao.replace("LOC", Integer.toString(loc));
+		if (this.expressao.contains("CYCLO"))
 			this.expressao = this.expressao.replace("CYCLO", Integer.toString(cyclo));
-		if(this.expressao.contains("ATFD"))
+		if (this.expressao.contains("ATFD"))
 			this.expressao = this.expressao.replace("ATFD", Integer.toString(atfd));
-		if(this.expressao.contains("LAA"))
+		if (this.expressao.contains("LAA"))
 			this.expressao = this.expressao.replace("LAA", Double.toString(laa));
 
-		
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		boolean result = (boolean) engine.eval(this.expressao);
 
 		return result;
-	}	
+	}
 
 }
-
