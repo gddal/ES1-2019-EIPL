@@ -11,12 +11,8 @@ public class Metodo {
 	private int cyclo;
 	private int atfd;
 	private double laa;
-	//private boolean is_long_method;
-	//private boolean iPlasma;
-	//private boolean pmd;
-	//private boolean is_feature_envy;
 
-	
+
 	/**
 	 * 
 	 * Construtor para o Objecto Regra
@@ -34,7 +30,7 @@ public class Metodo {
 	 * 
 	 */
 	//Construtor
-//	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa, boolean is_long_method, boolean iPlasma, boolean pmd, boolean is_feature_envy){
+	//	
 	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa){
 		this.methodID = methodID;
 		this.packageName=packageName;
@@ -44,10 +40,6 @@ public class Metodo {
 		this.cyclo=cyclo;
 		this.atfd=atfd;
 		this.laa=laa;
-	//	this.is_long_method=is_long_method;
-	//	this.iPlasma=iPlasma;
-	//	this.pmd=pmd;
-	//	this.is_feature_envy=is_feature_envy;
 	}
 
 	//Getters
@@ -62,7 +54,7 @@ public class Metodo {
 	public int getMethodID() {
 		return this.methodID;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o nome do pacote do metodo
@@ -70,11 +62,11 @@ public class Metodo {
 	 * @returns String nome do pacote do metodo.
 	 * 
 	 */
-	
+
 	public String getPackageName() {
 		return this.packageName;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o nome da classe do metodo
@@ -82,11 +74,11 @@ public class Metodo {
 	 * @returns String nome da classe do metodo.
 	 * 
 	 */
-	
+
 	public String getClassName() {
 		return this.className;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o nome do metodo.
@@ -94,11 +86,11 @@ public class Metodo {
 	 * @returns String nome do metodo.
 	 * 
 	 */
-	
+
 	public String getMethodName() {
 		return this.methodName;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o valor do número de linhas de código do metodo.
@@ -106,11 +98,11 @@ public class Metodo {
 	 * @returns int número de linhas de código.
 	 * 
 	 */
-	
+
 	public int getLoc() {
 		return this.loc;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o valor da complexidade ciclomática do metodo.
@@ -118,11 +110,11 @@ public class Metodo {
 	 * @returns int valor da complexidade ciclomática.
 	 * 
 	 */
-	
+
 	public int getCyclo() {
 		return this.cyclo;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o valor dos acessos do método a métodos de outras classes do metodo.
@@ -130,11 +122,11 @@ public class Metodo {
 	 * @returns int número de linhas de código.
 	 * 
 	 */
-	
+
 	public int getAtfd() {
 		return this.atfd;
 	}
-	
+
 	/**
 	 * 
 	 * Getter para o valor do numero de acessos do método a atributos da própria classe do metodo.
@@ -142,23 +134,15 @@ public class Metodo {
 	 * @returns double numero de acessos do método a atributos da própria classe.
 	 * 
 	 */
-	
+
 	public double getLaa() {
 		return this.laa;
 	}
 
-	/*public boolean Getis_long_method() {
-		return is_long_method;
+	//Metodo toString
+	public String toString() {
+		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
+
 	}
-	public boolean GetiPlasma(){
-		return iPlasma;		
-	}
-	public boolean Getpmd() {
-		return pmd;		
-	}
-	public boolean Getis_feature_envy() {
-		return is_feature_envy;		
-	}
-*/
 
 }

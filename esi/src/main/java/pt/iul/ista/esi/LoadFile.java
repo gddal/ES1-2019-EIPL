@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -31,71 +32,100 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoadFile {
 
-	static int MethodID;
+	//Atributos internos
+	static int methodID;
 	static String packageName;
 	static String className;
 	static String methodName;
-	static int LOC;
-	static int CYCLO;
-	static int ATFD;
-	static double LAA;
+	static int loc;
+	static int cyclo;
+	static int atfd;
+	static double laa;
+	private ArrayList<Metodo> listaMetodos = new ArrayList<Metodo>();
+
+	/**
+	 * 
+	 * Construtor para o metodo LoadFile
+	 *
+	 * @param methodID
+	 *            int ID do metodo
+	 * @param packageName
+	 *            String nome do package.
+	 * @param className
+	 *            String nome da class.
+	 * @param methodName
+	 *            String nome do metodo.
+	 * @param loc
+	 *            int numero de linhas de codigo.
+	 * @param cyclo
+	 *            int complexidade ciclomatica.
+	 * @param atfd
+	 *            int acessos do metodo a metodos de outras classes.
+	 * @param laa
+	 *            double acessos do metodo a atributos da propria classe.
+	 */
+
+	public LoadFile() {
+		this.LoadFiletoList();
+	}
+
+	/**
+	 * 
+	 * Getter para a lista de metodos obtida
+	 *
+	 * @returns ArrayList<Method> listaMetodos
+	 *  
+	 */
+	public ArrayList<Metodo> getMetodos(){
+		return listaMetodos;
+	}
 	
+	//Metodo que processa o XLSX e coloca os dados na listaMetodos
+	public void LoadFiletoList() {
 
-
-	public static void main(String[] args) {
 		try {
-			File excel = new File (App.FILE);
-			FileInputStream fis = new FileInputStream(excel);
-			XSSFWorkbook book = new XSSFWorkbook(fis);
-			XSSFSheet sheet = book.getSheetAt(0);
+			File excel = new File ("FILE");
+			FileInputStream ficheiroInput = new FileInputStream(excel);
+			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);
+			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);
 
-			Iterator<Row> itr = sheet.iterator();
+			// Interage com cada folha do ficheiro Excel
+			Iterator<Row> iteradorFolha = folhaExcel.iterator();
 
-			// Iterating over Excel file in Java
-			while (itr.hasNext()) {
-				Row row = itr.next();
+			// Interage com cada linha do ficheiro Excel
+			while (iteradorFolha.hasNext()) {
+				Row linhaExcel = iteradorFolha.next();
 
-				// Iterating over each column of Excel file
-				Iterator<Cell> cellIterator = row.cellIterator();
-				while (cellIterator.hasNext()) {
+				// Interage com cada coluna do ficheiro Excel
+				Iterator<Cell> iteradorCelula = linhaExcel.cellIterator();
 
-					Cell cell = cellIterator.next();
+				// Ignora a primeira Linha
+				if(linhaExcel.getRowNum()==0 )
+					continue;
 
-					System.out.print(cell.toString()+";");
+				Cell celula=iteradorCelula.next();
 
-					//						MethodID = (int) cell.getNumericCellValue();
-					//						packageName = cell.getStringCellValue();
-					//						className = cell.getStringCellValue();
-					//						methodName = cell.getStringCellValue();
-					//						LOC = (int) cell.getNumericCellValue();
-					//						CYCLO = (int) cell.getNumericCellValue();
-					//						ATFD = (int) cell.getNumericCellValue();
-					//						LAA = (double) cell.getNumericCellValue();
-					//						is_long_method = cell.getBooleanCellValue();
-					//						iPlasma = cell.getBooleanCellValue();
-					//						PMD = cell.getBooleanCellValue();
-					//						is_feature_envy = cell.getBooleanCellValue();
+				methodID = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				packageName = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				className = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				methodName = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				loc = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				cyclo = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				atfd = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				laa = celula.getNumericCellValue();
 
-					//						switch (cell.getCellType()) {
-					//						case STRING:{
-					//
-					//							System.out.print(cell.getStringCellValue() + "\t");
-					//						}break;
-					//						case NUMERIC:{
-					//							System.out.print(cell.getNumericCellValue() + "\t");
-					//						}break;
-					//						case BOOLEAN:{
-					//							System.out.print(cell.getBooleanCellValue() + "\t");
-					//						}break;
-					//						default:
-					//
-					//						}
-				}
-				System.out.println("CRLF");
+				listaMetodos.add(new Metodo(methodID, packageName, className, methodName, loc, cyclo, atfd, laa));
 			}
 
-			fis.close();
-			book.close();
+			ficheiroInput.close();
+			livroExcel.close();
 
 		} catch (FileNotFoundException fe) {
 			fe.printStackTrace();
@@ -103,6 +133,4 @@ public class LoadFile {
 			ie.printStackTrace();
 		}
 	}
-
 }
-
