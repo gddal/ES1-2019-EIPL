@@ -69,4 +69,21 @@ class MetodoTest {
 		assertEquals(metodo.getLaa(), 0.1);
 	}
 
+	@Test
+	void testToString() {
+		metodo = new Metodo(1,"packageName","className","methodName",81,11,6,0.1);
+		assertEquals(metodo.toString(),"1;packageName;className;methodName;81;11;6;0.1");
+	}
+	
+	@Test
+	void testEquals() {
+		String string = new String();
+		metodo = new Metodo(1,"packageName","className","methodName",81,11,6,0.1);
+		assertTrue(metodo.equals(metodo));
+		assertTrue(metodo.equals(new Metodo(1,"packageName","className","methodName",81,11,6,0.1)));
+		assertFalse(metodo.equals(new Metodo(2,"packageName2","className2","methodName2",81,11,6,0.1)));
+		assertFalse(metodo.equals(string));
+	}
+	
+
 }

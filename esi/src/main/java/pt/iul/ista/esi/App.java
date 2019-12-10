@@ -1,13 +1,21 @@
 package pt.iul.ista.esi;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -107,6 +115,70 @@ public class App {
 
 	}
 
+	public static List<Metodo> carregaMetodos(String file) {
+
+		int methodID;
+		String packageName;
+		String className;
+		String methodName;
+		int loc;
+		int cyclo;
+		int atfd;
+		double laa;
+		List<Metodo> listaMetodos = new ArrayList<Metodo>();
+
+		try {
+			File excel = new File ("FILE");
+			FileInputStream ficheiroInput = new FileInputStream(excel);
+			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);
+			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);
+
+			// Interage com cada folha do ficheiro Excel
+			Iterator<Row> iteradorFolha = folhaExcel.iterator();
+
+			// Interage com cada linha do ficheiro Excel
+			while (iteradorFolha.hasNext()) {
+				Row linhaExcel = iteradorFolha.next();
+
+				// Interage com cada coluna do ficheiro Excel
+				Iterator<Cell> iteradorCelula = linhaExcel.cellIterator();
+
+				// Ignora a primeira Linha
+				if(linhaExcel.getRowNum()==0 )
+					continue;
+
+				Cell celula=iteradorCelula.next();
+
+				methodID = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				packageName = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				className = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				methodName = celula.getStringCellValue();
+				celula = iteradorCelula.next();
+				loc = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				cyclo = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				atfd = (int) celula.getNumericCellValue();
+				celula = iteradorCelula.next();
+				laa = celula.getNumericCellValue();
+
+				listaMetodos.add(new Metodo(methodID, packageName, className, methodName, loc, cyclo, atfd, laa));
+			}
+
+			ficheiroInput.close();
+			livroExcel.close();
+
+		} catch (FileNotFoundException fe) {
+			fe.printStackTrace();
+		} catch (IOException ie) {
+			ie.printStackTrace();
+		}
+		return listaMetodos;
+	}	
+	
 	/**
 	 * 
 	 * Main method to start application.
@@ -116,6 +188,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		listaRegras = App.carregaRegras(REGRAS);
+		listaMetodos = App.carregaMetodos(FILE);
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

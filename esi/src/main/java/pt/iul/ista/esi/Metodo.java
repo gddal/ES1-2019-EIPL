@@ -140,6 +140,47 @@ public class Metodo {
 		return this.laa;
 	}
 
+	/**
+	 * 
+	 * equals para comparar dois metodos.
+	 *
+	 * @param o Object para comparar.
+
+	 * @return
+	 *         Boolean verdadeiro se os metodos forem iguais falso caso contrário
+	 * 
+	 */
+	@Override
+	public boolean equals(Object objecto) {
+		
+		// Se é ele proprio return true   
+        if (objecto == this) { 
+            return true; 
+        } 
+  
+        // Testa se é uma Metodo
+        if (!(objecto instanceof Metodo)) { 
+            return false; 
+        } 
+          
+        // typecast para Regra para poder comparar  
+        Metodo metodo= (Metodo) objecto; 
+          
+        // Compara os atibutos  
+        return this.methodID == metodo.getMethodID() &&
+        		this.packageName.equals(metodo.getPackageName()) &&
+                		this.className.equals(metodo.getClassName()) &&
+                		this.methodName.equals(metodo.getMethodName()); 
+    }
+
+
+	/**
+	 * 
+	 * toString para a classe do metodo.
+	 *
+	 * @returns String getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa().
+	 * 
+	 */
 	//Metodo toString
 	public String toString() {
 		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
