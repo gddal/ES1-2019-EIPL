@@ -22,21 +22,26 @@ package pt.iul.ista.esi;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionListener;
 
 
 
-public class Gui extends JPanel{
+public class MenuGui extends JPanel{
 	
-	
-	
-	
+
 	private static JFrame frame;
 	private JButton criarB;
 	private JButton eliminarB;
@@ -59,7 +64,7 @@ public class Gui extends JPanel{
 	 * 
 	 */
 	
-	public Gui() {
+	public MenuGui() {
 		super(new BorderLayout());
 		frame = new JFrame("GUI");
 		frame.setSize(300, 200);
@@ -75,6 +80,8 @@ public class Gui extends JPanel{
 	 */
 	
 	private void addFrameContent() {
+		
+		//---JButton---
 		
 		criarB = new JButton("create");
 		CreateListener createListener = new CreateListener(criarB);
@@ -93,15 +100,16 @@ public class Gui extends JPanel{
 		editarB.addActionListener(editarListener);
 		
 		
-		//---LISTA JPANEL---
+		//---JPANEL---
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.add(criarB);
 		buttonPane.add(eliminarB);
 		buttonPane.add(editarB);
-		
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		
 		add(buttonPane, BorderLayout.PAGE_END);
+		
 	}
 	
 	/**
