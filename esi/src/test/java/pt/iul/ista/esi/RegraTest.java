@@ -60,6 +60,23 @@ class RegraTest {
 	}
 
 	@Test
+	void testToString() {
+		String string = new String();
+		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
+		assertEquals(regra.toString(),"is_long_method;LOC > 80 && CYCLO >10");
+	}
+	
+	@Test
+	void testEquals() {
+		String string = new String();
+		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
+		assertTrue(regra.equals(regra));
+		assertTrue(regra.equals(new Regra("is_long_method", "LOC > 80 && CYCLO >10")));
+		assertFalse(regra.equals(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42")));
+		assertFalse(regra.equals(string));
+	}
+	
+	@Test
 	void testCalcula() throws ScriptException {
 		metodo = new Metodo(1,"packageName","className","methodName",81,11,6,0.1);
 		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
