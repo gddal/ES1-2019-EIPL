@@ -61,7 +61,6 @@ class RegraTest {
 
 	@Test
 	void testToString() {
-		String string = new String();
 		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
 		assertEquals(regra.toString(),"is_long_method;LOC > 80 && CYCLO >10");
 	}

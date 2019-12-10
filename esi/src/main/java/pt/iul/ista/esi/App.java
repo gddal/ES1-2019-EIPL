@@ -115,8 +115,18 @@ public class App {
 
 	}
 
+	/**
+	 * 
+	 * Garrega para listaMetodos todos os Metodos defenidos no ficheiro Excel
+	 * 
+	 * @param file    String nome do ficheiro.
+	 *
+	 * @return List<Metodos> arrayList com as metodos.
+	 *
+	 */
 	public static List<Metodo> carregaMetodos(String file) {
 
+		List<Metodo> listaMetodos = new ArrayList<Metodo>();
 		int methodID;
 		String packageName;
 		String className;
@@ -125,10 +135,9 @@ public class App {
 		int cyclo;
 		int atfd;
 		double laa;
-		List<Metodo> listaMetodos = new ArrayList<Metodo>();
 
 		try {
-			File excel = new File ("FILE");
+			File excel = new File (FILE);
 			FileInputStream ficheiroInput = new FileInputStream(excel);
 			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);
 			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);
