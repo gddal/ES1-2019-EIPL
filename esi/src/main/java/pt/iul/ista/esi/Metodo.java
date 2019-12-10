@@ -42,6 +42,7 @@ public class Metodo {
 		this.laa=laa;
 	}
 
+	
 	//Getters
 	/**
 	 * 

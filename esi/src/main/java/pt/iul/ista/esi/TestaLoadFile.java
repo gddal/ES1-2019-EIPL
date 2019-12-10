@@ -18,6 +18,7 @@ package pt.iul.ista.esi;
 
 import java.util.ArrayList;
 
+
 public class TestaLoadFile {
 
 	public static void main(String[] args) {
