@@ -45,7 +45,7 @@ public class Regras extends JPanel{
 		}
 	}
 		
-	public boolean verify(int LOC, int CYCLO, int ATFD, int LAA) {
+	public boolean verify(int LOC, int CYCLO, int ATFD, double LAA) {
 		if(regra.contains("LOC"))
 			regra = regra.replace("LOC", Integer.toString(LOC));			
 		if(regra.contains("CYCLO"))
@@ -53,7 +53,7 @@ public class Regras extends JPanel{
 		if(regra.contains("ATFD"))
 			regra = regra.replace("ATFD", Integer.toString(ATFD));
 		if(regra.contains("LAA"))
-			regra = regra.replace("LAA", Integer.toString(LAA));
+			regra = regra.replace("LAA", Double.toString(LAA));
 		try {
 			if ((Boolean)engine.eval("" + regra)) {
 				System.out.println("true");
