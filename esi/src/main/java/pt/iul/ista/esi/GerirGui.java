@@ -47,7 +47,7 @@ import javax.swing.event.ListSelectionListener;
  */
 
 
-public class AvaliaGui extends JPanel implements ListSelectionListener{
+public class GerirGui extends JPanel implements ListSelectionListener{
 	
 	private JButton criarB;
 	private JButton eliminarB;
@@ -76,7 +76,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 	 * 
 	 */
 	
-	public AvaliaGui(String name) {
+	public GerirGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
 		panel = new JPanel();

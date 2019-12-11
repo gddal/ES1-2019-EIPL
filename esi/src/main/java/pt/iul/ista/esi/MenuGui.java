@@ -139,7 +139,7 @@ public class MenuGui extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					AvaliaGui gj = new AvaliaGui("Gerir regras");
+					GerirGui gj = new GerirGui("Gerir regras");
 					gj.open();
 				}
 			});
@@ -187,6 +187,7 @@ public class MenuGui extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
+			
 			
 		}
 

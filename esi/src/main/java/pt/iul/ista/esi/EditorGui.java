@@ -243,7 +243,7 @@ public class EditorGui {
 						if(hasRegraContent) {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
-							AvaliaGui.regraList.addElement(temp);
+							GerirGui.regraList.addElement(temp);
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
 							regra.clear();	
