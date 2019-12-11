@@ -85,7 +85,7 @@ public class Ferramenta {
 	 * @throws IllegalArgumentException caso o metodo não exeistir
 	 */
 
-	public boolean resultado(int methodID) throws IllegalArgumentException {
+	public boolean getResultado(int methodID) throws IllegalArgumentException {
 
 		for (Resultado object : this.listaResultados) {
 			if (object.getMethodID() == methodID)

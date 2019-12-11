@@ -41,19 +41,27 @@ class FerramentaTest {
 	@Test
 	void testGetListaResultados() {
 		lista = ferramenta.getListaResultados();
-		assertNull(lista);
+		assertTrue(lista.isEmpty());
+		resultado = new Resultado(1,true);
 		ferramenta.addResultado(resultado);
 		lista = ferramenta.getListaResultados();
 		assertNotNull(lista);
 	}
 	
 	@Test
-	void testEquals() {
-		String string = new String();
-		assertTrue(resultado.equals(resultado));
-		assertTrue(resultado.equals(new Resultado(1,true)));
-		assertFalse(resultado.equals(new Resultado(2,true)));
-		assertFalse(resultado.equals(string));
+	void testExistsResultado() {
+		resultado = new Resultado(1,true);
+		ferramenta.addResultado(resultado);
+		assertTrue(ferramenta.existsResultado(resultado));
+		resultado = new Resultado(2,true);
+		assertFalse(ferramenta.existsResultado(resultado));
+	}
+	
+	@Test
+	void testResultado() {
+		resultado = new Resultado(1,true);
+		ferramenta.addResultado(resultado);
+		assertTrue(ferramenta.getResultado(1));
 	}
 	
 
