@@ -43,7 +43,7 @@ public class App {
 	// Ficheiro de excel
 	public static final String FILE = "Long-Method.xlsx";
 	// Ficheiro de regras
-	private static final String REGRAS = "regras.cfg";
+	public static final String REGRAS = "regras.cfg";
 
 	// Lista com todas as regras defenidas
 	public static List<Regra> listaRegras = new ArrayList<Regra>();
