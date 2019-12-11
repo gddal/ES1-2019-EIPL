@@ -241,10 +241,13 @@ public class EditorGui {
 						// TODO
 						// Regras.clear();
 						if(hasRegraContent) {
-							App.listaRegras.add(new Regra(textField_regra.getText(), showRegra()));
+							Regra temp = new Regra(textField_regra.getText(), showRegra());
+							App.listaRegras.add(temp);
+							AvaliaGui.regraList.addElement(temp);
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
-							regra.clear();						
+							regra.clear();	
+							
 						} else {
 							JOptionPane.showMessageDialog(frame, "Regra Invalida");
 						}
@@ -378,4 +381,5 @@ public class EditorGui {
 		}
 		return temp;
 	}
+
 }

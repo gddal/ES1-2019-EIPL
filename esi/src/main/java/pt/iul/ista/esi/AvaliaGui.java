@@ -49,12 +49,11 @@ import javax.swing.event.ListSelectionListener;
 
 public class AvaliaGui extends JPanel implements ListSelectionListener{
 	
-	
 	private JButton criarB;
 	private JButton eliminarB;
 	private JButton editarB;
 	private String[] options = {"Yes","No"};
-	private DefaultListModel<Regra> regraList;
+	static DefaultListModel<Regra> regraList;
 	private JList<Regra> list;
 	private JFrame frame;
 	private String name;
@@ -197,8 +196,10 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 				public void run() {
 					EditorGui gj = new EditorGui(null, null);
 					gj.open();
+					
 				}
 			});
+
 		}
 
 	}
@@ -220,11 +221,19 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
+			
+			int index = list.getSelectedIndex();
+			
 			if (App.listaRegras.size() == 0) { // Nobody's left, disable button.
 				button.setEnabled(false);
 			} else {
 				// tem que ter um metodo para eliminar um elemento regra 
-				
+				if(list.isSelectedIndex(index)) {
+					App.listaRegras.remove(index);
+					regraList.removeElementAt(index);
+				}else {
+					System.out.println("Delete Interrupted: não existe tal regra");
+				}
 				
 			}
 			
@@ -280,5 +289,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 		}
 		
 	}
+
+
 	
 }
