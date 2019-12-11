@@ -39,8 +39,10 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Editor {
+public class EditorGui {
 
+	private String expressao;
+	private String name;
 	private String[] options = {"Yes","No"};
 	private JPanel panel;
 	private JLabel lbl;
@@ -79,7 +81,9 @@ public class Editor {
 	 * 			  boolean devolve true se existe conteudo no parametro "textField_regra", caso contrario devolve false. 
 	 * 
 	 */
-	public Editor() {
+	public EditorGui (String name, String expressao) {
+		this.name = name;
+		this.expressao = expressao;
 		frame = new JFrame("Editor");
 		frame.setBounds(100, 100, 475, 315);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -114,6 +118,12 @@ public class Editor {
 	 * Inicializa o conteudo GUI.
 	 */
 	private void initialize() {
+
+//----------------------- (Caso seja em modo edit)------------------------------------
+		
+		if(expressao != null) {
+			regra.add(expressao);
+		}
 		
 //----------------------- JButton ------------------------------------
 
@@ -296,6 +306,9 @@ public class Editor {
 		textField.setBounds(27, 231, 280, 34);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		if(expressao != null) {
+			textField.setText(expressao);
+		}
 		
 		textField_valor = new JTextField("Valores");
 		textField_valor.setForeground(Color.LIGHT_GRAY);
@@ -325,8 +338,12 @@ public class Editor {
 
 		
 		textField_regra = new JTextField("Nome da Regra");
-		textField_regra.setForeground(Color.LIGHT_GRAY);
-		textField_regra.setToolTipText("Nome da Regra");
+		if(name == null) {
+			textField_regra.setForeground(Color.LIGHT_GRAY);
+			textField_regra.setToolTipText("Nome da Regra");
+		}else {
+			textField_regra.setText(name);
+		}
 		textField_regra.setBounds(27, 11, 401, 25);
 		frame.getContentPane().add(textField_regra);
 		textField_regra.setColumns(10);

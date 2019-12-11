@@ -43,9 +43,9 @@ public class MenuGui extends JPanel{
 	
 
 	private static JFrame frame;
-	private JButton criarB;
-	private JButton eliminarB;
-	private JButton editarB;
+	private JButton gerirB;
+	private JButton avaliarB;
+	private JButton compararB;
 	
 	
 	/**
@@ -67,7 +67,7 @@ public class MenuGui extends JPanel{
 	public MenuGui() {
 		super(new BorderLayout());
 		frame = new JFrame("GUI");
-		frame.setSize(300, 200);
+		frame.setSize(500, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		addFrameContent();
@@ -83,29 +83,30 @@ public class MenuGui extends JPanel{
 		
 		//---JButton---
 		
-		criarB = new JButton("create");
-		CreateListener createListener = new CreateListener(criarB);
-		criarB.setActionCommand("create");
-		criarB.addActionListener(createListener);
+		gerirB = new JButton("Gerir regras");
+		GerirListener gerirListener = new GerirListener(gerirB);
+		gerirB.setActionCommand("gerirRegras");
+		gerirB.addActionListener(gerirListener);
+		
+		avaliarB = new JButton("Avaliar regras");
+		AvaliarListener avaliarListener = new AvaliarListener(avaliarB);
+		gerirB.setActionCommand("avaliarRegras");
+		gerirB.addActionListener(avaliarListener);
+		
+		compararB = new JButton("Comparar aplicacoes");
+		CompararListener compararListener = new CompararListener(compararB);
+		compararB.setActionCommand("compararAvalicacoes");
+		compararB.addActionListener(compararListener);
 		
 		
-		eliminarB = new JButton("delete");
-		EliminarListener eliminarListener = new EliminarListener(criarB);
-		eliminarB.setActionCommand("delete");
-		eliminarB.addActionListener(eliminarListener);
-		
-		editarB = new JButton("edit");
-		EditarListener editarListener = new EditarListener(editarB);
-		editarB.setActionCommand("edit");
-		editarB.addActionListener(editarListener);
 		
 		
 		//---JPANEL---
 		
 		JPanel buttonPane = new JPanel();
-		buttonPane.add(criarB);
-		buttonPane.add(eliminarB);
-		buttonPane.add(editarB);
+		buttonPane.add(gerirB);
+		buttonPane.add(avaliarB);
+		buttonPane.add(compararB);
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		add(buttonPane, BorderLayout.PAGE_END);
@@ -124,16 +125,16 @@ public class MenuGui extends JPanel{
 	}
 	
 	/**
-	 * Classe do botão create.
+	 * Classe do botão gerir.
 	 */
 	
-	class CreateListener implements ActionListener {
+	class GerirListener implements ActionListener {
 
 		
 		private JButton button;
 
 		
-		public CreateListener(JButton button) {
+		public GerirListener(JButton button) {
 			this.button = button;
 			
 
@@ -144,7 +145,7 @@ public class MenuGui extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					Editor gj = new Editor();
+					AvaliaGui gj = new AvaliaGui("Gerir regras");
 					gj.open();
 				}
 			});
@@ -153,15 +154,15 @@ public class MenuGui extends JPanel{
 	}
 	
 	/**
-	 * Classe do botão delete.
+	 * Classe do botão avaliar.
 	 */
 	
-	class EliminarListener implements ActionListener {
+	class AvaliarListener implements ActionListener {
 
 		private JButton button;
 
 		
-		public EliminarListener(JButton button) {
+		public AvaliarListener(JButton button) {
 			this.button = button;
 
 		}
@@ -179,12 +180,12 @@ public class MenuGui extends JPanel{
 	 * Classe do botão edit.
 	 */
 	
-	class EditarListener implements ActionListener {
+	class CompararListener implements ActionListener {
 
 		private JButton button;
 
 		
-		public EditarListener(JButton button) {
+		public CompararListener(JButton button) {
 			this.button = button;
 
 		}
@@ -192,12 +193,7 @@ public class MenuGui extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					Editor gj = new Editor();
-					gj.open();
-				}
-			});
+			
 		}
 
 	}
