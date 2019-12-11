@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.script.ScriptException;
+
 //CLASSE TEMPORARIA
 
 
@@ -28,30 +30,29 @@ public class Indicadores {
 
 	
 	public static void main(String[] args) {
-		HashMap regraslist = new HashMap<String, Regras>(); // TALVEZ E MELHOR UTILIZAR UM HASHMAP PARA SER MAIS FACIL OBTER AS REGRAS A PARTIR DO NOME
+		HashMap regraslist = new HashMap<String, Regra>(); // TALVEZ E MELHOR UTILIZAR UM HASHMAP PARA SER MAIS FACIL OBTER AS REGRAS A PARTIR DO NOME
 		
 		Metodo metodo = new Metodo(0, null, null, null, 0, 0, 0, 0); //TODO incorporar no GUI e com o metodo
 		
-		Regras longmethod = (Regras) regraslist.get("is_long_methog");
-		Regras PMI = (Regras) regraslist.get("PMI");
-		Regras iPlasma = (Regras) regraslist.get("iPlasma");
+		Regra longmethod = (Regra) regraslist.get("is_long_methog");
+		Regra PMI = (Regra) regraslist.get("PMI");
+		Regra iPlasma = (Regra) regraslist.get("iPlasma");
 
 		
 		
 		//DCI
 		
-		if (longmethod.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) && // (PMI OU IPLASMA TRUE) E LONGMETHOD TRUE
-			(PMI.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) ||
-			iPlasma.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()))){
-			
-			boolean DCI = true;
-
-		}
+		try {
+			if (longmethod.calcula(metodo) && // (PMI OU IPLASMA TRUE) E LONGMETHOD TRUE
+				(PMI.calcula(metodo) ||
+				iPlasma.calcula(metodo))){
+				
+				boolean DCI = true;
 		
 		
-		if (!longmethod.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) && // (PMI OU IPLASMA TRUE) E LONGMETHOD FALSE
-				(PMI.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) ||
-				iPlasma.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()))){
+		if (!longmethod.calcula(metodo) && // (PMI OU IPLASMA TRUE) E LONGMETHOD FALSE
+				(PMI.calcula(metodo)) ||
+				iPlasma.calcula(metodo)){
 				
 				boolean DII = true;
 
@@ -59,9 +60,9 @@ public class Indicadores {
 			
 		
 		
-		if (!longmethod.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) && // (PMI OU IPLASMA FALSE) E LONGMETHOD FALSE
-				!(PMI.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) ||
-				iPlasma.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()))){
+		if (!longmethod.calcula(metodo) && // (PMI OU IPLASMA FALSE) E LONGMETHOD FALSE
+				!(PMI.calcula(metodo) ||
+				iPlasma.calcula(metodo))){
 				
 				boolean ADCI = true;
 
@@ -69,15 +70,20 @@ public class Indicadores {
 			
 		
 		
-		if (longmethod.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) && // (PMI OU IPLASMA FALSE) E LONGMETHOD TRUE
-				!(PMI.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()) ||
-				iPlasma.verify(metodo.getLoc(), metodo.getCyclo(), metodo.getAtfd(), metodo.getLaa()))){
+		if (longmethod.calcula(metodo) && // (PMI OU IPLASMA FALSE) E LONGMETHOD TRUE
+				!(PMI.calcula(metodo) ||
+				iPlasma.calcula(metodo))){
 				
 				boolean ADII = true;
 
 			}
 			
 		
+			}
+		} catch (ScriptException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
