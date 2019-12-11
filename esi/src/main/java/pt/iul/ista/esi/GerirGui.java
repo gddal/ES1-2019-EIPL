@@ -52,7 +52,6 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 	private JButton criarB;
 	private JButton eliminarB;
 	private JButton editarB;
-	private String[] options = {"Yes","No"};
 	static DefaultListModel<Regra> regraList;
 	private JList<Regra> list;
 	private JFrame frame;
@@ -72,7 +71,18 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 	 * @param panel 
 	 *            jpanel painel "Close Panel".
 	 * @param lbl
-	 *            jlabel label situado no painel "Close Panel".
+	 * 		      jlabel label situado no painel "Close Panel".
+	 * @param criarB
+	 *            jbutton que cria uma janela para aplicar uma nova regra.
+	 * @param eliminarB
+	 *            jbutton que elimina uma regra.
+	 * @param editarB
+	 *            jbutton que cria uma janela que edita uma regra existente.
+	 * @param list
+	 * 			  jlist<regra> lista de regras.
+	 * @param regraList
+	 * 			  defaultlistmodel<regra> modelo da "list".
+	 * 
 	 * 
 	 */
 	
@@ -85,15 +95,7 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 		frame.setLayout(new BorderLayout());
 		frame.setSize(350, 450);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showOptionDialog(null, panel, "Close Panel", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]) == JOptionPane.YES_OPTION) {
-					frame.dispose();
-					
-				}
-			}
-		});
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		addFrameContent();
 
