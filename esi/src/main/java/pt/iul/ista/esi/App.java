@@ -234,6 +234,22 @@ public class App {
 		}
 		return lista;
 	}
+	
+	public static int contemRegra(Regra r) {
+		String rNome = r.getNome().replace(" ", "");
+		String rExpressao = r.getExpressao().trim();
+		for(Regra regra : listaRegras) {
+			String regraNome = regra.getNome().trim();
+			String regraExpressao = regra.getExpressao().trim();
+			if(rNome.equals(regraNome))
+				return 1;
+			if(rExpressao.equals(regraExpressao))
+				return 2;
+			System.out.println(rNome +" " +rExpressao +" regra da lista");
+			System.out.println(regraNome +" " +regraExpressao);
+		}
+		return 0;
+	}
 
 	/**
 	 * 
