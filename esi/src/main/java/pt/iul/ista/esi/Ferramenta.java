@@ -14,7 +14,6 @@ public class Ferramenta {
 	 * Construtor para o Objecto Ferramenta
 	 *
 	 * @param nome            Srting nome da ferramenta.
-	 * @param listaResultados ArrayList com os resultados da ferramenta.
 	 * 
 	 */
 	// Construtor
@@ -80,7 +79,7 @@ public class Ferramenta {
 	 * 
 	 * Devolve o resultado do teste para o metodo methodID.
 	 *
-	 * @param int metodo.
+	 * @param methodID int ID do metodo.
 	 * @return Boolean returna o valor do teste.
 	 * @throws IllegalArgumentException caso o metodo não exeistir
 	 */
