@@ -15,7 +15,7 @@ class FerramentaTest {
 	List<Resultado> lista;
 	private Ferramenta ferramenta;
 	private Resultado resultado;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -42,27 +42,29 @@ class FerramentaTest {
 	void testGetListaResultados() {
 		lista = ferramenta.getListaResultados();
 		assertTrue(lista.isEmpty());
-		resultado = new Resultado(1,true);
+		resultado = new Resultado(1, true);
 		ferramenta.addResultado(resultado);
 		lista = ferramenta.getListaResultados();
 		assertNotNull(lista);
 	}
-	
+
 	@Test
 	void testExistsResultado() {
-		resultado = new Resultado(1,true);
+		resultado = new Resultado(1, true);
 		ferramenta.addResultado(resultado);
 		assertTrue(ferramenta.existsResultado(resultado));
-		resultado = new Resultado(2,true);
+		resultado = new Resultado(2, true);
 		assertFalse(ferramenta.existsResultado(resultado));
 	}
-	
+
 	@Test
-	void testResultado() {
-		resultado = new Resultado(1,true);
+	void testGetResultado() {
+		resultado = new Resultado(1, true);
 		ferramenta.addResultado(resultado);
 		assertTrue(ferramenta.getResultado(1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			ferramenta.getResultado(99);
+		});
 	}
-	
 
 }
