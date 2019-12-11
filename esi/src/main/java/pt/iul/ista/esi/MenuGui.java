@@ -60,7 +60,7 @@ public class MenuGui extends JPanel{
 	
 	public MenuGui() {
 		super(new BorderLayout());
-		frame = new JFrame("GUI");
+		frame = new JFrame("MENU");
 		frame.setSize(500, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -164,14 +164,14 @@ public class MenuGui extends JPanel{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			//Pode se remover nesta janela
+			
 			
 		}
 
 	}
 	
 	/**
-	 * Classe do botão edit.
+	 * Classe do botão comparar.
 	 */
 	
 	class CompararListener implements ActionListener {
