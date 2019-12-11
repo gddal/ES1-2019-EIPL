@@ -37,6 +37,8 @@ class ResultadoTest {
 	@Test
 	void testGetValor() {
 		assertTrue(resultado.getValor());
+		resultado = new Resultado(1,false);
+		assertFalse(resultado.getValor());
 	}
 	
 	@Test
