@@ -33,9 +33,8 @@ import pt.iul.ista.esi.App;
 class AppTest {
 
 	private List<Regra> listaRegras = new ArrayList<>();
-	private List<Metodo> listaMetodos = new ArrayList<Metodo>();
 	private Regra regra;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
@@ -54,30 +53,37 @@ class AppTest {
 
 	@Test
 	void testApp() {
-	   	App.main(null);
-	   	assertTrue(true);
+		App.main(null);
+		assertTrue(true);
 	}
 
 	@Test
 	void testGravaRegras() {
+
 		listaRegras.add(new Regra("is_long_method", "LOC > 80 && CYCLO >10"));
 		listaRegras.add(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42"));
-		App.gravaRegras("teste_regras.tmp",listaRegras);
-		App.gravaRegras("z:/teste_regras.tmp",listaRegras);
+		App.gravaRegras("teste_regras.tmp", listaRegras);
+		App.gravaRegras("z:/teste_regras.tmp", listaRegras);
 	}
 
 	@Test
 	void testCarregaRegras() {
-		
+
 		assertTrue(App.carregaRegras("não_existe.xxx").isEmpty());
 		listaRegras.add(new Regra("is_long_method", "LOC > 80 && CYCLO >10"));
 		listaRegras.add(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42"));
-		App.gravaRegras("teste_regras.tmp",listaRegras);
+		App.gravaRegras("teste_regras.tmp", listaRegras);
 		listaRegras.clear();
 		listaRegras = App.carregaRegras("teste_regras.tmp");
 		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
 		assertTrue(listaRegras.contains(regra));
 		regra = new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42");
 		assertTrue(listaRegras.contains(regra));
+	}
+
+	@Test
+	void testCarregaMetodos() {
+
+		assertFalse(App.carregaMetodos(App.FILE).isEmpty());
 	}
 }
