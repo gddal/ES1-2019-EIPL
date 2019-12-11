@@ -3,6 +3,8 @@ package pt.iul.ista.esi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -80,6 +82,26 @@ public class App {
 		}
 
 	}
+	
+	public static void gravaRegra(String file, Regra regra) {
+
+		PrintWriter printwriter = null;
+
+		try {
+			printwriter = new PrintWriter(new FileWriter(file, true));
+			printwriter.append(regra.toString());
+			printwriter.flush();
+		} catch (FileNotFoundException e) {
+			System.out.println("Erro. Ficheiro " + file + " não encontrado.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (printwriter != null)
+				printwriter.close();
+		}
+
+	}
 
 	/**
 	 * 
@@ -115,6 +137,27 @@ public class App {
 		}
 
 		return listaRegras;
+	}
+	
+	//SE HOUVER UMA REGRA : OLA_01 e OLA_02 e mandarmos apagar a "OLA" FICAMOS COM _01 e _02
+	public static void apagaRegra(String file, Regra regra) {
+			
+	        Scanner inputs;
+			try {
+				inputs = new Scanner(new FileReader(file));
+				PrintWriter outputs = new PrintWriter(new FileWriter(file, true));
+				while(inputs.hasNext()){
+					String s1 = inputs.nextLine();
+					String s2 = s1.replaceAll(regra.getNome(), "");
+					outputs.println(s2);
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 
 	/**

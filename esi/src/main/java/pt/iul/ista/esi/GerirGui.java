@@ -231,6 +231,7 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 			} else {
 				// tem que ter um metodo para eliminar um elemento regra 
 				if(list.isSelectedIndex(index)) {
+					App.apagaRegra("regras.cfg", App.listaRegras.get(index));
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
 				}else {
