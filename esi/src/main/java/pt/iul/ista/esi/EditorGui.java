@@ -48,7 +48,6 @@ public class EditorGui {
 	private JLabel lbl;
 	private JFrame frame;
 	private JTextField textField;
-	private ArrayList<Regras> Regras = new ArrayList<Regras>();
 	private ArrayList<String> regra = new ArrayList<String>();
 	private String temp = "";
 	private JTextField textField_valor;
@@ -240,9 +239,9 @@ public class EditorGui {
 				try {
 					if (!textField_valor.getText().isEmpty()) {
 						// TODO
-						Regras.clear();
+						// Regras.clear();
 						if(hasRegraContent) {
-							Regras.add(new Regras(textField_regra.getText(), showRegra()));
+							App.listaRegras.add(new Regra(textField_regra.getText(), showRegra()));
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
 							regra.clear();						
