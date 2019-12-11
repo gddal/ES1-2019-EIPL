@@ -51,6 +51,9 @@ public class App {
 	// Lista com todas os Metodos
 	public static List<Metodo> listaMetodos = new ArrayList<Metodo>();
 
+	// Lista com os resultados das ferramentas a analizar
+	public static List<Ferramenta> listaFerramentas = new ArrayList<Ferramenta>();
+
 	/**
 	 * 
 	 * Grava num ficheiro todas as regras defenidas listaRegras
@@ -125,7 +128,7 @@ public class App {
 	 */
 	public static List<Metodo> carregaMetodos(String file) {
 
-		List<Metodo> listaMetodos = new ArrayList<Metodo>();
+		List<Metodo> lista = new ArrayList<Metodo>();
 		int methodID;
 		String packageName;
 		String className;
@@ -173,7 +176,7 @@ public class App {
 				celula = iteradorCelula.next();
 				laa = celula.getNumericCellValue();
 
-				listaMetodos.add(new Metodo(methodID, packageName, className, methodName, loc, cyclo, atfd, laa));
+				lista.add(new Metodo(methodID, packageName, className, methodName, loc, cyclo, atfd, laa));
 			}
 
 			ficheiroInput.close();
@@ -184,7 +187,52 @@ public class App {
 		} catch (IOException ie) {
 			return null;
 		}
-		return listaMetodos;
+		return lista;
+	}
+
+	public static List<Ferramenta> carregaFerramentas(String file) {
+
+		List<Ferramenta> lista = new ArrayList<Ferramenta>();
+		Ferramenta ferramenta = null;
+		Resultado resultado = null;
+		String nome = null;
+		try {
+			File excel = new File(FILE);
+			FileInputStream ficheiroInput = new FileInputStream(excel);
+			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);
+			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);
+
+			for (int i = 8; i < 12; i++) {
+
+				// Interage com cada folha do ficheiro Excel
+				Iterator<Row> iteradorLinha = folhaExcel.iterator();
+
+				Row linhaExcel = iteradorLinha.next();
+
+				nome = linhaExcel.getCell(i).getStringCellValue();
+				ferramenta = new Ferramenta(nome);
+
+				// Interage com cada linha do ficheiro Excel
+				while (iteradorLinha.hasNext()) {
+
+					linhaExcel = iteradorLinha.next();
+					resultado = new Resultado((int) linhaExcel.getCell(0).getNumericCellValue(),
+					linhaExcel.getCell(i).getBooleanCellValue());
+					ferramenta.addResultado(resultado);
+				}
+				
+				lista.add(ferramenta);
+			}
+
+			ficheiroInput.close();
+			livroExcel.close();
+
+		} catch (FileNotFoundException fe) {
+			return null;
+		} catch (IOException ie) {
+			return null;
+		}
+		return lista;
 	}
 
 	/**
@@ -197,6 +245,7 @@ public class App {
 
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
+		listaFerramentas = App.carregaFerramentas(FILE);
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

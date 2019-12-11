@@ -15,7 +15,7 @@ public class Metodo {
 
 	/**
 	 * 
-	 * Construtor para o Objecto Regra
+	 * Construtor para o Objecto Metodo
 	 *
 	 * @param methodID
 	 *            int ID do metodo.
@@ -169,7 +169,7 @@ public class Metodo {
             return false; 
         } 
           
-        // typecast para Regra para poder comparar  
+        // typecast para Metodo para poder comparar  
         Metodo metodo= (Metodo) objecto; 
           
         // Compara os atibutos  
