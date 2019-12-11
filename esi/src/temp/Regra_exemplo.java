@@ -48,7 +48,7 @@ public class Regra_exemplo {
 	 * 
 	 * Getter para o nome da regra.
 	 *
-	 * @returns String nome da regra.
+	 * @return String nome da regra.
 	 * 
 	 */
 	public String getNome() {
@@ -60,7 +60,7 @@ public class Regra_exemplo {
 	 * 
 	 * Getter para a expressao de calculo da regra.
 	 *
-	 * @returns String expressao de calculo da regra.
+	 * @return String expressao de calculo da regra.
 	 * 
 	 */
 	public String getExpressao() {

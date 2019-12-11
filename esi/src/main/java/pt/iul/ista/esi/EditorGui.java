@@ -367,7 +367,7 @@ public class EditorGui {
 	 * 
 	 * Mostra o resultado da regra.
 	 *
-	 * @returns String resultado da regra.
+	 * @return String resultado da regra.
 	 * 
 	 */
 	

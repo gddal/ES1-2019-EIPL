@@ -17,7 +17,13 @@ public class Metodo {
 	 * 
 	 * Construtor para o Objecto Regra
 	 *
-	 * @param nome
+	 * @param methodID
+	 *            int ID do metodo.
+	 * @param packageName
+	 *            String package do metodo.
+	 * @param className
+	 *            String classe do metodo.
+	 * @param methodName
 	 *            String nome do metodo.
 	 * @param loc
 	 *            int número de linhas de código.
@@ -48,7 +54,7 @@ public class Metodo {
 	 * 
 	 * Getter para o id do metodo
 	 *
-	 * @returns int  id do metodo
+	 * @return int id do metodo
 	 * 
 	 * 
 	 */
@@ -60,7 +66,7 @@ public class Metodo {
 	 * 
 	 * Getter para o nome do pacote do metodo
 	 *
-	 * @returns String nome do pacote do metodo.
+	 * @return String nome do pacote do metodo.
 	 * 
 	 */
 
@@ -72,7 +78,7 @@ public class Metodo {
 	 * 
 	 * Getter para o nome da classe do metodo
 	 *
-	 * @returns String nome da classe do metodo.
+	 * @return String nome da classe do metodo.
 	 * 
 	 */
 
@@ -84,7 +90,7 @@ public class Metodo {
 	 * 
 	 * Getter para o nome do metodo.
 	 *
-	 * @returns String nome do metodo.
+	 * @return String nome do metodo.
 	 * 
 	 */
 
@@ -96,7 +102,7 @@ public class Metodo {
 	 * 
 	 * Getter para o valor do número de linhas de código do metodo.
 	 *
-	 * @returns int número de linhas de código.
+	 * @return int número de linhas de código.
 	 * 
 	 */
 
@@ -108,7 +114,7 @@ public class Metodo {
 	 * 
 	 * Getter para o valor da complexidade ciclomática do metodo.
 	 *
-	 * @returns int valor da complexidade ciclomática.
+	 * @return int valor da complexidade ciclomática.
 	 * 
 	 */
 
@@ -120,7 +126,7 @@ public class Metodo {
 	 * 
 	 * Getter para o valor dos acessos do método a métodos de outras classes do metodo.
 	 *
-	 * @returns int número de linhas de código.
+	 * @return int número de linhas de código.
 	 * 
 	 */
 
@@ -132,7 +138,7 @@ public class Metodo {
 	 * 
 	 * Getter para o valor do numero de acessos do método a atributos da própria classe do metodo.
 	 *
-	 * @returns double numero de acessos do método a atributos da própria classe.
+	 * @return double numero de acessos do método a atributos da própria classe.
 	 * 
 	 */
 
@@ -144,7 +150,7 @@ public class Metodo {
 	 * 
 	 * equals para comparar dois metodos.
 	 *
-	 * @param o Object para comparar.
+	 * @param objecto Object para comparar.
 
 	 * @return
 	 *         Boolean verdadeiro se os metodos forem iguais falso caso contrário
@@ -175,10 +181,10 @@ public class Metodo {
 	 * 
 	 * toString para a classe do metodo.
 	 *
-	 * @returns String getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa().
+	 * @return String getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa().
 	 * 
 	 */
-	//Metodo toString
+	
 	public String toString() {
 		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
 

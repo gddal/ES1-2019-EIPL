@@ -55,7 +55,7 @@ public class Metodo_exemplo {
 	 * 
 	 * Getter para o valor do número de linhas de código do metodo.
 	 *
-	 * @returns int número de linhas de código.
+	 * @return int número de linhas de código.
 	 * 
 	 */
 	public int getLoc() {
@@ -79,7 +79,7 @@ public class Metodo_exemplo {
 	 * 
 	 * Getter para o valor da complexidade ciclomática do metodo.
 	 *
-	 * @returns int valor da complexidade ciclomática.
+	 * @return int valor da complexidade ciclomática.
 	 * 
 	 */
 	public int getCyclo() {
@@ -104,7 +104,7 @@ public class Metodo_exemplo {
 	 * 
 	 * Getter para o valor dos acessos do método a métodos de outras classes do metodo.
 	 *
-	 * @returns int número de linhas de código.
+	 * @return int número de linhas de código.
 	 * 
 	 */
 	public int getAtfd() {
@@ -129,7 +129,7 @@ public class Metodo_exemplo {
 	 * 
 	 * Getter para o valor do numero de acessos do método a atributos da própria classe do metodo.
 	 *
-	 * @returns int numero de acessos do método a atributos da própria classe.
+	 * @return int numero de acessos do método a atributos da própria classe.
 	 * 
 	 */
 	public int getLaa() {
@@ -154,7 +154,7 @@ public class Metodo_exemplo {
 	 * 
 	 * Getter para o nome do metodo.
 	 *
-	 * @returns String nome do metodo.
+	 * @return String nome do metodo.
 	 * 
 	 */
 	public String getNome() {

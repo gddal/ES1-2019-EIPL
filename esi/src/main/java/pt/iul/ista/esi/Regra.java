@@ -46,7 +46,7 @@ public class Regra {
 	 * 
 	 * Getter para o nome da regra.
 	 *
-	 * @returns String nome da regra.
+	 * @return String nome da regra.
 	 * 
 	 */
 	public String getNome() {
@@ -57,7 +57,7 @@ public class Regra {
 	 * 
 	 * Getter para a expressao de calculo da regra.
 	 *
-	 * @returns String expressao de calculo da regra.
+	 * @return String expressao de calculo da regra.
 	 * 
 	 */
 	public String getExpressao() {
@@ -134,12 +134,11 @@ public class Regra {
 	 * Calcula o resultado da regra para os valores fornecidos
 	 * 
 	 * @param metodo Metodo O metodo a analisar.
-	 * @param cyclo  int complexidade ciclomática.
-	 * @param atfd   int acessos do método a métodos de outras classes.
-	 * @param laa    int acessos do método a atributos da própria classe.
 	 *
 	 * @return Boolean resultado do calculo da regra.
-	 *
+	 * 
+	 * @throws ScriptException caso a regra seja invalida
+	 * 
 	 */
 	public boolean calcula(Metodo metodo) throws ScriptException {
 

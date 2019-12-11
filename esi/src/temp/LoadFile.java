@@ -73,7 +73,7 @@ public class LoadFile {
 	 * 
 	 * Getter para a lista de metodos obtida
 	 *
-	 * @returns ArrayList<Method> listaMetodos
+	 * @return ArrayList<Method> listaMetodos
 	 *  
 	 */
 	public ArrayList<Metodo> getMetodos(){
