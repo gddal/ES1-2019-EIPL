@@ -47,8 +47,8 @@ import javax.swing.event.ListSelectionListener;
 public class AvaliaGui extends JPanel implements ListSelectionListener {
 	
 	
-	static DefaultListModel<Regra> regraList;
-	private JList<Regra> list;
+	static DefaultListModel<Metodo> regraList;
+	private JList<Metodo> list;
 	String[] options = {"Yes","No"};
 	private JFrame frame;
 	private String name;
@@ -81,7 +81,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 		lbl = new JLabel("Are you sure?");
 		panel.add(lbl);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(350, 450);
+		frame.setSize(500, 750);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -110,18 +110,21 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 
 	private void addFrameContent() {
 	//---JList & DefaultListModel---
+		JPanel p = new JPanel();
 		
-		regraList = new DefaultListModel<Regra>();
-		for(int i = 0 ; i < App.listaRegras.size() ; i++) {
-			regraList.addElement(App.listaRegras.get(i));
+		
+		regraList = new DefaultListModel<Metodo>();
+		for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
+			
+			regraList.addElement(App.listaMetodos.get(i));
 		}
 				
-		list = new JList<Regra>(regraList);
+		list = new JList<Metodo>(regraList);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);
 		list.setSelectedIndex(0);
-		list.setVisibleRowCount(20);
-		list.setFixedCellWidth(300);
+		list.setVisibleRowCount(38);
+		list.setFixedCellWidth(450);
 		JScrollPane scroll = new JScrollPane(list);
 				
 				
