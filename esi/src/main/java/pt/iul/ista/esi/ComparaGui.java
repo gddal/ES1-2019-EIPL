@@ -78,7 +78,12 @@ public class ComparaGui{
 	 *            jpanel painel "Close Panel".
 	 * @param lbl
 	 *            jlabel label situado no painel "Close Panel".
-	 * 
+	 * @param rl, ml
+	 * 			  jlist<string> lista de nomes das regras e classes + metodos respetivamente.
+	 * @param regraList,metodoList
+	 * 			  defaultlistmodel<string> modelo das listas.
+	 * @param checkB
+	 * 			  jbutton botão que mostra o resultado, em booleano, de um select da lista rl e um outro select da lista ml
 	 */
 	
 	public ComparaGui(String name) {
@@ -188,6 +193,7 @@ public class ComparaGui{
 	 * Classe botao check
 	 * 
 	 */
+	
 	class CheckListener implements ActionListener {
 		
 		public void actionPerformed(ActionEvent arg0) {

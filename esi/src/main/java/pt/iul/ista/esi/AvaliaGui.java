@@ -75,10 +75,8 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 	 *            jpanel painel "Close Panel".
 	 * @param lbl
 	 *            jlabel label situado no painel "Close Panel".
-	 * @param list
-	 * 			  jlist<regra> lista de regras.
-	 * @param regraList
-	 * 			  defaultlistmodel<regra> modelo da "list".
+	 * @param displaytable
+	 * 			  jtable tabela que mostra os métodos guardados na "App.listaRegra".
 	 */
 	
 	public AvaliaGui(String name) {
@@ -88,7 +86,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 		lbl = new JLabel("Are you sure?");
 		panel.add(lbl);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(500, 750);
+		frame.setSize(500, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -116,7 +114,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 	 */
 
 	private void addFrameContent() {
-	//---JList & DefaultListModel---
+	//---JTable & DefaultTableModel---
 		JPanel p = new JPanel();
 		
 		
@@ -131,14 +129,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 
 			model.addRow(infoFormatter(i));
 		}
-	/*			
-		list = new JList<String>(displaylist);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.addListSelectionListener(this);
-		list.setSelectedIndex(0);
-		list.setVisibleRowCount(38);
-		list.setFixedCellWidth(450);
-	*/
+	
 		JScrollPane scroll = new JScrollPane(displaytable);
 				
 				
