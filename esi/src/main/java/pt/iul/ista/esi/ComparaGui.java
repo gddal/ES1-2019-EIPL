@@ -201,6 +201,9 @@ public class ComparaGui{
 			for(int i = 0 ; i < App.listaRegras.size() ; i++) {
 				try {
 					if(App.listaRegras.get(i).getNome() == rl.getSelectedValue() ) {
+						System.out.println(App.listaRegras.get(i));
+						System.out.println(App.listaMetodos.get(index));
+
 						JOptionPane.showMessageDialog(frame, App.listaRegras.get(i).calcula(App.listaMetodos.get(index)));
 					}
 				} catch (ScriptException e) {
