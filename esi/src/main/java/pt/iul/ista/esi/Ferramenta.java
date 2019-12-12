@@ -94,4 +94,18 @@ public class Ferramenta {
 		throw new IllegalArgumentException("Metodo não encontrado");
 	}
 
+	/**
+	 * 
+	 * toStrin para o objeto ferramenta.
+	 *
+	 * @return
+	 *         String Nome_da_regra
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return this.nome;
+	}
+
+
 }
