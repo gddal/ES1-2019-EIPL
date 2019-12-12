@@ -50,7 +50,7 @@ class AvaliaGuiTest {
 
 	@Test
 	void testApp() {
-		new GerirGui("is_long_method").open();
+		new AvaliaGui("nome").open();
 		assertTrue(true);
 	}
 }
