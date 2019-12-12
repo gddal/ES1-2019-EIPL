@@ -159,7 +159,7 @@ public class Regra {
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
 		boolean result = (boolean) engine.eval(this.expressao);
 
-		return result;
+	return result;
 	}
 
 }
