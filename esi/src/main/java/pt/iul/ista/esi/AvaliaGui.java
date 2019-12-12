@@ -24,6 +24,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+import javax.script.ScriptException;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,24 +32,30 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /*
- * @author André Freitas
  * 
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
  */
 
 
 public class AvaliaGui extends JPanel implements ListSelectionListener {
 	
 	
-	static DefaultListModel<Metodo> regraList;
-	private JList<Metodo> list;
+	
+	private JTable displaytable;
 	String[] options = {"Yes","No"};
 	private JFrame frame;
 	private String name;
@@ -113,33 +120,85 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 		JPanel p = new JPanel();
 		
 		
-		regraList = new DefaultListModel<Metodo>();
+		displaytable = new JTable();
+		DefaultTableModel model = (DefaultTableModel) displaytable.getModel();
+		String[] colunas = columnMaker();
+		for (int i = 0; i < colunas.length; i++)
+			model.addColumn(colunas[i]);
+
+
 		for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
-			
-			regraList.addElement(App.listaMetodos.get(i));
+
+			model.addRow(infoFormatter(i));
 		}
-				
-		list = new JList<Metodo>(regraList);
+	/*			
+		list = new JList<String>(displaylist);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);
 		list.setSelectedIndex(0);
 		list.setVisibleRowCount(38);
 		list.setFixedCellWidth(450);
-		JScrollPane scroll = new JScrollPane(list);
+	*/
+		JScrollPane scroll = new JScrollPane(displaytable);
 				
 				
-			
+		
 		add(scroll, BorderLayout.CENTER);
 				
 		
 		
 	}
+	private String[] columnMaker() {
+		
+		StringBuilder sb = new StringBuilder("ID;Method;LOC;CYCLO;ATFD;LAA");
+
+
+		for(int i = 0; i<App.listaRegras.size(); i++) {
+			sb.append(";"+App.listaRegras.get(i).getNome());
+		}
 	
+		
+		return sb.toString().split(";");
+		
+	}
+	
+	private String[] infoFormatter(int i) {
+		
+
+		StringBuilder sb = new StringBuilder();
+		Metodo metodo = App.listaMetodos.get(i);
+		
+		sb.append(metodo.simplifiedtoString());
+
+		
+		App.listaRegras.forEach(regra -> {
+			try {
+				
+				Boolean resultado = regra.calcula(metodo);
+				sb.append(";" + resultado);
+				
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		String finalstring;
+		finalstring = sb.toString();
+		
+		return finalstring.split(";");
+		
+	
+
+				
+			
+		
+	}
 	
 	/**
 	 * Abre a janela.
 	 * 
 	 */
+	
 	public void open() {
 		frame.setContentPane(this);
 		frame.setVisible(true);
