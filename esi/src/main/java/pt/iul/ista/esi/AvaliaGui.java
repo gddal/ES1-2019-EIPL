@@ -20,41 +20,43 @@
 package pt.iul.ista.esi;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.script.ScriptException;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /*
- * @author André Freitas
  * 
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
  */
 
 
-public class AvaliaGui extends JPanel implements ListSelectionListener{
+public class AvaliaGui implements ListSelectionListener {
 	
-	private JButton criarB;
-	private JButton eliminarB;
-	private JButton editarB;
-	private String[] options = {"Yes","No"};
-	static DefaultListModel<Regra> regraList;
-	private JList<Regra> list;
+	
+	
+	private JTable displaytable;
+	String[] options = {"Yes","No"};
 	private JFrame frame;
 	private String name;
 	private JPanel panel;
@@ -63,7 +65,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 
 	/**
 	 * 
-	 * Construtor para a classe AvaliaGui
+	 * Construtor para a classe Janela
 	 *
 	 * @param frane
 	 *            jframe frame da classe janela.
@@ -73,7 +75,8 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 	 *            jpanel painel "Close Panel".
 	 * @param lbl
 	 *            jlabel label situado no painel "Close Panel".
-	 * 
+	 * @param displaytable
+	 * 			  jtable tabela que mostra os métodos guardados na "App.listaRegra".
 	 */
 	
 	public AvaliaGui(String name) {
@@ -83,7 +86,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 		lbl = new JLabel("Are you sure?");
 		panel.add(lbl);
 		frame.setLayout(new BorderLayout());
-		frame.setSize(350, 450);
+		frame.setSize(500, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -111,185 +114,92 @@ public class AvaliaGui extends JPanel implements ListSelectionListener{
 	 */
 
 	private void addFrameContent() {
+	//---JTable & DefaultTableModel---
+		JPanel p = new JPanel();
+		
+		
+		displaytable = new JTable();
+		DefaultTableModel model = (DefaultTableModel) displaytable.getModel();
+		String[] colunas = columnMaker();
+		for (int i = 0; i < colunas.length; i++)
+			model.addColumn(colunas[i]);
 
-		//---Jbutton---
+
+		for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
+
+			model.addRow(infoFormatter(i));
+		}
+	
+		JScrollPane scroll = new JScrollPane(displaytable);
+				
+				
 		
-		criarB = new JButton("criar regra");
-		CreateListener criarListener = new CreateListener(criarB);
-		criarB.setActionCommand("criar");
-		criarB.addActionListener(criarListener);
-		
-		eliminarB = new JButton("delete");
-		EliminarListener eliminarListener = new EliminarListener(eliminarB);
-		eliminarB.setActionCommand("delete");
-		eliminarB.addActionListener(eliminarListener);
-		
-		editarB = new JButton("edit");
-		EditarListener editarListener = new EditarListener(editarB);
-		editarB.setActionCommand("edit");
-		editarB.addActionListener(editarListener);
+		frame.add(scroll, BorderLayout.CENTER);
+				
 		
 		
+	}
+	private String[] columnMaker() {
 		
-		//---JPANEL---
-		
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
-		buttonPane.add(criarB);
-		buttonPane.add(eliminarB);
-		buttonPane.add(editarB);
-		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		
-		//---JList & DefaultListModel---
-		
-		regraList = new DefaultListModel<Regra>();
-		for(int i = 0 ; i < App.listaRegras.size() ; i++) {
-			regraList.addElement(App.listaRegras.get(i));
+		StringBuilder sb = new StringBuilder("ID;Method;LOC;CYCLO;ATFD;LAA");
+
+
+		for(int i = 0; i<App.listaRegras.size(); i++) {
+			sb.append(";"+App.listaRegras.get(i).getNome());
 		}
 		
-		list = new JList<Regra>(regraList);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.addListSelectionListener(this);
-		list.setSelectedIndex(0);
-		list.setVisibleRowCount(20);
-		list.setFixedCellWidth(300);
-		JScrollPane scroll = new JScrollPane(list);
+
+	
 		
-		
-		
-		add(scroll, BorderLayout.CENTER);
-		add(buttonPane, BorderLayout.PAGE_END);
+		return sb.toString().split(";");
 		
 	}
 	
+	private String[] infoFormatter(int i) {
+		
+
+		StringBuilder sb = new StringBuilder();
+		Metodo metodo = App.listaMetodos.get(i);
+		
+		sb.append(metodo.simplifiedtoString());
+
+		
+		App.listaRegras.forEach(regra -> {
+			try {
+				
+				Boolean resultado = regra.calcula(metodo);
+				sb.append(";" + resultado);
+				
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		String finalstring;
+		finalstring = sb.toString();
+		
+		return finalstring.split(";");
+		
+	
+
+				
+			
+		
+	}
 	
 	/**
 	 * Abre a janela.
 	 * 
 	 */
+	
 	public void open() {
-		frame.setContentPane(this);
 		frame.setVisible(true);
-	}
-	
-	
-	/**
-	 * Classe do botão create.
-	 */
-	
-	class CreateListener implements ActionListener {
-
-		
-		private JButton button;
-
-		
-		public CreateListener(JButton button) {
-			this.button = button;
-			
-
-		}
-
-		
-		
-		public void actionPerformed(ActionEvent arg0) {
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					EditorGui gj = new EditorGui(null, null);
-					gj.open();
-					
-				}
-			});
-
-		}
-
-	}
-	
-	/**
-	 * Classe do botão delete.
-	 */
-	
-	class EliminarListener implements ActionListener {
-
-		private JButton button;
-
-		
-		public EliminarListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
-		
-		public void actionPerformed(ActionEvent arg0) {
-			
-			int index = list.getSelectedIndex();
-			
-			if (App.listaRegras.size() == 0) { // Nobody's left, disable button.
-				button.setEnabled(false);
-			} else {
-				// tem que ter um metodo para eliminar um elemento regra 
-				if(list.isSelectedIndex(index)) {
-					App.listaRegras.remove(index);
-					regraList.removeElementAt(index);
-				}else {
-					System.out.println("Delete Interrupted: não existe tal regra");
-				}
-				
-			}
-			
-		}
-
-	}
-	
-	/**
-	 * Classe do botão edit.
-	 */
-	
-	class EditarListener implements ActionListener {
-
-		private JButton button;
-		
-		public EditarListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
-		
-		public void actionPerformed(ActionEvent arg0) {
-			
-			if (App.listaRegras.size() == 0) { 
-				button.setEnabled(false);
-			} else {
-				
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run() {
-						EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
-						gj.open();
-					}
-				});
-			}
-		}
-
 	}
 
 	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (list.getSelectedIndex() == -1) {
-			// No selection, disable button.
-			eliminarB.setEnabled(false);
-			editarB.setEnabled(false);
-			
-
-		} else {
-			// Selection, enable button.
-			eliminarB.setEnabled(true);
-			editarB.setEnabled(true);
-			
-		}
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
-
-
 	
 }

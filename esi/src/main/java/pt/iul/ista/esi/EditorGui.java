@@ -236,14 +236,19 @@ public class EditorGui {
 		JButton submitB = new JButton("SUBMIT");
 		submitB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==1)
+					JOptionPane.showMessageDialog(frame, "Ja existe uma regra com esse nome");
+				if(!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==2)
+					JOptionPane.showMessageDialog(frame, "Ja existe uma regra com essa expressao");
 				try {
-					if (!textField_valor.getText().isEmpty()) {
+					if (!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==0) {
 						// TODO
 						// Regras.clear();
 						if(hasRegraContent) {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
-							AvaliaGui.regraList.addElement(temp);
+							GerirGui.regraList.addElement(temp);
+							App.gravaRegra("regras.cfg", new Regra(textField_regra.getText(), showRegra()));
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
 							regra.clear();	

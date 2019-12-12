@@ -31,6 +31,8 @@ import org.junit.jupiter.api.Test;
 import pt.iul.ista.esi.App;
 
 class MenuGuiTest {
+	
+	private MenuGui menu;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -42,6 +44,7 @@ class MenuGuiTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		menu = new MenuGui();
 	}
 
 	@AfterEach
@@ -52,5 +55,6 @@ class MenuGuiTest {
 	void testApp() {
 		new EditorGui("is_long_method", "LOC > 80 && CYCLO >10").open();
 		assertTrue(true);
+		menu.open();
 	}
 }

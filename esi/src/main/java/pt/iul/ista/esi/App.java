@@ -3,6 +3,8 @@ package pt.iul.ista.esi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -80,6 +82,26 @@ public class App {
 		}
 
 	}
+	
+	public static void gravaRegra(String file, Regra regra) {
+
+		PrintWriter printwriter = null;
+
+		try {
+			printwriter = new PrintWriter(new FileWriter(file, true));
+			printwriter.append(regra.toString());
+			printwriter.flush();
+		} catch (FileNotFoundException e) {
+			System.out.println("Erro. Ficheiro " + file + " não encontrado.");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (printwriter != null)
+				printwriter.close();
+		}
+
+	}
 
 	/**
 	 * 
@@ -116,6 +138,7 @@ public class App {
 
 		return listaRegras;
 	}
+	
 
 	/**
 	 * 
@@ -234,6 +257,22 @@ public class App {
 		}
 		return lista;
 	}
+	
+	public static int contemRegra(Regra r) {
+		String rNome = r.getNome().replace(" ", "");
+		String rExpressao = r.getExpressao().trim();
+		for(Regra regra : listaRegras) {
+			String regraNome = regra.getNome().trim();
+			String regraExpressao = regra.getExpressao().trim();
+			if(rNome.equals(regraNome))
+				return 1;
+			if(rExpressao.equals(regraExpressao))
+				return 2;
+			System.out.println(rNome +" " +rExpressao +" regra da lista");
+			System.out.println(regraNome +" " +regraExpressao);
+		}
+		return 0;
+	}
 
 	/**
 	 * 
@@ -246,6 +285,7 @@ public class App {
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
 		listaFerramentas = App.carregaFerramentas(FILE);
+		System.out.println(listaRegras.toString());
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

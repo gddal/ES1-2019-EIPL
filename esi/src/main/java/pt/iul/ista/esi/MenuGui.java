@@ -35,7 +35,6 @@ import javax.swing.WindowConstants;
 
 public class MenuGui extends JPanel{
 	
-
 	private static JFrame frame;
 	private JButton gerirB;
 	private JButton avaliarB;
@@ -48,12 +47,12 @@ public class MenuGui extends JPanel{
 	 *
 	 * @param frame
 	 *            frame do gui.
-	 * @param criarB
-	 *            botão que cria uma janela para aplicar uma nova regra.
-	 * @param eliminarB
-	 *            botão que elimina uma regra.
-	 * @param editarB
-	 *            botão que cria uma janela que edita uma regra existente.
+	 * @param gerirB
+	 *            botão que cria uma janela para gerir regras.
+	 * @param avaliarB
+	 *            botão que cria uma janela para avaliar regras.
+	 * @param compararB
+	 *            botão que cria uma janela para avaliar diferentes aplicações de regras.
 	 * 
 	 * 
 	 */
@@ -78,17 +77,17 @@ public class MenuGui extends JPanel{
 		//---JButton---
 		
 		gerirB = new JButton("Gerir regras");
-		GerirListener gerirListener = new GerirListener(gerirB);
+		GerirListener gerirListener = new GerirListener();
 		gerirB.setActionCommand("gerirRegras");
 		gerirB.addActionListener(gerirListener);
 		
-		avaliarB = new JButton("Avaliar regras");
-		AvaliarListener avaliarListener = new AvaliarListener(avaliarB);
-		gerirB.setActionCommand("avaliarRegras");
-		gerirB.addActionListener(avaliarListener);
+		avaliarB = new JButton("Avaliar metodos");
+		AvaliarListener avaliarListener = new AvaliarListener();
+		avaliarB.setActionCommand("avaliarMetodos");
+		avaliarB.addActionListener(avaliarListener);
 		
 		compararB = new JButton("Comparar aplicacoes");
-		CompararListener compararListener = new CompararListener(compararB);
+		CompararListener compararListener = new CompararListener();
 		compararB.setActionCommand("compararAvalicacoes");
 		compararB.addActionListener(compararListener);
 		
@@ -125,21 +124,10 @@ public class MenuGui extends JPanel{
 	class GerirListener implements ActionListener {
 
 		
-		private JButton button;
-
-		
-		public GerirListener(JButton button) {
-			this.button = button;
-			
-
-		}
-
-		
-		
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					AvaliaGui gj = new AvaliaGui("Gerir regras");
+					GerirGui gj = new GerirGui("Gerir regras");
 					gj.open();
 				}
 			});
@@ -153,19 +141,14 @@ public class MenuGui extends JPanel{
 	
 	class AvaliarListener implements ActionListener {
 
-		private JButton button;
-
-		
-		public AvaliarListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
-		
+	
 		public void actionPerformed(ActionEvent arg0) {
-			
-			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					AvaliaGui ge = new AvaliaGui("Avaliar metodos");
+					ge.open();
+				}
+			});
 		}
 
 	}
@@ -176,17 +159,14 @@ public class MenuGui extends JPanel{
 	
 	class CompararListener implements ActionListener {
 
-		private JButton button;
-
-		
-		public CompararListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
 		
 		public void actionPerformed(ActionEvent arg0) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					ComparaGui gc = new ComparaGui("Comparar aplicações");
+					gc.open();
+				}
+			});
 			
 		}
 
