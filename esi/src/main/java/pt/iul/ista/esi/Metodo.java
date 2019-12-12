@@ -12,7 +12,6 @@ public class Metodo {
 	private int atfd;
 	private double laa;
 
-
 	/**
 	 * 
 	 * Construtor para o Objecto Metodo
@@ -48,7 +47,7 @@ public class Metodo {
 		this.laa=laa;
 	}
 
-	
+
 	//Getters
 	/**
 	 * 
@@ -158,24 +157,23 @@ public class Metodo {
 	 */
 	@Override
 	public boolean equals(Object objecto) {
-		
-		// Se é ele proprio return true   
-        if (objecto == this) { 
-            return true; 
-        } 
-  
-        // Testa se é uma Metodo
-        if (!(objecto instanceof Metodo)) { 
-            return false; 
-        } 
-          
-        // typecast para Metodo para poder comparar  
-        Metodo metodo= (Metodo) objecto; 
-          
-        // Compara os atibutos  
-        return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
-    }
 
+		// Se é ele proprio return true   
+		if (objecto == this) { 
+			return true; 
+		} 
+
+		// Testa se é uma Metodo
+		if (!(objecto instanceof Metodo)) { 
+			return false; 
+		} 
+
+		// typecast para Metodo para poder comparar  
+		Metodo metodo= (Metodo) objecto; 
+
+		// Compara os atibutos  
+		return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
+	}
 
 	/**
 	 * 
@@ -184,23 +182,8 @@ public class Metodo {
 	 * @return String getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa().
 	 * 
 	 */
-	
+
 	public String toString() {
 		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
-
 	}
-	
-	/**
-	 * 
-	 * simplifiedtoString para a classe do metodo, menos informaçao para ser displayed no Gui.
-	 *
-	 * @return String getMethodID() +";" + getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();.
-	 * 
-	 */
-	
-	public String simplifiedtoString() { //Meant to use in Gui
-		return getMethodID() +";" + getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
-
-	}
-
 }

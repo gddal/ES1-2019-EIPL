@@ -149,20 +149,22 @@ public class AvaliaGui implements ListSelectionListener {
 		}
 		
 
-	
-		
+			
 		return sb.toString().split(";");
 		
 	}
 	
 	private String[] infoFormatter(int i) {
 		
-
 		StringBuilder sb = new StringBuilder();
 		Metodo metodo = App.listaMetodos.get(i);
 		
-		sb.append(metodo.simplifiedtoString());
-
+		sb.append(metodo.getMethodID() +";" 
+		        + metodo.getMethodName() +";"
+				+ metodo.getLoc() +";"
+		        + metodo.getCyclo() +";"
+				+ metodo.getAtfd() +";"
+		        + metodo.getLaa());
 		
 		App.listaRegras.forEach(regra -> {
 			try {

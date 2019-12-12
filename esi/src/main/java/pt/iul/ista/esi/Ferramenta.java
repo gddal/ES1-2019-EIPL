@@ -63,20 +63,6 @@ public class Ferramenta {
 
 	/**
 	 * 
-	 * Verifica se o resultado já existe.
-	 *
-	 * @param resultado Resultado resultado da analize.
-	 * @return Boolean verdadeiro se o resultado já existir na lista, falso caso
-	 *         contrário.
-	 * 
-	 */
-
-	public boolean existsResultado(Resultado resultado) {
-		return this.listaResultados.contains(resultado);
-	}
-
-	/**
-	 * 
 	 * Devolve o resultado do teste para o metodo methodID.
 	 *
 	 * @param methodID int ID do metodo.
@@ -93,5 +79,19 @@ public class Ferramenta {
 
 		throw new IllegalArgumentException("Metodo não encontrado");
 	}
+
+	/**
+	 * 
+	 * toStrin para o objeto ferramenta.
+	 *
+	 * @return
+	 *         String Nome_da_ferramenta
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return this.nome;
+	}
+
 
 }
