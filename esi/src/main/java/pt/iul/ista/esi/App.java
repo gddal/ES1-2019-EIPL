@@ -1,5 +1,6 @@
 package pt.iul.ista.esi;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -272,6 +274,21 @@ public class App {
 			System.out.println(regraNome +" " +regraExpressao);
 		}
 		return 0;
+	}
+
+	/**
+	 * 
+	 * Mostra uma janela de confirmação.
+	 * @param cmp Component objecto a que pretence a janela
+	 * @param msg String mensagem a apresentar
+	 *
+	 * @return boolean sim ou não.
+	 *
+	 */
+	public static boolean confirm(Component cmp, String msg) {
+		String[] ObjButtons = { "Sim", "Não" };
+		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
+		return (PromptResult == JOptionPane.YES_OPTION);
 	}
 
 	/**
