@@ -53,6 +53,7 @@ public class EditorGui {
 	private JTextField textField_valor;
 	private JTextField textField_regra;
 	private boolean hasRegraContent;
+	private Metodo metodo = new Metodo(0, "teste", "teste", "teste", 0, 0, 0, 0);
 	//private ScriptEngineManager factory = new ScriptEngineManager();
 	//private ScriptEngine engine = factory.getEngineByName("JavaScript");    
 	
@@ -244,6 +245,7 @@ public class EditorGui {
 					if (!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==0) {
 						// TODO
 						// Regras.clear();
+						boolean teste = new Regra(textField_regra.getText(), showRegra()).calcula(metodo); 
 						if(hasRegraContent) {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
@@ -258,7 +260,7 @@ public class EditorGui {
 						}
 					}
 				} catch (Exception e2) {
-					//JOptionPane.showMessageDialog(frame, "Regra Invalida");
+					JOptionPane.showMessageDialog(frame, "Regra Invalida");
 				}
 			}
 		});
