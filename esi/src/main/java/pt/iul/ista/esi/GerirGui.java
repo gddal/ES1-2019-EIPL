@@ -47,7 +47,7 @@ import javax.swing.event.ListSelectionListener;
  */
 
 
-public class GerirGui extends JPanel implements ListSelectionListener{
+public class GerirGui implements ListSelectionListener{
 	
 	private JButton criarB;
 	private JButton eliminarB;
@@ -103,7 +103,7 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 	}
 
 	/*
-	 * Conteúdos para o GUI da classe janela
+	 * Conteúdos para o GUI da classe 
 	 * 
 	 *   Adicionar o conteudo aqui
 	 *   
@@ -117,7 +117,7 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 		//---Jbutton---
 		
 		criarB = new JButton("criar regra");
-		CreateListener criarListener = new CreateListener(criarB);
+		CreateListener criarListener = new CreateListener();
 		criarB.setActionCommand("criar");
 		criarB.addActionListener(criarListener);
 		
@@ -159,8 +159,8 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 		
 		
 		
-		add(scroll, BorderLayout.CENTER);
-		add(buttonPane, BorderLayout.PAGE_END);
+		frame.add(scroll, BorderLayout.CENTER);
+		frame.add(buttonPane, BorderLayout.PAGE_END);
 		
 	}
 	
@@ -170,7 +170,6 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 	 * 
 	 */
 	public void open() {
-		frame.setContentPane(this);
 		frame.setVisible(true);
 	}
 	
@@ -181,17 +180,6 @@ public class GerirGui extends JPanel implements ListSelectionListener{
 	
 	class CreateListener implements ActionListener {
 
-		
-		private JButton button;
-
-		
-		public CreateListener(JButton button) {
-			this.button = button;
-			
-
-		}
-
-		
 		
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {

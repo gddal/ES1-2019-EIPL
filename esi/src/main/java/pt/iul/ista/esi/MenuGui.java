@@ -35,7 +35,6 @@ import javax.swing.WindowConstants;
 
 public class MenuGui extends JPanel{
 	
-
 	private static JFrame frame;
 	private JButton gerirB;
 	private JButton avaliarB;
@@ -78,17 +77,17 @@ public class MenuGui extends JPanel{
 		//---JButton---
 		
 		gerirB = new JButton("Gerir regras");
-		GerirListener gerirListener = new GerirListener(gerirB);
+		GerirListener gerirListener = new GerirListener();
 		gerirB.setActionCommand("gerirRegras");
 		gerirB.addActionListener(gerirListener);
 		
 		avaliarB = new JButton("Avaliar regras");
-		AvaliarListener avaliarListener = new AvaliarListener(avaliarB);
+		AvaliarListener avaliarListener = new AvaliarListener();
 		avaliarB.setActionCommand("avaliarRegras");
 		avaliarB.addActionListener(avaliarListener);
 		
 		compararB = new JButton("Comparar aplicacoes");
-		CompararListener compararListener = new CompararListener(compararB);
+		CompararListener compararListener = new CompararListener();
 		compararB.setActionCommand("compararAvalicacoes");
 		compararB.addActionListener(compararListener);
 		
@@ -125,17 +124,6 @@ public class MenuGui extends JPanel{
 	class GerirListener implements ActionListener {
 
 		
-		private JButton button;
-
-		
-		public GerirListener(JButton button) {
-			this.button = button;
-			
-
-		}
-
-		
-		
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -153,16 +141,7 @@ public class MenuGui extends JPanel{
 	
 	class AvaliarListener implements ActionListener {
 
-		private JButton button;
-
-		
-		public AvaliarListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
-		
+	
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -180,18 +159,14 @@ public class MenuGui extends JPanel{
 	
 	class CompararListener implements ActionListener {
 
-		private JButton button;
-
-		
-		public CompararListener(JButton button) {
-			this.button = button;
-
-		}
-
-		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					ComparaGui gc = new ComparaGui("Comparar aplicações");
+					gc.open();
+				}
+			});
 			
 		}
 
