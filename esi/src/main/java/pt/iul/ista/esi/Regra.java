@@ -141,7 +141,7 @@ public class Regra {
 	 * 
 	 */
 	public boolean calcula(Metodo metodo) throws ScriptException {
-		String toTest=expressao;
+		String toTest = expressao;
 		int loc = metodo.getLoc();
 		int cyclo = metodo.getCyclo();
 		int atfd = metodo.getAtfd();
@@ -157,7 +157,7 @@ public class Regra {
 			toTest = toTest.replace("LAA", Double.toString(laa));
 
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-		boolean result = (boolean) engine.eval(this.expressao);
+		boolean result = (boolean) engine.eval(toTest);
 
 	return result;
 	}
