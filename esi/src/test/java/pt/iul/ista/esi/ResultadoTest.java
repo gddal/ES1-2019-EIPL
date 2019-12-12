@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 class ResultadoTest {
 
 	private Resultado resultado;
+	private Resultado resultado2;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -23,6 +24,7 @@ class ResultadoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		resultado = new Resultado(1,true);
+		resultado2 = new Resultado(2,false);
 	}
 
 	@AfterEach
@@ -47,6 +49,8 @@ class ResultadoTest {
 		assertTrue(resultado.equals(resultado));
 		assertTrue(resultado.equals(new Resultado(1,true)));
 		assertFalse(resultado.equals(new Resultado(2,true)));
+		assertFalse(resultado.equals(new Resultado(3,false)));
+		assertFalse(resultado.equals(new Resultado(1,false)));
 		assertFalse(resultado.equals(string));
 	}
 	

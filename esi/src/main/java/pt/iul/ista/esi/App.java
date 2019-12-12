@@ -145,11 +145,11 @@ public class App {
 	        Scanner inputs;
 			try {
 				inputs = new Scanner(new FileReader(file));
-				PrintWriter outputs = new PrintWriter(new FileWriter(file, true));
+				PrintWriter outputs = new PrintWriter(new FileWriter(file));
 				while(inputs.hasNext()){
 					String s1 = inputs.nextLine();
-					String s2 = s1.replaceAll(regra.getNome(), "");
-					outputs.println(s2);
+					String s2 = s1.replaceAll(regra.toString(), "");
+					outputs.write(s2);
 				}
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

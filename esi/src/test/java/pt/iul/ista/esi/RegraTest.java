@@ -72,6 +72,7 @@ class RegraTest {
 		assertTrue(regra.equals(regra));
 		assertTrue(regra.equals(new Regra("is_long_method", "LOC > 80 && CYCLO >10")));
 		assertFalse(regra.equals(new Regra("is_feature_envy", "ATFD > 4 && LAA < 0.42")));
+		assertFalse(regra.equals(new Regra("is_long_method", "LOC > 345 && CYCLO >10")));
 		assertFalse(regra.equals(string));
 	}
 	
