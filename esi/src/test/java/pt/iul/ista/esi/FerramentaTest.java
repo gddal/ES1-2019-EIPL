@@ -49,15 +49,6 @@ class FerramentaTest {
 	}
 
 	@Test
-	void testExistsResultado() {
-		resultado = new Resultado(1, true);
-		ferramenta.addResultado(resultado);
-		assertTrue(ferramenta.existsResultado(resultado));
-		resultado = new Resultado(2, true);
-		assertFalse(ferramenta.existsResultado(resultado));
-	}
-
-	@Test
 	void testGetResultado() {
 		resultado = new Resultado(1, true);
 		ferramenta.addResultado(resultado);
