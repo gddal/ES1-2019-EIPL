@@ -24,20 +24,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 public class Avalia extends JPanel implements ListSelectionListener {
 
@@ -54,7 +47,6 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frmMain;
-	private JPanel panel;
 	private Ferramenta f1;
 	private Ferramenta f2;
 	private String fName;
@@ -154,11 +146,8 @@ public class Avalia extends JPanel implements ListSelectionListener {
 			default:
 				break;
 			}
-			
 		}
-		
 		return ret;
-
 	}
 
 	/**
