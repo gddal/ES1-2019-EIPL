@@ -219,9 +219,10 @@ public class GerirGui implements ListSelectionListener{
 			} else {
 				// tem que ter um metodo para eliminar um elemento regra 
 				if(list.isSelectedIndex(index)) {
-					App.apagaRegra("regras.cfg", App.listaRegras.get(index));
+					//App.apagaRegra("regras.cfg", App.listaRegras.get(index));
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
+					App.gravaRegras("regras.cfg", App.listaRegras);
 				}else {
 					System.out.println("Delete Interrupted: não existe tal regra");
 				}

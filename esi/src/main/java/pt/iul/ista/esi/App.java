@@ -139,26 +139,6 @@ public class App {
 		return listaRegras;
 	}
 	
-	//SE HOUVER UMA REGRA : OLA_01 e OLA_02 e mandarmos apagar a "OLA" FICAMOS COM _01 e _02
-	public static void apagaRegra(String file, Regra regra) {
-			
-	        Scanner inputs;
-			try {
-				inputs = new Scanner(new FileReader(file));
-				PrintWriter outputs = new PrintWriter(new FileWriter(file));
-				while(inputs.hasNext()){
-					String s1 = inputs.nextLine();
-					String s2 = s1.replaceAll(regra.toString(), "");
-					outputs.write(s2);
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
 
 	/**
 	 * 
@@ -305,6 +285,7 @@ public class App {
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
 		listaFerramentas = App.carregaFerramentas(FILE);
+		System.out.println(listaRegras.toString());
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
