@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.script.ScriptException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -284,12 +285,81 @@ public class App {
 	 * @return boolean sim ou não.
 	 *
 	 */
+	
 	public static boolean confirm(Component cmp, String msg) {
 		String[] ObjButtons = { "Sim", "Não" };
 		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
 		return (PromptResult == JOptionPane.YES_OPTION);
 	}
 
+	
+	
+	/**
+	 * 
+	 * Devolve um vetor de strings do nome dos cabeçalhos excel.
+	 * 
+	 * 
+	 *
+	 * @return String[] nomes dos cabecalhos
+	 *
+	 */
+	
+	public static String[] columnMaker() {
+		
+		StringBuilder sb = new StringBuilder("ID;Package Name;Class Name;Method;LOC;CYCLO;ATFD;LAA");
+
+
+		for(int i = 0; i<App.listaFerramentas.size(); i++) {
+			sb.append(";"+App.listaFerramentas.get(i).getNome());
+		}
+		
+
+			
+		return sb.toString().split(";");
+		
+	}
+	
+	/**
+	 * 
+	 * Devolve um vetor de strings com a informacao de um metodo.
+	 * 
+	 * @param i int indice para procura de metodos na lista de metodos
+	 *
+	 * @return String[] vetor com informacao de o metodo
+	 *
+	 */
+	
+	public static String[] infoFormatter(int i) {
+		
+		StringBuilder sb = new StringBuilder();
+		Metodo metodo = App.listaMetodos.get(i);
+		
+		sb.append(metodo.toString());
+		
+	/*	App.listaFerramentas.forEach(regra -> {
+			try {
+				
+				Boolean resultado = regra.calcula(metodo);
+				sb.append(";" + resultado);
+				
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		});
+		*/
+		App.listaFerramentas.forEach(ferramenta -> {
+			Boolean resultado = ferramenta.getResultado(metodo.getMethodID());
+				sb.append(";" + resultado);
+				
+		});
+		
+		String finalstring;
+		finalstring = sb.toString();
+		
+		return finalstring.split(";");
+
+	}
+	
 	/**
 	 * 
 	 * Main method to start application.

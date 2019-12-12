@@ -120,14 +120,14 @@ public class AvaliaGui implements ListSelectionListener {
 		
 		displaytable = new JTable();
 		DefaultTableModel model = (DefaultTableModel) displaytable.getModel();
-		String[] colunas = columnMaker();
+		String[] colunas = App.columnMaker();
 		for (int i = 0; i < colunas.length; i++)
 			model.addColumn(colunas[i]);
 
 
 		for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
 
-			model.addRow(infoFormatter(i));
+			model.addRow(App.infoFormatter(i));
 		}
 	
 		JScrollPane scroll = new JScrollPane(displaytable);
@@ -139,55 +139,7 @@ public class AvaliaGui implements ListSelectionListener {
 		
 		
 	}
-	private String[] columnMaker() {
-		
-		StringBuilder sb = new StringBuilder("ID;Method;LOC;CYCLO;ATFD;LAA");
-
-
-		for(int i = 0; i<App.listaRegras.size(); i++) {
-			sb.append(";"+App.listaRegras.get(i).getNome());
-		}
-		
-
-			
-		return sb.toString().split(";");
-		
-	}
 	
-	private String[] infoFormatter(int i) {
-		
-		StringBuilder sb = new StringBuilder();
-		Metodo metodo = App.listaMetodos.get(i);
-		
-		sb.append(metodo.getMethodID() +";" 
-		        + metodo.getMethodName() +";"
-				+ metodo.getLoc() +";"
-		        + metodo.getCyclo() +";"
-				+ metodo.getAtfd() +";"
-		        + metodo.getLaa());
-		
-		App.listaRegras.forEach(regra -> {
-			try {
-				
-				Boolean resultado = regra.calcula(metodo);
-				sb.append(";" + resultado);
-				
-			} catch (ScriptException e) {
-				e.printStackTrace();
-			}
-		});
-		
-		String finalstring;
-		finalstring = sb.toString();
-		
-		return finalstring.split(";");
-		
-	
-
-				
-			
-		
-	}
 	
 	/**
 	 * Abre a janela.
