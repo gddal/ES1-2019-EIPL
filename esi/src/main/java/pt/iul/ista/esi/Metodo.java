@@ -176,7 +176,6 @@ public class Metodo {
         return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
     }
 
-
 	/**
 	 * 
 	 * toString para a classe do metodo.

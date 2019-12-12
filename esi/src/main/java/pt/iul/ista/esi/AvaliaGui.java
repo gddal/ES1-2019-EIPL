@@ -149,8 +149,7 @@ public class AvaliaGui implements ListSelectionListener {
 		}
 		
 
-	
-		
+			
 		return sb.toString().split(";");
 		
 	}
