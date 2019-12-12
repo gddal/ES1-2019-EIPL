@@ -63,24 +63,10 @@ public class EditorGui {
 	 * 
 	 * Construtor para classe Editor
 	 *
-	 * @param panel
-	 *            jpanel painel "Close panel".
-	 * @param options
-	 *            string[] lista de opçoes para o panel.
-	 * @param lbl
-	 *            jlabel label do panel.
-	 * @param textField
-	 *            jtextfield barra de texto que mostra a regra definida pelo user.
-	 * @param Regras
-	 * 			  arraylist<regras> lista de regras que foram criadas.
-	 * @param regra
-	 * 			  arraylist<string> lista de strings selecionados para a regra nova.
-	 * @param textField_valor
-	 * 			  jtextfield caixa de texto para inserir valores numericos na regra nova.
-	 * @param textField_regra
-	 * 			  jtextfield caixa de texto para atribuir o nome da nova regra.
-	 * @param hasRegraContent
-	 * 			  boolean devolve true se existe conteudo no parametro "textField_regra", caso contrario devolve false. 
+	 * @param nome
+	 *            String nome da regra.
+	 * @param expressão
+	 *            String expressão de calculo.
 	 * 
 	 */
 	public EditorGui (String name, String expressao) {

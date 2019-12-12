@@ -257,10 +257,10 @@ public class GerirGui implements ListSelectionListener{
 					public void run() {
 						System.out.println(index);
 						if(index==0) {
-							ThresHoldGui gui = new ThresHoldGui();
+							//ThresHoldGui gui = new ThresHoldGui();
 							
 						}else if(index==1) {
-							ThresHoldGui gui = new ThresHoldGui();
+							//ThresHoldGui gui = new ThresHoldGui();
 						}else {
 							EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
 							gj.open();						

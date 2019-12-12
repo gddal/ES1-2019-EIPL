@@ -84,7 +84,7 @@ public class App {
 		}
 
 	}
-	
+
 	public static void gravaRegra(String file, Regra regra) {
 
 		PrintWriter printwriter = null;
@@ -140,7 +140,6 @@ public class App {
 
 		return listaRegras;
 	}
-	
 
 	/**
 	 * 
@@ -215,6 +214,15 @@ public class App {
 		return lista;
 	}
 
+	/**
+	 * 
+	 * Carrega para listaFerramentas todos os resultados defenidos no ficheiro Excel
+	 * 
+	 * @param file String nome do ficheiro.
+	 *
+	 * @return ArrayList com as Ferramentas.
+	 *
+	 */
 	public static List<Ferramenta> carregaFerramentas(String file) {
 
 		List<Ferramenta> lista = new ArrayList<Ferramenta>();
@@ -242,10 +250,10 @@ public class App {
 
 					linhaExcel = iteradorLinha.next();
 					resultado = new Resultado((int) linhaExcel.getCell(0).getNumericCellValue(),
-					linhaExcel.getCell(i).getBooleanCellValue());
+							linhaExcel.getCell(i).getBooleanCellValue());
 					ferramenta.addResultado(resultado);
 				}
-				
+
 				lista.add(ferramenta);
 			}
 
@@ -259,19 +267,55 @@ public class App {
 		}
 		return lista;
 	}
-	
+
+	/**
+	 * 
+	 * Retorna o objeto Regra com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Regra se ela existir, null caso contrário.
+	 *
+	 */
+	public static Regra getRegra(String nome) {
+
+		for (Regra regra : listaRegras)
+			if (regra.getNome().equals(nome)) {
+				return regra;
+			}
+		return null;
+	}
+
+	/**
+	 * 
+	 * Retorna o objeto Ferramenta com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Ferramenta se ela existir, null caso contrário.
+	 *
+	 */
+	public static Ferramenta getFerramenta(String nome) {
+
+		for (Ferramenta ferramenta : listaFerramentas)
+			if (ferramenta.getNome().equals(nome)) {
+				return ferramenta;
+			}
+		return null;
+	}
+
 	public static int contemRegra(Regra r) {
 		String rNome = r.getNome().replace(" ", "");
 		String rExpressao = r.getExpressao().trim();
-		for(Regra regra : listaRegras) {
+		for (Regra regra : listaRegras) {
 			String regraNome = regra.getNome().trim();
 			String regraExpressao = regra.getExpressao().trim();
-			if(rNome.equals(regraNome))
+			if (rNome.equals(regraNome))
 				return 1;
-			if(rExpressao.equals(regraExpressao))
+			if (rExpressao.equals(regraExpressao))
 				return 2;
-			System.out.println(rNome +" " +rExpressao +" regra da lista");
-			System.out.println(regraNome +" " +regraExpressao);
+			System.out.println(rNome + " " + rExpressao + " regra da lista");
+			System.out.println(regraNome + " " + regraExpressao);
 		}
 		return 0;
 	}
@@ -279,6 +323,7 @@ public class App {
 	/**
 	 * 
 	 * Mostra uma janela de confirmação.
+	 * 
 	 * @param cmp Component objecto a que pretence a janela
 	 * @param msg String mensagem a apresentar
 	 *
@@ -288,7 +333,8 @@ public class App {
 	
 	public static boolean confirm(Component cmp, String msg) {
 		String[] ObjButtons = { "Sim", "Não" };
-		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
+		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
 		return (PromptResult == JOptionPane.YES_OPTION);
 	}
 
