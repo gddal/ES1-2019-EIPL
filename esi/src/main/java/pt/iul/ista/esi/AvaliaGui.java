@@ -51,7 +51,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 
-public class AvaliaGui extends JPanel implements ListSelectionListener {
+public class AvaliaGui implements ListSelectionListener {
 	
 	
 	
@@ -134,7 +134,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 				
 				
 		
-		add(scroll, BorderLayout.CENTER);
+		frame.add(scroll, BorderLayout.CENTER);
 				
 		
 		
@@ -193,7 +193,6 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 	 */
 	
 	public void open() {
-		frame.setContentPane(this);
 		frame.setVisible(true);
 	}
 
