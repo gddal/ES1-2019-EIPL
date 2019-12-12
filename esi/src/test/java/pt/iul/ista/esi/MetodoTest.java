@@ -82,6 +82,10 @@ class MetodoTest {
 		assertTrue(metodo.equals(metodo));
 		assertTrue(metodo.equals(new Metodo(1,"packageName","className","methodName",81,11,6,0.1)));
 		assertFalse(metodo.equals(new Metodo(2,"packageName2","className2","methodName2",81,11,6,0.1)));
+		assertFalse(metodo.equals(new Metodo(2,"packageName","className","methodName",81,11,6,0.1)));
+		assertFalse(metodo.equals(new Metodo(1,"packageName2","className","methodName",81,11,6,0.1)));
+		assertFalse(metodo.equals(new Metodo(1,"packageName","className2","methodName",81,11,6,0.1)));
+		assertFalse(metodo.equals(new Metodo(1,"packageName","className","methodName2",81,11,6,0.1)));
 		assertFalse(metodo.equals(string));
 	}
 	
