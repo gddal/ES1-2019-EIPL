@@ -166,7 +166,6 @@ public class AvaliaGui implements ListSelectionListener {
 		        + metodo.getCyclo() +";"
 				+ metodo.getAtfd() +";"
 		        + metodo.getLaa());
-
 		
 		App.listaRegras.forEach(regra -> {
 			try {
