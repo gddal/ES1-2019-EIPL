@@ -192,7 +192,7 @@ public class ComparaGui{
 		public void actionPerformed(ActionEvent arg0) {
 			//fl.getSelectedValue().getResultado();
 			for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
-				model.setValueAt(fl.getSelectedValue().getResultado(i+1),i,2);
+				model.setValueAt(fl.getSelectedValue().getResultado(i+1), i, 2);
 			}
 		}
 
