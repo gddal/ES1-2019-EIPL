@@ -3,6 +3,10 @@ package pt.iul.ista.esi;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public class Ferramenta {
 
 	// Atributos
@@ -13,7 +17,7 @@ public class Ferramenta {
 	 * 
 	 * Construtor para o Objecto Ferramenta
 	 *
-	 * @param nome            Srting nome da ferramenta.
+	 * @param nome Srting nome da ferramenta.
 	 * 
 	 */
 	// Construtor
@@ -63,6 +67,16 @@ public class Ferramenta {
 
 	/**
 	 * 
+	 * Limpa a lista de resulados da ferramenta.
+	 *
+	 */
+
+	public void limpaResultados() {
+		this.listaResultados.clear();
+	}
+
+	/**
+	 * 
 	 * Devolve o resultado do teste para o metodo methodID.
 	 *
 	 * @param methodID int ID do metodo.
@@ -84,8 +98,7 @@ public class Ferramenta {
 	 * 
 	 * toStrin para o objeto ferramenta.
 	 *
-	 * @return
-	 *         String Nome_da_ferramenta
+	 * @return String Nome_da_ferramenta
 	 * 
 	 */
 	@Override
@@ -93,5 +106,22 @@ public class Ferramenta {
 		return this.nome;
 	}
 
-
+	/**
+	 * 
+	 * Calcula os resultados da regra para esta ferramenta
+	 * 
+	 * 
+	 */
+	public void calcula() {
+		
+		Regra regra = App.getRegra(this.nome);
+	
+		this.limpaResultados();
+		for( Metodo metodo : App.listaMetodos)
+			try {
+				this.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));
+			} catch (ScriptException e) {
+				continue;
+			}
+	}
 }
