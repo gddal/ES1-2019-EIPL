@@ -156,6 +156,8 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 		for(int i = 0; i<App.listaRegras.size(); i++) {
 			sb.append(";"+App.listaRegras.get(i).getNome());
 		}
+		
+
 	
 		
 		return sb.toString().split(";");
