@@ -12,7 +12,6 @@ public class Metodo {
 	private int atfd;
 	private double laa;
 
-
 	/**
 	 * 
 	 * Construtor para o Objecto Metodo

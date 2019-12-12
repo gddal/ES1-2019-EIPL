@@ -156,7 +156,6 @@ public class AvaliaGui implements ListSelectionListener {
 	
 	private String[] infoFormatter(int i) {
 		
-
 		StringBuilder sb = new StringBuilder();
 		Metodo metodo = App.listaMetodos.get(i);
 		
