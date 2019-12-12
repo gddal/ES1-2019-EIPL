@@ -189,5 +189,18 @@ public class Metodo {
 		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
 
 	}
+	
+	/**
+	 * 
+	 * simplifiedtoString para a classe do metodo, menos informaçao para ser displayed no Gui.
+	 *
+	 * @return String getMethodID() +";" + getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();.
+	 * 
+	 */
+	
+	public String simplifiedtoString() { //Meant to use in Gui
+		return getMethodID() +";" + getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
+
+	}
 
 }
