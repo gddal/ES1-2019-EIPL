@@ -54,6 +54,8 @@ public class EditorGui {
 	private JTextField textField_regra;
 	private boolean hasRegraContent;
 	private Metodo metodo = new Metodo(0, "teste", "teste", "teste", 0, 0, 0, 0);
+	private String PMD = "PMD";
+	private String iPlasma = "iPlasma";
 	//private ScriptEngineManager factory = new ScriptEngineManager();
 	//private ScriptEngine engine = factory.getEngineByName("JavaScript");    
 	
@@ -232,7 +234,7 @@ public class EditorGui {
 						// TODO
 						// Regras.clear();
 						boolean teste = new Regra(textField_regra.getText(), showRegra()).calcula(metodo); 
-						if(hasRegraContent) {
+						if(hasRegraContent && !textField_regra.getText().equals(PMD) && !textField_regra.getText().equals(iPlasma)) {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
 							GerirGui.regraList.addElement(temp);

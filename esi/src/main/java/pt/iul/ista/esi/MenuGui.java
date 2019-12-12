@@ -22,6 +22,8 @@ package pt.iul.ista.esi;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -63,6 +65,13 @@ public class MenuGui extends JPanel{
 		frame.setSize(500, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				if(App.confirm(frame, "Deseja sair da aplicação?")) 
+					frame.dispose();
+				
+			}
+		});
 		addFrameContent();
 
 	}

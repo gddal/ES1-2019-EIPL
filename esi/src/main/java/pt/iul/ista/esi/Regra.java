@@ -157,9 +157,9 @@ public class Regra {
 			toTest = toTest.replace("LAA", Double.toString(laa));
 
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-		boolean result = (boolean) engine.eval(toTest);
+		boolean result = (boolean) engine.eval(this.expressao);
 
-		return result;
+	return result;
 	}
 
 }
