@@ -61,7 +61,7 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 			@Override
 			public void windowClosing(WindowEvent we) {
 				if (App.confirm(frmMain,"Tem a certeza que quer sair?")) {
-					frmMain.dispose();
+					 frmMain.dispose();
 				}
 			}
 		});
