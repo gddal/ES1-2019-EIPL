@@ -50,7 +50,7 @@ class ComparaGuiTest {
 
 	@Test
 	void testApp() {
-		new ComparaGui("nome");
+		new ComparaGui("nome").open();
 		assertTrue(true);
 	}
 }
