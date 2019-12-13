@@ -28,6 +28,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -67,8 +69,9 @@ public class MenuGui extends JPanel{
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if(App.confirm(frame, "Deseja sair da aplicação?")) 
+				if(App.confirm(frame, "Deseja sair da aplicação?")) {
 					frame.dispose();
+				}
 				
 			}
 		});
@@ -83,6 +86,11 @@ public class MenuGui extends JPanel{
 	
 	private void addFrameContent() {
 		
+		//---JLabel---
+		
+		JLabel lbl = new JLabel(App.TITLE,JLabel.CENTER );
+	
+		
 		//---JButton---
 		
 		gerirB = new JButton("Gerir regras");
@@ -95,7 +103,7 @@ public class MenuGui extends JPanel{
 		avaliarB.setActionCommand("avaliarMetodos");
 		avaliarB.addActionListener(avaliarListener);
 		
-		compararB = new JButton("Comparar aplicacoes");
+		compararB = new JButton("Comparar aplicações");
 		CompararListener compararListener = new CompararListener();
 		compararB.setActionCommand("compararAvalicacoes");
 		compararB.addActionListener(compararListener);
@@ -111,6 +119,7 @@ public class MenuGui extends JPanel{
 		buttonPane.add(compararB);
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
+		add(lbl, BorderLayout.CENTER);
 		add(buttonPane, BorderLayout.PAGE_END);
 		
 	}

@@ -42,8 +42,12 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import pt.iul.ista.esi.GerirGui.CreateListener;
@@ -124,6 +128,15 @@ public class ComparaGui{
 			model.addRow(rowMaker(i));
 		}
 	
+		fl.addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
+					model.setValueAt(fl.getSelectedValue().getResultado(i+1), i, 2);
+				}
+			}
+		});
+		
 		JScrollPane scroll = new JScrollPane(displaytable);
 				
 				
