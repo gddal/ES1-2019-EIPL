@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.script.ScriptException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -45,7 +47,7 @@ public class App {
 	// Titulo
 	public static final String TITLE = "Analise de erros de software";
 	// Ficheiro de excel
-	public static final String FILE = "Long-Method.xlsx";
+	public static String FILE = "Long-Method.xlsx";
 	// Ficheiro de regras
 	public static final String REGRAS = "regras.cfg";
 
@@ -270,6 +272,33 @@ public class App {
 
 	/**
 	 * 
+	 * Calcula os resultados da regra para esta ferramenta
+	 * 
+	 * 
+	 */
+	public static void calcula(String nome) {
+		
+        Ferramenta ferramenta = getFerramenta(nome);
+		Regra regra = getRegra(nome);
+        
+        if( regra == null)
+        	return;
+
+        if( ferramenta == null)
+        	ferramenta = new Ferramenta(nome);
+        else
+    		ferramenta.limpaResultados();
+        					
+		for( Metodo metodo : App.listaMetodos)
+			try {
+				ferramenta.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));
+			} catch (ScriptException e) {
+				continue;
+			}
+	}
+
+	/**
+	 * 
 	 * Retorna o objeto Regra com o mesmo nome se ele existir na lista
 	 * 
 	 * @param nome String nome da regra.
@@ -282,6 +311,24 @@ public class App {
 		for (Regra regra : listaRegras)
 			if (regra.getNome().equals(nome)) {
 				return regra;
+			}
+		return null;
+	}
+
+	/**
+	 * 
+	 * Retorna o objeto Metodo com o ID nome se ele existir na lista
+	 * 
+	 * @param nome String nome da Metodo.
+	 *
+	 * @return Metodo se ele existir, null caso contrário.
+	 *
+	 */
+	public static Metodo getRegra(int id) {
+
+		for (Metodo metodo : listaMetodos)
+			if (metodo.getMethodID() == id) {
+				return metodo;
 			}
 		return null;
 	}
@@ -406,6 +453,20 @@ public class App {
 
 	}
 	
+	
+
+	
+	/**
+	 * da reload as listas para serem atualizadas.
+	 */
+	public static void refreshLists() {
+		
+		listaRegras = App.carregaRegras(REGRAS);
+		listaMetodos = App.carregaMetodos(FILE);
+		listaFerramentas = App.carregaFerramentas(FILE);
+		
+	}
+	
 	/**
 	 * 
 	 * Main method to start application.
@@ -414,11 +475,7 @@ public class App {
 	 */
 	public static void main(String[] args) {
 
-		listaRegras = App.carregaRegras(REGRAS);
-		listaMetodos = App.carregaMetodos(FILE);
-		listaFerramentas = App.carregaFerramentas(FILE);
-		System.out.println(listaRegras.toString());
-
+		refreshLists();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new MenuGui().open();

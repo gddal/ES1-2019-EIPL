@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import pt.iul.ista.esi.App;
 
-class AvaliaGuiTest {
+class GerirGuiTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -50,7 +50,7 @@ class AvaliaGuiTest {
 
 	@Test
 	void testApp() {
-		new AvaliaGui("nome").open();
+		new GerirGui("nome").open();
 		assertTrue(true);
 	}
 }

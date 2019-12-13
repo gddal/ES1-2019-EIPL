@@ -63,9 +63,9 @@ public class EditorGui {
 	 * 
 	 * Construtor para classe Editor
 	 *
-	 * @param nome
+	 * @param name
 	 *            String nome da regra.
-	 * @param expressão
+	 * @param expressao
 	 *            String expressão de calculo.
 	 * 
 	 */
@@ -238,7 +238,7 @@ public class EditorGui {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
 							GerirGui.regraList.addElement(temp);
-							App.gravaRegra("regras.cfg", new Regra(textField_regra.getText(), showRegra()));
+							App.gravaRegras(App.REGRAS, App.listaRegras);
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
 							regra.clear();	

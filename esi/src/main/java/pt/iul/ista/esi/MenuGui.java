@@ -39,32 +39,24 @@ import javax.swing.WindowConstants;
 
 public class MenuGui extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
 	private JButton gerirB;
 	private JButton avaliarB;
 	private JButton compararB;
+	private JButton escolherficheiroB;
 	
 	
 	/**
 	 * 
 	 * Construtor para classe GUI
-	 *
-	 * @param frame
-	 *            frame do gui.
-	 * @param gerirB
-	 *            botão que cria uma janela para gerir regras.
-	 * @param avaliarB
-	 *            botão que cria uma janela para avaliar regras.
-	 * @param compararB
-	 *            botão que cria uma janela para avaliar diferentes aplicações de regras.
-	 * 
 	 * 
 	 */
 	
 	public MenuGui() {
 		super(new BorderLayout());
 		frame = new JFrame("MENU");
-		frame.setSize(500, 200);
+		frame.setSize(700, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -108,7 +100,10 @@ public class MenuGui extends JPanel{
 		compararB.setActionCommand("compararAvalicacoes");
 		compararB.addActionListener(compararListener);
 		
-		
+		escolherficheiroB = new JButton("Escolher Ficheiro Excel");
+		EscolherficheiroListener escolherficheirolistener = new EscolherficheiroListener();
+		escolherficheiroB.setActionCommand("escolherficheiroexcel");
+		escolherficheiroB.addActionListener(escolherficheirolistener);
 		
 		
 		//---JPANEL---
@@ -117,6 +112,8 @@ public class MenuGui extends JPanel{
 		buttonPane.add(gerirB);
 		buttonPane.add(avaliarB);
 		buttonPane.add(compararB);
+		buttonPane.add(escolherficheiroB);
+		
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		add(lbl, BorderLayout.CENTER);
@@ -165,6 +162,24 @@ public class MenuGui extends JPanel{
 				public void run() {
 					AvaliaGui ge = new AvaliaGui("Avaliar metodos");
 					ge.open();
+				}
+			});
+		}
+		
+	}
+	
+	/**
+	 * Classe do botao escolher ficheiro.
+	 */
+	
+	class EscolherficheiroListener implements ActionListener {
+
+		
+		public void actionPerformed(ActionEvent arg0) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					EscolheGui ef = new EscolheGui();
+					
 				}
 			});
 		}
