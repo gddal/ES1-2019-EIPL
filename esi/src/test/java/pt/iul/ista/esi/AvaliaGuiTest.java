@@ -50,7 +50,7 @@ class AvaliaGuiTest {
 
 	@Test
 	void testApp() {
-		new AvaliaGui("nome").open();
+		new VisualizaGui("nome").open();
 		assertTrue(true);
 	}
 }

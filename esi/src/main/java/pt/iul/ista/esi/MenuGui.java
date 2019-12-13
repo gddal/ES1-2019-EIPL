@@ -80,7 +80,7 @@ public class MenuGui extends JPanel{
 		gerirB.setActionCommand("gerirRegras");
 		gerirB.addActionListener(gerirListener);
 
-		avaliarB = new JButton("Avaliar metodos");
+		avaliarB = new JButton("Visualizar Excel");
 		AvaliarListener avaliarListener = new AvaliarListener();
 		avaliarB.setActionCommand("avaliarMetodos");
 		avaliarB.addActionListener(avaliarListener);
@@ -132,8 +132,7 @@ public class MenuGui extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					GerirGui gj = new GerirGui("Gerir regras");
-					gj.open();
+					new GerirGui("Gerir regras").open();
 				}
 			});
 		}
@@ -150,8 +149,7 @@ public class MenuGui extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
-					AvaliaGui ge = new AvaliaGui("Avaliar metodos");
-					ge.open();
+					new VisualizaGui("Visualizae Excel").open();
 				}
 			});
 		}

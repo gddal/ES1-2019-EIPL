@@ -6,7 +6,7 @@
  * 
  * Projecto Analise de erros de software.
  * 
- * Classe Gui
+ * Classe VisualizaGui
  *
  * @author Miguel Diaz Gonçalves 82493
  * @author Gonçalo Dias do Amaral 83380
@@ -51,7 +51,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 
-public class AvaliaGui implements ListSelectionListener {
+public class VisualizaGui implements ListSelectionListener {
 
 
 
@@ -69,7 +69,7 @@ public class AvaliaGui implements ListSelectionListener {
 	 * 
 	 */
 
-	public AvaliaGui(String name) {
+	public VisualizaGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
 		frame.setLayout(new BorderLayout());
