@@ -20,9 +20,6 @@
 package pt.iul.ista.esi;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -43,16 +40,13 @@ public class EditorGui {
 
 	private String expressao;
 	private String name;
+	private Editor editor;
 	private JFrame frame;
 	private JTextField textField;
 	private ArrayList<String> regra = new ArrayList<String>();
 	private String temp = "";
 	private JTextField textField_valor;
 	private JTextField textField_regra;
-	private boolean hasRegraContent;
-	private Metodo metodo = new Metodo(0, "teste", "teste", "teste", 0, 0, 0, 0);
-	private String PMD = "PMD";
-	private String iPlasma = "iPlasma";
 	//private ScriptEngineManager factory = new ScriptEngineManager();
 	//private ScriptEngine engine = factory.getEngineByName("JavaScript");    
 
@@ -68,12 +62,12 @@ public class EditorGui {
 	public EditorGui (String name, String expressao) {
 		this.name = name;
 		this.expressao = expressao;
+		editor = new Editor(frame);
 		frame = new JFrame("Editor");
 		frame.setBounds(100, 100, 475, 315);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		hasRegraContent = false;
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				if (App.confirm(frame, "Deseja sair?")) {
@@ -218,30 +212,17 @@ public class EditorGui {
 		JButton submitB = new JButton("SUBMIT");
 		submitB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==1)
-					JOptionPane.showMessageDialog(frame, "Ja existe uma regra com esse nome");
-				if(!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==2)
-					JOptionPane.showMessageDialog(frame, "Ja existe uma regra com essa expressao");
-				try {
-					if (!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==0) {
-						// TODO
-						// Regras.clear();
-						boolean teste = new Regra(textField_regra.getText(), showRegra()).calcula(metodo); 
-						if(hasRegraContent && !textField_regra.getText().equals(PMD) && !textField_regra.getText().equals(iPlasma)) {
-							Regra temp = new Regra(textField_regra.getText(), showRegra());
-							App.listaRegras.add(temp);
-							GerirGui.regraList.addElement(temp);
-							App.gravaRegras(App.REGRAS, App.listaRegras);
-							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
-							frame.dispose();
-							regra.clear();	
-
-						} else {
-							JOptionPane.showMessageDialog(frame, "Regra Invalida");
-						}
-					}
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(frame, "Regra Invalida");
+				
+				String nome = textField_regra.getText();
+				String expressao = textField_valor.getText();
+				
+				if(!editor.camposVazios(nome, expressao) &&
+						editor.verificaRegra(nome, expressao) &&
+							editor.testaNome(nome) &&
+								!editor.existeRegra(nome, expressao)) {
+									editor.criaRegra(nome, expressao);
+									frame.dispose();
+									regra.clear();	
 				}
 			}
 		});
@@ -343,11 +324,6 @@ public class EditorGui {
 			public void mousePressed(MouseEvent e) {
 				textField_regra.setForeground(Color.BLACK);
 				textField_regra.setText("");
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if(!textField_regra.getText().isEmpty())
-					hasRegraContent=true;
 			}
 		});
 
