@@ -42,7 +42,6 @@ public class ValorEditor {
 			for(int i=0; i<splitRegra.length; i++) {
 				expressao += splitRegra[i] + " ";
 			}
-			System.out.println(expressao);
 			regra.setExpressao(expressao);
 	}
 	

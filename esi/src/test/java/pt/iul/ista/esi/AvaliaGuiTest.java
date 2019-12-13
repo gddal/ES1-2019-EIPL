@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  * @author Mytuga
  *
  */
-class IndicadoresTest {
+class AvaliaGuiTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -62,11 +62,12 @@ class IndicadoresTest {
 	}
 
 	/**
-	 * Test method for {@link pt.iul.ista.esi.Indicadores#main(java.lang.String[])}.
+	 * Test method for {@link pt.iul.ista.esi.AvaliaGui#AvaliaGui(java.lang.String)}.
 	 */
 	@Test
-	final void testMain() {
-		fail("Not yet implemented"); // TODO
+	final void testAvaliaGui() {
+		new AvaliaGui("PMD");
+		assertTrue(true);
 	}
 
 }

@@ -77,15 +77,4 @@ class ValorEditorTest {
 		editor.mudaValores("20", "20");
 		assertNotEquals("LOC > 20 && CYCLO > 20", is_long_method.getExpressao());
 	}
-
-	/**
-	 * Test method for {@link pt.iul.ista.esi.ValorEditor#atualizaListas()}.
-	 */
-	@Test
-	final void testAtualizaListas() {
-		editor.atualizaListas();
-	}
-	
-	
-
 }
