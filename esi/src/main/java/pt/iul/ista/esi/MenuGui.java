@@ -47,16 +47,6 @@ public class MenuGui extends JPanel{
 	/**
 	 * 
 	 * Construtor para classe GUI
-	 *
-	 * @param frame
-	 *            frame do gui.
-	 * @param gerirB
-	 *            botão que cria uma janela para gerir regras.
-	 * @param avaliarB
-	 *            botão que cria uma janela para avaliar regras.
-	 * @param compararB
-	 *            botão que cria uma janela para avaliar diferentes aplicações de regras.
-	 * 
 	 * 
 	 */
 	

@@ -63,9 +63,9 @@ public class EditorGui {
 	 * 
 	 * Construtor para classe Editor
 	 *
-	 * @param nome
+	 * @param name
 	 *            String nome da regra.
-	 * @param expressão
+	 * @param expressao
 	 *            String expressão de calculo.
 	 * 
 	 */
