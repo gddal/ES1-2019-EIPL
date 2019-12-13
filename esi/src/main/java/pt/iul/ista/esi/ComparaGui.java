@@ -78,7 +78,7 @@ public class ComparaGui{
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addFrameContent();
-
+		
 			
 	}
 
@@ -95,11 +95,27 @@ public class ComparaGui{
 	private void addFrameContent() {
 		
 		
+		if(App.listaRegras.size() > App.listaFerramentas.size() - 2) {
+			for(int i = App.listaFerramentas.size() - 2; i < App.listaRegras.size(); i++) {
+				Regra temp = App.listaRegras.get(i);
+				Ferramenta fer = new Ferramenta(temp.getNome());
+				for(int j = 0; j < App.listaMetodos.size(); j++) {
+					try {
+						fer.addResultado(new Resultado(App.listaMetodos.get(j).getMethodID(),temp.calcula(App.listaMetodos.get(j))));
+					} catch (ScriptException e) {
+						e.printStackTrace();
+					}
+				}
+				App.listaFerramentas.add(fer);
+			}
+		}
+		
+		
 		//---JList & DefaultListModel---
+		 
 		ferramentaList = new DefaultListModel<Ferramenta>();
 		for(int i = 0 ; i < App.listaFerramentas.size() ; i++) {
 			ferramentaList.addElement(App.listaFerramentas.get(i));
-			
 		}
 				
 		fl = new JList<Ferramenta>(ferramentaList);
