@@ -239,11 +239,10 @@ public class GerirGui implements ListSelectionListener{
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						System.out.println(index);
-						if(index==0) {
-							//ThresHoldGui gui = new ThresHoldGui();
-							
-						}else if(index==1) {
-							//ThresHoldGui gui = new ThresHoldGui();
+						if(index==0 || index==1) {
+							ValorEditorGui gui = new ValorEditorGui(list.getSelectedValue());
+							gui.open();
+						
 						}else {
 							EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
 							gj.open();						
