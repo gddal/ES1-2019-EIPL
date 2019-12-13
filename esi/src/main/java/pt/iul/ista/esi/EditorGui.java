@@ -214,7 +214,7 @@ public class EditorGui {
 			public void actionPerformed(ActionEvent e) {
 				
 				String nome = textField_regra.getText();
-				String expressao = textField_valor.getText();
+				String expressao = showRegra();
 				
 				if(!editor.camposVazios(nome, expressao) &&
 						editor.verificaRegra(nome, expressao) &&
