@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Editor.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">Editor.java</span></div><h1>Editor.java</h1><pre class="source lang-java linenums">/**
+*
+* Trabalho final de Engenharia de Software I 2019/20
+* 
+* Grupo 85
+* 
+* Projecto Analise de erros de software.
+*
+* @author Miguel Diaz Gonçalves 82493
+* @author Gonçalo Dias do Amaral 83380
+* @author Miguel Carriço 73745
+* @author André Freitas 82361
+* @author Pedro Jones 82946
+* @version 0.01
+*
+*/
+package pt.iul.ista.esi;
+
+import javax.script.ScriptException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+/**
+ * @author Mytuga
+ *
+ */
+public class Editor {
+	
+	private JFrame gui;
+	
+<span class="fc" id="L31">	private Metodo metodo = new Metodo(0, &quot;teste&quot;, &quot;teste&quot;, &quot;teste&quot;, 0, 0, 0, 0);</span>
+<span class="fc" id="L32">	private String PMD = &quot;PMD&quot;;</span>
+<span class="fc" id="L33">	private String iPlasma = &quot;iPlasma&quot;;</span>
+
+	/**
+	 * @param frame da GUI
+	 */
+<span class="fc" id="L38">	public Editor(JFrame frame) {</span>
+<span class="fc" id="L39">		gui = frame;</span>
+<span class="fc" id="L40">	}</span>
+	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se pelo menos uma delas esta vazia
+	 * @param nome da regra
+	 * @param expressao da regra
+	 * @return true se pelo menos uma estiver vazia
+	 */
+	public boolean camposVazios(String nome, String expressao) {
+<span class="fc bfc" id="L49" title="All 4 branches covered.">		if(nome.isEmpty() || expressao.isEmpty()) {</span>
+<span class="fc" id="L50">			JOptionPane.showMessageDialog(gui, &quot;Campo(s) Vazio(s)&quot;);</span>
+<span class="fc" id="L51">			return true;</span>
+		}
+<span class="fc" id="L53">		return false;</span>
+	}
+	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se a regra e valida logicamente
+	 * @param nome da regra
+	 * @param expressao da regra
+	 * @return true se a expressao for valida
+	 */
+	public boolean verificaRegra(String nome, String expressao) {
+<span class="fc" id="L63">		Regra r = new Regra(nome,expressao);</span>
+		try {
+<span class="fc" id="L65">			r.calcula(metodo);</span>
+<span class="fc" id="L66">			return true;</span>
+<span class="fc" id="L67">		} catch (ScriptException e) {</span>
+<span class="fc" id="L68">			JOptionPane.showMessageDialog(gui, &quot;Regra Invalida&quot;);</span>
+<span class="fc" id="L69">			return false;</span>
+		}
+	}
+	
+	/**
+	 * Dada uma String (nome) verifica se o nome é PMD ou iPlasma
+	 * @param nome da regra
+	 * @return false caso o nome seja PMD ou iPlasma
+	 */
+	public boolean testaNome(String nome) {
+<span class="fc bfc" id="L79" title="All 4 branches covered.">		if(nome.equals(PMD) || nome.equals(iPlasma)) {</span>
+<span class="fc" id="L80">			JOptionPane.showMessageDialog(gui, &quot;Esse nome não pode ser utilizado&quot;);</span>
+<span class="fc" id="L81">			return false;</span>
+		}else
+<span class="fc" id="L83">			return true;</span>
+	}
+	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se existe alguma regra com o mesmo nome ou mesma expressao caso exista returna true
+	 * @param nome nome da regra
+	 * @param expressao expressao da regra
+	 * @return true se houver uma regra com o mesmo nome ou expressao
+	 */
+	public boolean existeRegra(String nome, String expressao) {
+<span class="fc" id="L93">		Regra r = new Regra(nome,expressao);</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">		if(App.contemRegra(r)==1) {</span>
+<span class="fc" id="L95">			JOptionPane.showMessageDialog(gui, &quot;Ja existe uma regra com esse nome&quot;);</span>
+<span class="fc" id="L96">			return true;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">		}else if(App.contemRegra(r)==2) {</span>
+<span class="fc" id="L98">				JOptionPane.showMessageDialog(gui, &quot;Ja existe uma regra com essa expressao&quot;);</span>
+<span class="fc" id="L99">				return true;</span>
+			} else {
+<span class="fc" id="L101">				return false;</span>
+			}
+		}
+	
+	/**
+	 * Dadas duas Strings (nome e expressao) cria uma regra e atualiza as listas de Regras.
+	 * @param nome nome da regra
+	 * @param expressao expressao da regra
+	 */
+	public void criaRegra(String nome, String expressao) {
+<span class="fc" id="L111">		Regra r = new Regra(nome,expressao);</span>
+<span class="fc" id="L112">		App.listaRegras.add(r);</span>
+<span class="fc" id="L113">		GerirGui.regraList.addElement(r);</span>
+		//App.gravaRegras(App.REGRAS, App.listaRegras);
+<span class="fc" id="L115">		JOptionPane.showMessageDialog(gui, &quot;Regra criada com sucesso&quot;);</span>
+<span class="fc" id="L116">	}</span>
+	
+	/**
+	 * Recebe uma regra e gera os resultados da mesma 
+	 * @param r regra
+	 */
+	public void geraResultados(Regra r) {
+<span class="nc" id="L123">			App.calcula(r.getNome());</span>
+<span class="nc" id="L124">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

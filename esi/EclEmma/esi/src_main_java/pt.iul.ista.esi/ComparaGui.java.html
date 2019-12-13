@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ComparaGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">ComparaGui.java</span></div><h1>ComparaGui.java</h1><pre class="source lang-java linenums">/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Gui
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+
+package pt.iul.ista.esi;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.script.ScriptException;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
+public class ComparaGui{
+
+	private JTable displaytable;
+	private JFrame frame;
+	private String name;
+	private DefaultListModel&lt;Ferramenta&gt; ferramentaList;
+	private JList&lt;Ferramenta&gt; fl;
+	private DefaultTableModel model;
+
+
+	/**
+	 * 
+	 * Construtor para a classe ComparaGui
+	 * 
+	 * @param name String nome da janela.
+	 *            
+	 */
+
+<span class="fc" id="L58">	public ComparaGui(String name) {</span>
+<span class="fc" id="L59">		this.name = name;</span>
+<span class="fc" id="L60">		frame = new JFrame(this.name);</span>
+<span class="fc" id="L61">		frame.setLayout(new BorderLayout());</span>
+<span class="fc" id="L62">		frame.setSize(800, 550);</span>
+<span class="fc" id="L63">		frame.setLocationRelativeTo(null);</span>
+<span class="fc" id="L64">		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);</span>
+<span class="fc" id="L65">		addFrameContent();</span>
+
+
+<span class="fc" id="L68">	}</span>
+
+	/*
+	 * Conteúdos para o GUI da classe
+	 * 
+	 *   Adicionar o conteudo aqui
+	 *   
+	 *  	|			|
+	 *  	|			|
+	 *  	V			V
+	 */
+
+	private void addFrameContent() {
+
+
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">		if(App.listaRegras.size() &gt; App.listaFerramentas.size() - 2) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">			for(int i = App.listaFerramentas.size() - 2; i &lt; App.listaRegras.size(); i++) {</span>
+<span class="fc" id="L85">				Regra temp = App.listaRegras.get(i);</span>
+<span class="fc" id="L86">				Ferramenta fer = new Ferramenta(temp.getNome());</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">				for(int j = 0; j &lt; App.listaMetodos.size(); j++) {</span>
+					try {
+<span class="fc" id="L89">						fer.addResultado(new Resultado(App.listaMetodos.get(j).getMethodID(),temp.calcula(App.listaMetodos.get(j))));</span>
+<span class="pc" id="L90">					} catch (ScriptException e) {</span>
+<span class="nc" id="L91">						e.printStackTrace();</span>
+					}
+				}
+<span class="fc" id="L94">				App.listaFerramentas.add(fer);</span>
+			}
+		}
+
+
+		//---JList &amp; DefaultListModel---
+
+<span class="fc" id="L101">		ferramentaList = new DefaultListModel&lt;Ferramenta&gt;();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">		for(int i = 0 ; i &lt; App.listaFerramentas.size() ; i++) {</span>
+<span class="fc" id="L103">			ferramentaList.addElement(App.listaFerramentas.get(i));</span>
+		}
+
+<span class="fc" id="L106">		fl = new JList&lt;Ferramenta&gt;(ferramentaList);</span>
+<span class="fc" id="L107">		fl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);</span>
+<span class="fc" id="L108">		fl.setSelectedIndex(0);</span>
+<span class="fc" id="L109">		fl.setVisibleRowCount(20);</span>
+<span class="fc" id="L110">		fl.setFixedCellWidth(300);</span>
+<span class="fc" id="L111">		JScrollPane rscroll = new JScrollPane(fl);</span>
+
+		//---JTable e DefaultTableModel---
+<span class="fc" id="L114">		displaytable = new JTable();</span>
+<span class="fc" id="L115">		model = (DefaultTableModel) displaytable.getModel();</span>
+<span class="fc" id="L116">		String[] colunas = columnMaker();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">		for (int i = 0; i &lt; colunas.length; i++)</span>
+<span class="fc" id="L118">			model.addColumn(colunas[i]);</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">		for(int i = 0 ; i &lt; App.listaMetodos.size() ; i++) {</span>
+<span class="fc" id="L121">			model.addRow(rowMaker(i));</span>
+		}
+
+<span class="fc" id="L124">		fl.addListSelectionListener(new ListSelectionListener() {</span>
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+<span class="nc bnc" id="L127" title="All 2 branches missed.">				for(int i = 0 ; i &lt; App.listaMetodos.size() ; i++) {</span>
+<span class="nc" id="L128">					model.setValueAt(fl.getSelectedValue().getResultado(i+1), i, 2);</span>
+				}
+<span class="nc" id="L130">			}</span>
+		});
+
+<span class="fc" id="L133">		JScrollPane scroll = new JScrollPane(displaytable);</span>
+<span class="fc" id="L134">		JPanel listPane = new JPanel();</span>
+		
+<span class="fc" id="L136">		listPane.add(rscroll);</span>
+<span class="fc" id="L137">		listPane.add(scroll);</span>
+
+<span class="fc" id="L139">		JButton but = new JButton(&quot;Avaliar ferramenta&quot;);</span>
+<span class="fc" id="L140">		but.addActionListener(new ActionListener() {</span>
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L144">				SwingUtilities.invokeLater(new Runnable() {</span>
+					public void run() {
+<span class="nc" id="L146">						new AvaliaGui(fl.getSelectedValue().getNome());</span>
+<span class="nc" id="L147">					}</span>
+				});
+<span class="nc" id="L149">			}</span>
+			
+		});
+		
+		
+		//---add to frame---
+<span class="fc" id="L155">		frame.add(listPane, BorderLayout.CENTER);</span>
+<span class="fc" id="L156">		frame.add(but, BorderLayout.PAGE_END);</span>
+<span class="fc" id="L157">	}</span>
+
+	/**
+	 * 
+	 * method columnMaker
+	 * 
+	 * @return ArrayList&lt;String&gt; com as colunas resultantes 
+	 * 
+	 */
+	
+	private String[] columnMaker() {
+
+<span class="fc" id="L169">		StringBuilder sb = new StringBuilder(&quot;ID;Method;Resultado&quot;);</span>
+<span class="fc" id="L170">		sb.append(&quot;;&quot;);</span>
+<span class="fc" id="L171">		return sb.toString().split(&quot;;&quot;);</span>
+
+	}
+
+	/**
+	 * 
+	 * method rowMaker
+	 * 
+	 * @param i posicao da Lista de metodos onde vai criar as linhas
+	 * 
+	 * @return ArrayList&lt;String&gt; com as linhas resultantes 
+	 * 
+	 */
+	private String[] rowMaker(int i) {
+
+<span class="fc" id="L186">		Metodo metodo = App.listaMetodos.get(i);</span>
+<span class="fc" id="L187">		StringBuilder sb = new StringBuilder(metodo.getMethodID()+&quot;;&quot;+metodo.getMethodName() );</span>
+<span class="fc" id="L188">		sb.append(&quot;;&quot;);</span>
+<span class="fc" id="L189">		return sb.toString().split(&quot;;&quot;);</span>
+
+	}
+
+	/**
+	 * Abre a janela.
+	 * 
+	 */
+	public void open() {
+<span class="fc" id="L198">		frame.setVisible(true);</span>
+<span class="fc" id="L199">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

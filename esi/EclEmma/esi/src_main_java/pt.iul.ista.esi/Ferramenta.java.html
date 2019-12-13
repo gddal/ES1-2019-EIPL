@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Ferramenta.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">Ferramenta.java</span></div><h1>Ferramenta.java</h1><pre class="source lang-java linenums">package pt.iul.ista.esi;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Ferramenta {
+
+	// Atributos
+	private String nome;
+	List&lt;Resultado&gt; listaResultados;
+
+	/**
+	 * 
+	 * Construtor para o Objecto Ferramenta
+	 *
+	 * @param nome Srting nome da ferramenta.
+	 * 
+	 */
+<span class="fc" id="L19">	public Ferramenta(String nome) {</span>
+<span class="fc" id="L20">		this.nome = nome;</span>
+<span class="fc" id="L21">		listaResultados = new ArrayList&lt;Resultado&gt;();</span>
+<span class="fc" id="L22">	}</span>
+
+	// Getters
+
+	/**
+	 * 
+	 * Getter para o nome da ferramenta
+	 *
+	 * @return String nome da ferramenta.
+	 * 
+	 */
+
+	public String getNome() {
+<span class="fc" id="L35">		return this.nome;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para a lista de resultados
+	 *
+	 * @return ArrayList com a lista de resultados.
+	 * 
+	 */
+
+	public List&lt;Resultado&gt; getListaResultados() {
+<span class="fc" id="L47">		return this.listaResultados;</span>
+	}
+
+	/**
+	 * 
+	 * Adiciona resultado à ferramenta.
+	 *
+	 * @param resultado Resultado da analise.
+	 * 
+	 */
+
+	public void addResultado(Resultado resultado) {
+<span class="fc" id="L59">		this.listaResultados.add(resultado);</span>
+<span class="fc" id="L60">	}</span>
+
+	/**
+	 * 
+	 * Limpa a lista de resulados da ferramenta.
+	 *
+	 */
+
+	public void limpaResultados() {
+<span class="fc" id="L69">		this.listaResultados.clear();</span>
+<span class="fc" id="L70">	}</span>
+
+	/**
+	 * 
+	 * Devolve o resultado do teste para o metodo methodID.
+	 *
+	 * @param methodID int ID do metodo.
+	 * @return boolean returna o valor do teste.
+	 * @throws IllegalArgumentException caso o metodo não exeistir
+	 */
+
+	public boolean getResultado(int methodID) throws IllegalArgumentException {
+
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		for (Resultado object : this.listaResultados) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">			if (object.getMethodID() == methodID)</span>
+<span class="fc" id="L85">				return object.getValor();</span>
+		}
+
+<span class="fc" id="L88">		throw new IllegalArgumentException(&quot;Metodo não encontrado&quot;);</span>
+	}
+
+	/**
+	 * 
+	 * toString para o objeto ferramenta.
+	 *
+	 * @return String Nome da ferramenta
+	 * 
+	 */
+	@Override
+	public String toString() {
+<span class="fc" id="L100">		return this.nome;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EscolheGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">EscolheGui.java</span></div><h1>EscolheGui.java</h1><pre class="source lang-java linenums">/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+package pt.iul.ista.esi;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+public class EscolheGui {
+
+	/**
+	 * 
+	 * Construtor para a classe EscolheGui
+	 * 
+	 */
+<span class="fc" id="L29">	public EscolheGui() {</span>
+
+<span class="fc" id="L31">		addFrameContent();</span>
+
+<span class="fc" id="L33">	}</span>
+
+	/*
+	 * Conteúdos para o GUI da classe janela
+	 * 
+	 * Adicionar o conteudo aqui
+	 * 
+	 * | | | | V V
+	 */
+
+	private void addFrameContent() {
+
+<span class="fc" id="L45">		JFileChooser filechooser = new JFileChooser(&quot;.&quot;);</span>
+<span class="fc" id="L46">		FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;Microsoft Excel&quot;, &quot;xlsx&quot;);</span>
+<span class="fc" id="L47">		filechooser.setFileFilter(filter);</span>
+
+<span class="fc" id="L49">		int i = filechooser.showOpenDialog(null);</span>
+
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">		if (i == JFileChooser.APPROVE_OPTION) {</span>
+<span class="nc" id="L52">			String path = filechooser.getSelectedFile().getAbsolutePath();</span>
+<span class="nc" id="L53">			App.FILE = path;</span>
+<span class="nc" id="L54">			System.out.println(App.FILE);</span>
+<span class="nc" id="L55">			App.refreshLists();</span>
+		}
+<span class="fc" id="L57">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

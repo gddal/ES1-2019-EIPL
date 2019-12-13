@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MenuGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">MenuGui.java</span></div><h1>MenuGui.java</h1><pre class="source lang-java linenums">/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Gui
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+
+package pt.iul.ista.esi;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
+public class MenuGui extends JPanel{
+
+	private static final long serialVersionUID = 1L;
+	private static JFrame frame;
+	private JButton gerirB;
+	private JButton avaliarB;
+	private JButton compararB;
+	private JButton escolherficheiroB;
+
+
+	/**
+	 * 
+	 * Construtor para classe MenuGui
+	 * 
+	 */
+
+	public MenuGui() {
+<span class="fc" id="L51">		super(new BorderLayout());</span>
+<span class="fc" id="L52">		frame = new JFrame(&quot;MENU&quot;);</span>
+<span class="fc" id="L53">		frame.setSize(800, 200);</span>
+<span class="fc" id="L54">		frame.setLocationRelativeTo(null);	</span>
+<span class="fc" id="L55">		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="fc" id="L57">		addFrameContent();</span>
+<span class="fc" id="L58">	}</span>
+
+
+	/**
+	 * 
+	 * Metodo que adiciona conteúdo para GUI.
+	 */
+
+	private void addFrameContent() {
+
+		//---JLabel---
+
+<span class="fc" id="L70">		JLabel lbl = new JLabel(App.TITLE,JLabel.CENTER );</span>
+
+
+		//---JButton---
+
+<span class="fc" id="L75">		gerirB = new JButton(&quot;Gerir regras&quot;);</span>
+<span class="fc" id="L76">		GerirListener gerirListener = new GerirListener();</span>
+<span class="fc" id="L77">		gerirB.setActionCommand(&quot;gerirRegras&quot;);</span>
+<span class="fc" id="L78">		gerirB.addActionListener(gerirListener);</span>
+
+<span class="fc" id="L80">		avaliarB = new JButton(&quot;Visualizar Excel&quot;);</span>
+<span class="fc" id="L81">		AvaliarListener avaliarListener = new AvaliarListener();</span>
+<span class="fc" id="L82">		avaliarB.setActionCommand(&quot;avaliarMetodos&quot;);</span>
+<span class="fc" id="L83">		avaliarB.addActionListener(avaliarListener);</span>
+
+<span class="fc" id="L85">		compararB = new JButton(&quot;Comparar aplicações&quot;);</span>
+<span class="fc" id="L86">		CompararListener compararListener = new CompararListener();</span>
+<span class="fc" id="L87">		compararB.setActionCommand(&quot;compararAvalicacoes&quot;);</span>
+<span class="fc" id="L88">		compararB.addActionListener(compararListener);</span>
+
+<span class="fc" id="L90">		escolherficheiroB = new JButton(&quot;Escolher Ficheiro Excel&quot;);</span>
+<span class="fc" id="L91">		EscolherficheiroListener escolherficheirolistener = new EscolherficheiroListener();</span>
+<span class="fc" id="L92">		escolherficheiroB.setActionCommand(&quot;escolherficheiroexcel&quot;);</span>
+<span class="fc" id="L93">		escolherficheiroB.addActionListener(escolherficheirolistener);</span>
+
+
+		//---JPANEL---
+
+<span class="fc" id="L98">		JPanel buttonPane = new JPanel();</span>
+<span class="fc" id="L99">		buttonPane.add(gerirB);</span>
+<span class="fc" id="L100">		buttonPane.add(avaliarB);</span>
+<span class="fc" id="L101">		buttonPane.add(compararB);</span>
+<span class="fc" id="L102">		buttonPane.add(escolherficheiroB);</span>
+
+<span class="fc" id="L104">		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));</span>
+
+<span class="fc" id="L106">		add(lbl, BorderLayout.CENTER);</span>
+<span class="fc" id="L107">		add(buttonPane, BorderLayout.PAGE_END);</span>
+
+<span class="fc" id="L109">	}</span>
+
+	/**
+	 * Abre a aplicação.
+	 */
+
+	public void open() {
+
+<span class="fc" id="L117">		frame.setContentPane(this);</span>
+<span class="fc" id="L118">		frame.setVisible(true);</span>
+
+<span class="fc" id="L120">	}</span>
+
+	/**
+	 * Classe do botão gerir.
+	 */
+
+<span class="fc" id="L126">	class GerirListener implements ActionListener {</span>
+
+
+		public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L130">			SwingUtilities.invokeLater(new Runnable() {</span>
+				public void run() {
+<span class="nc" id="L132">					new GerirGui(&quot;Gerir regras&quot;).open();</span>
+<span class="nc" id="L133">				}</span>
+			});
+<span class="nc" id="L135">		}</span>
+
+	}
+
+	/**
+	 * Classe do botão avaliar.
+	 */
+
+<span class="fc" id="L143">	class AvaliarListener implements ActionListener {</span>
+
+
+		public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L147">			SwingUtilities.invokeLater(new Runnable() {</span>
+				public void run() {
+<span class="nc" id="L149">					new VisualizaGui(&quot;Visualizae Excel&quot;).open();</span>
+<span class="nc" id="L150">				}</span>
+			});
+<span class="nc" id="L152">		}</span>
+
+	}
+
+	/**
+	 * Classe do botao escolher ficheiro.
+	 */
+
+<span class="fc" id="L160">	class EscolherficheiroListener implements ActionListener {</span>
+
+
+		public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L164">			SwingUtilities.invokeLater(new Runnable() {</span>
+				public void run() {
+<span class="nc" id="L166">					EscolheGui ef = new EscolheGui();</span>
+
+<span class="nc" id="L168">				}</span>
+			});
+<span class="nc" id="L170">		}</span>
+
+	}
+
+	/**
+	 * Classe do botão comparar.
+	 */
+
+<span class="fc" id="L178">	class CompararListener implements ActionListener {</span>
+
+
+		public void actionPerformed(ActionEvent arg0) {
+<span class="nc" id="L182">			SwingUtilities.invokeLater(new Runnable() {</span>
+				public void run() {
+<span class="nc" id="L184">					ComparaGui gc = new ComparaGui(&quot;Comparar aplicações&quot;);</span>
+<span class="nc" id="L185">					gc.open();</span>
+<span class="nc" id="L186">				}</span>
+			});
+
+<span class="nc" id="L189">		}</span>
+
+	}
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

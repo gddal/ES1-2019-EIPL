@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package pt.iul.ista.esi;
+
+import java.awt.Component;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+
+import javax.script.ScriptException;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe de entrada da Aplicação do cliente.
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+
+<span class="nc" id="L43">public class App {</span>
+
+	// Titulo
+	public static final String TITLE = &quot;Analise de erros de software&quot;;
+	// Ficheiro de excel
+<span class="fc" id="L48">	public static String FILE = &quot;Long-Method.xlsx&quot;;</span>
+	// Ficheiro de regras
+	public static final String REGRAS = &quot;regras.cfg&quot;;
+
+	// Lista com todas as regras defenidas
+<span class="fc" id="L53">	public static List&lt;Regra&gt; listaRegras = new ArrayList&lt;Regra&gt;();</span>
+
+	// Lista com todas os Metodos
+<span class="fc" id="L56">	public static List&lt;Metodo&gt; listaMetodos = new ArrayList&lt;Metodo&gt;();</span>
+
+	// Lista com os resultados das ferramentas a analizar
+<span class="fc" id="L59">	public static List&lt;Ferramenta&gt; listaFerramentas = new ArrayList&lt;Ferramenta&gt;();</span>
+
+	/**
+	 * 
+	 * Grava num ficheiro todas as regras defenidas listaRegras
+	 * 
+	 * @param file        String nome do ficheiro.
+	 * @param listaRegras ArrayList com as regras.
+	 *
+	 */
+	public static void gravaRegras(String file, List&lt;Regra&gt; listaRegras) {
+
+<span class="fc" id="L71">		PrintWriter printwriter = null;</span>
+
+		try {
+<span class="fc" id="L74">			printwriter = new PrintWriter(new File(file));</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">			for (Regra object : listaRegras) {</span>
+<span class="fc" id="L76">				printwriter.println(object.toString());</span>
+			}
+<span class="fc" id="L78">			printwriter.flush();</span>
+<span class="fc" id="L79">		} catch (FileNotFoundException e) {</span>
+<span class="fc" id="L80">			System.out.println(&quot;Erro. Ficheiro &quot; + file + &quot; não encontrado.&quot;);</span>
+		} finally {
+<span class="fc bfc" id="L82" title="All 2 branches covered.">			if (printwriter != null)</span>
+<span class="fc" id="L83">				printwriter.close();</span>
+		}
+
+<span class="fc" id="L86">	}</span>
+
+	/**
+	 * 
+	 * Grava a regras defenidas
+	 * 
+	 * @param file        String com o nome do ficheiro.
+	 * @param regra Regra que vai ser gravada.
+	 *
+	 */
+
+	public static void gravaRegra(String file, Regra regra) {
+
+<span class="fc" id="L99">		PrintWriter printwriter = null;</span>
+
+		try {
+<span class="fc" id="L102">			printwriter = new PrintWriter(new FileWriter(file, true));</span>
+<span class="fc" id="L103">			printwriter.append(regra.toString());</span>
+<span class="fc" id="L104">			printwriter.flush();</span>
+<span class="pc" id="L105">		} catch (FileNotFoundException e) {</span>
+<span class="nc" id="L106">			System.out.println(&quot;Erro. Ficheiro &quot; + file + &quot; não encontrado.&quot;);</span>
+<span class="nc" id="L107">		} catch (IOException e) {</span>
+			// TODO Auto-generated catch block
+<span class="nc" id="L109">			e.printStackTrace();</span>
+		} finally {
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">			if (printwriter != null)</span>
+<span class="fc" id="L112">				printwriter.close();</span>
+		}
+
+<span class="fc" id="L115">	}</span>
+
+	/**
+	 * 
+	 * Carrega para listaRegras todas as regras definidas no ficheiro
+	 * 
+	 * @param file String nome do ficheiro.
+	 *
+	 * @return ArrayList com as regras.
+	 *
+	 */
+	public static List&lt;Regra&gt; carregaRegras(String file) {
+
+<span class="fc" id="L128">		Scanner scanner = null;</span>
+<span class="fc" id="L129">		List&lt;Regra&gt; listaRegras = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="fc" id="L132">			scanner = new Scanner(new File(file));</span>
+			String line;
+			String[] info;
+
+<span class="fc bfc" id="L136" title="All 2 branches covered.">			while (scanner.hasNextLine()) {</span>
+
+<span class="fc" id="L138">				line = scanner.nextLine();</span>
+<span class="fc" id="L139">				info = line.split(&quot;;&quot;);</span>
+<span class="fc" id="L140">				listaRegras.add(new Regra(info[0], info[1]));</span>
+			}
+
+<span class="fc" id="L143">		} catch (FileNotFoundException e) {</span>
+<span class="fc" id="L144">			System.out.println(&quot;Erro. Ficheiro &quot; + file + &quot; não encontrado.&quot;);</span>
+		} finally {
+<span class="fc bfc" id="L146" title="All 2 branches covered.">			if (scanner != null)</span>
+<span class="fc" id="L147">				scanner.close();</span>
+		}
+
+<span class="fc" id="L150">		return listaRegras;</span>
+	}
+
+	/**
+	 * 
+	 * Carrega para listaMetodos todos os Metodos definidos no ficheiro Excel
+	 * 
+	 * @param file String nome do ficheiro.
+	 *
+	 * @return ArrayList com as metodos.
+	 *
+	 */
+	public static List&lt;Metodo&gt; carregaMetodos(String file) {
+
+<span class="fc" id="L164">		List&lt;Metodo&gt; lista = new ArrayList&lt;Metodo&gt;();</span>
+		int methodID;
+		String packageName;
+		String className;
+		String methodName;
+		int loc;
+		int cyclo;
+		int atfd;
+		double laa;
+
+		try {
+<span class="fc" id="L175">			File excel = new File(FILE);</span>
+<span class="fc" id="L176">			FileInputStream ficheiroInput = new FileInputStream(excel);</span>
+<span class="fc" id="L177">			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);</span>
+<span class="fc" id="L178">			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);</span>
+
+			// Interage com cada folha do ficheiro Excel
+<span class="fc" id="L181">			Iterator&lt;Row&gt; iteradorFolha = folhaExcel.iterator();</span>
+
+			// Interage com cada linha do ficheiro Excel
+<span class="fc bfc" id="L184" title="All 2 branches covered.">			while (iteradorFolha.hasNext()) {</span>
+<span class="fc" id="L185">				Row linhaExcel = iteradorFolha.next();</span>
+
+				// Interage com cada coluna do ficheiro Excel
+<span class="fc" id="L188">				Iterator&lt;Cell&gt; iteradorCelula = linhaExcel.cellIterator();</span>
+
+				// Ignora a primeira Linha
+<span class="fc bfc" id="L191" title="All 2 branches covered.">				if (linhaExcel.getRowNum() == 0)</span>
+<span class="fc" id="L192">					continue;</span>
+
+<span class="fc" id="L194">				Cell celula = iteradorCelula.next();</span>
+
+<span class="fc" id="L196">				methodID = (int) celula.getNumericCellValue();</span>
+<span class="fc" id="L197">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L198">				packageName = celula.getStringCellValue();</span>
+<span class="fc" id="L199">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L200">				className = celula.getStringCellValue();</span>
+<span class="fc" id="L201">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L202">				methodName = celula.getStringCellValue();</span>
+<span class="fc" id="L203">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L204">				loc = (int) celula.getNumericCellValue();</span>
+<span class="fc" id="L205">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L206">				cyclo = (int) celula.getNumericCellValue();</span>
+<span class="fc" id="L207">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L208">				atfd = (int) celula.getNumericCellValue();</span>
+<span class="fc" id="L209">				celula = iteradorCelula.next();</span>
+<span class="fc" id="L210">				laa = celula.getNumericCellValue();</span>
+
+<span class="fc" id="L212">				lista.add(new Metodo(methodID, packageName, className, methodName, loc, cyclo, atfd, laa));</span>
+			}
+
+<span class="fc" id="L215">			ficheiroInput.close();</span>
+<span class="fc" id="L216">			livroExcel.close();</span>
+
+<span class="pc" id="L218">		} catch (FileNotFoundException fe) {</span>
+<span class="nc" id="L219">			return null;</span>
+<span class="nc" id="L220">		} catch (IOException ie) {</span>
+<span class="nc" id="L221">			return null;</span>
+		}
+<span class="fc" id="L223">		return lista;</span>
+	}
+
+	/**
+	 * 
+	 * Carrega para listaFerramentas todos os resultados definidos no ficheiro Excel
+	 * 
+	 * @param file String nome do ficheiro.
+	 *
+	 * @return ArrayList com as Ferramentas.
+	 *
+	 */
+	public static List&lt;Ferramenta&gt; carregaFerramentas(String file) {
+
+<span class="fc" id="L237">		List&lt;Ferramenta&gt; lista = new ArrayList&lt;Ferramenta&gt;();</span>
+<span class="fc" id="L238">		Ferramenta ferramenta = null;</span>
+<span class="fc" id="L239">		Resultado resultado = null;</span>
+<span class="fc" id="L240">		String nome = null;</span>
+		try {
+<span class="fc" id="L242">			File excel = new File(FILE);</span>
+<span class="fc" id="L243">			FileInputStream ficheiroInput = new FileInputStream(excel);</span>
+<span class="fc" id="L244">			XSSFWorkbook livroExcel = new XSSFWorkbook(ficheiroInput);</span>
+<span class="fc" id="L245">			XSSFSheet folhaExcel = livroExcel.getSheetAt(0);</span>
+
+<span class="fc bfc" id="L247" title="All 2 branches covered.">			for (int i = 8; i &lt; 12; i++) {</span>
+
+				// Interage com cada folha do ficheiro Excel
+<span class="fc" id="L250">				Iterator&lt;Row&gt; iteradorLinha = folhaExcel.iterator();</span>
+
+<span class="fc" id="L252">				Row linhaExcel = iteradorLinha.next();</span>
+
+<span class="fc" id="L254">				nome = linhaExcel.getCell(i).getStringCellValue();</span>
+<span class="fc" id="L255">				ferramenta = new Ferramenta(nome);</span>
+
+				// Interage com cada linha do ficheiro Excel
+<span class="fc bfc" id="L258" title="All 2 branches covered.">				while (iteradorLinha.hasNext()) {</span>
+
+<span class="fc" id="L260">					linhaExcel = iteradorLinha.next();</span>
+<span class="fc" id="L261">					resultado = new Resultado((int) linhaExcel.getCell(0).getNumericCellValue(),</span>
+<span class="fc" id="L262">							linhaExcel.getCell(i).getBooleanCellValue());</span>
+<span class="fc" id="L263">					ferramenta.addResultado(resultado);</span>
+				}
+
+<span class="fc" id="L266">				lista.add(ferramenta);</span>
+			}
+
+<span class="fc" id="L269">			ficheiroInput.close();</span>
+<span class="fc" id="L270">			livroExcel.close();</span>
+
+<span class="pc" id="L272">		} catch (FileNotFoundException fe) {</span>
+<span class="nc" id="L273">			return null;</span>
+<span class="nc" id="L274">		} catch (IOException ie) {</span>
+<span class="nc" id="L275">			return null;</span>
+		}
+<span class="fc" id="L277">		return lista;</span>
+	}
+
+	/**
+	 * 
+	 * Calcula os resultados da regra para esta ferramenta
+	 * @param nome String nome da ferramenta.
+	 *
+	 */
+	public static void calcula(String nome) {
+
+<span class="fc" id="L288">		Ferramenta ferramenta = getFerramenta(nome);</span>
+<span class="fc" id="L289">		Regra regra = getRegra(nome);</span>
+
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">		if( regra == null)</span>
+<span class="nc" id="L292">			return;</span>
+
+<span class="pc bpc" id="L294" title="1 of 2 branches missed.">		if( ferramenta == null)</span>
+<span class="nc" id="L295">			ferramenta = new Ferramenta(nome);</span>
+		else
+<span class="fc" id="L297">			ferramenta.limpaResultados();</span>
+
+<span class="fc bfc" id="L299" title="All 2 branches covered.">		for( Metodo metodo : App.listaMetodos)</span>
+			try {
+<span class="fc" id="L301">				ferramenta.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));</span>
+<span class="pc" id="L302">			} catch (ScriptException e) {</span>
+				continue;
+			}
+<span class="fc" id="L305">	}</span>
+
+	/**
+	 * 
+	 * Retorna o objeto Regra com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Regra se ela existir, null caso contrário.
+	 *
+	 */
+	public static Regra getRegra(String nome) {
+
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">		for (Regra regra : listaRegras)</span>
+<span class="pc bpc" id="L319" title="1 of 2 branches missed.">			if (regra.getNome().equals(nome)) {</span>
+<span class="fc" id="L320">				return regra;</span>
+			}
+<span class="nc" id="L322">		return null;</span>
+	}
+
+	/**
+	 * 
+	 * Retorna o objeto Metodo com o ID nome se ele existir na lista
+	 * 
+	 * @param id int Id do Metodo.
+	 *
+	 * @return Metodo se ele existir, null caso contrário.
+	 *
+	 */
+	public static Metodo getRegra(int id) {
+
+<span class="nc bnc" id="L336" title="All 2 branches missed.">		for (Metodo metodo : listaMetodos)</span>
+<span class="nc bnc" id="L337" title="All 2 branches missed.">			if (metodo.getMethodID() == id) {</span>
+<span class="nc" id="L338">				return metodo;</span>
+			}
+<span class="nc" id="L340">		return null;</span>
+	}
+
+	/**
+	 * 
+	 * Retorna o objeto Ferramenta com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Ferramenta se ela existir, null caso contrário.
+	 *
+	 */
+	public static Ferramenta getFerramenta(String nome) {
+
+<span class="pc bpc" id="L354" title="1 of 2 branches missed.">		for (Ferramenta ferramenta : listaFerramentas)</span>
+<span class="pc bpc" id="L355" title="1 of 2 branches missed.">			if (ferramenta.getNome().equals(nome)) {</span>
+<span class="fc" id="L356">				return ferramenta;</span>
+			}
+<span class="nc" id="L358">		return null;</span>
+	}
+
+
+	/**
+	 * 
+	 * Verifica se uma Regra já existe
+	 * 
+	 * @param r Regra que estamso a verificar.
+	 *
+	 * @return int 1 se existir, 0 caso contrário.
+	 *
+	 */
+	public static int contemRegra(Regra r) {
+<span class="fc" id="L372">		String rNome = r.getNome().replace(&quot; &quot;, &quot;&quot;);</span>
+<span class="fc" id="L373">		String rExpressao = r.getExpressao().trim();</span>
+<span class="fc bfc" id="L374" title="All 2 branches covered.">		for (Regra regra : listaRegras) {</span>
+<span class="fc" id="L375">			String regraNome = regra.getNome().trim();</span>
+<span class="fc" id="L376">			String regraExpressao = regra.getExpressao().trim();</span>
+<span class="fc bfc" id="L377" title="All 2 branches covered.">			if (rNome.equals(regraNome))</span>
+<span class="fc" id="L378">				return 1;</span>
+<span class="fc bfc" id="L379" title="All 2 branches covered.">			if (rExpressao.equals(regraExpressao))</span>
+<span class="fc" id="L380">				return 2;</span>
+		}
+<span class="fc" id="L382">		return 0;</span>
+	}
+
+	/**
+	 * 
+	 * Mostra uma janela de confirmação.
+	 * 
+	 * @param cmp Component objecto a que pretence a janela
+	 * @param msg String mensagem a apresentar
+	 *
+	 * @return boolean sim ou não.
+	 *
+	 */
+
+	public static boolean confirm(Component cmp, String msg) {
+<span class="nc" id="L397">		String[] ObjButtons = { &quot;Sim&quot;, &quot;Não&quot; };</span>
+<span class="nc" id="L398">		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION,</span>
+<span class="nc" id="L399">				JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">		return (PromptResult == JOptionPane.YES_OPTION);</span>
+	}
+
+
+
+	/**
+	 * 
+	 * Devolve um vetor de strings do nome dos cabeçalhos excel.
+	 * 
+	 * @return String[] nomes dos cabecalhos
+	 *
+	 */
+
+	public static String[] columnMaker() {
+
+<span class="fc" id="L415">		StringBuilder sb = new StringBuilder(&quot;ID;Package Name;Class Name;Method;LOC;CYCLO;ATFD;LAA&quot;);</span>
+
+
+<span class="fc bfc" id="L418" title="All 2 branches covered.">		for(int i = 0; i&lt;App.listaFerramentas.size(); i++) {</span>
+<span class="fc" id="L419">			sb.append(&quot;;&quot;+App.listaFerramentas.get(i).getNome());</span>
+		}
+
+<span class="fc" id="L422">		return sb.toString().split(&quot;;&quot;);</span>
+	}
+
+	/**
+	 * 
+	 * Devolve um vetor de strings com a informacao de um metodo.
+	 * 
+	 * @param i int indice para procura de metodos na lista de metodos
+	 *
+	 * @return String[] vetor com informacao de o metodo
+	 *
+	 */
+
+	public static String[] infoFormatter(int i) {
+
+<span class="fc" id="L437">		StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L438">		Metodo metodo = App.listaMetodos.get(i);</span>
+
+<span class="fc" id="L440">		sb.append(metodo.toString());</span>
+
+		/*	App.listaFerramentas.forEach(regra -&gt; {
+			try {
+
+				Boolean resultado = regra.calcula(metodo);
+				sb.append(&quot;;&quot; + resultado);
+
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+		});
+		 */
+<span class="fc" id="L453">		App.listaFerramentas.forEach(ferramenta -&gt; {</span>
+<span class="fc" id="L454">			Boolean resultado = ferramenta.getResultado(metodo.getMethodID());</span>
+<span class="fc" id="L455">			sb.append(&quot;;&quot; + resultado);</span>
+
+<span class="fc" id="L457">		});</span>
+
+		String finalstring;
+<span class="fc" id="L460">		finalstring = sb.toString();</span>
+
+<span class="fc" id="L462">		return finalstring.split(&quot;;&quot;);</span>
+
+	}
+
+	/**
+	 * 
+	 * Faz refresh da Lista de Regras, Metodos e Ferramentas
+	 * 
+	 */
+	public static void refreshLists() {
+
+<span class="fc" id="L473">		listaRegras = App.carregaRegras(REGRAS);</span>
+<span class="fc" id="L474">		listaMetodos = App.carregaMetodos(FILE);</span>
+<span class="fc" id="L475">		listaFerramentas = App.carregaFerramentas(FILE);</span>
+
+<span class="fc" id="L477">	}</span>
+
+	/**
+	 * 
+	 * Main method to start application.
+	 *
+	 * @param args String[] parametros iniciais
+	 */
+	public static void main(String[] args) {
+
+<span class="fc" id="L487">		refreshLists();</span>
+<span class="fc" id="L488">		SwingUtilities.invokeLater(new Runnable() {</span>
+			public void run() {
+<span class="fc" id="L490">				new MenuGui().open();</span>
+<span class="fc" id="L491">			}</span>
+
+		});
+<span class="fc" id="L494">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

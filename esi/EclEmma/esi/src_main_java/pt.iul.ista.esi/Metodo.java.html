@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Metodo.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">Metodo.java</span></div><h1>Metodo.java</h1><pre class="source lang-java linenums">package pt.iul.ista.esi;
+
+public class Metodo {
+
+	//Atributos
+	private int methodID;
+	private String packageName;
+	private String className;
+	private String methodName;
+	private int loc;
+	private int cyclo;
+	private int atfd;
+	private double laa;
+
+
+	/**
+	 * 
+	 * Construtor para o Objecto Metodo
+	 *
+	 * @param methodID int ID do metodo.
+	 * @param packageName String package do metodo.
+	 * @param className String classe do metodo.
+	 * @param methodName String nome do metodo.
+	 * @param loc int número de linhas de código.
+	 * @param cyclo int complexidade ciclomática.
+	 * @param atfd int acessos do método a métodos de outras classes.
+	 * @param laa double acessos do método a atributos da própria classe.
+	 * 
+	 */
+
+<span class="fc" id="L31">	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa){</span>
+<span class="fc" id="L32">		this.methodID = methodID;</span>
+<span class="fc" id="L33">		this.packageName=packageName;</span>
+<span class="fc" id="L34">		this.className=className;</span>
+<span class="fc" id="L35">		this.methodName=methodName;</span>
+<span class="fc" id="L36">		this.loc=loc;</span>
+<span class="fc" id="L37">		this.cyclo=cyclo;</span>
+<span class="fc" id="L38">		this.atfd=atfd;</span>
+<span class="fc" id="L39">		this.laa=laa;</span>
+<span class="fc" id="L40">	}</span>
+
+	/**
+	 * 
+	 * Getter para o id do metodo
+	 *
+	 * @return int id do metodo
+	 * 
+	 * 
+	 */
+	public int getMethodID() {
+<span class="fc" id="L51">		return this.methodID;</span>
+	}
+
+	/**
+	 * Getter para o nome do pacote do metodo
+	 *
+	 * @return String nome do pacote do metodo.
+	 * 
+	 */
+
+	public String getPackageName() {
+<span class="fc" id="L62">		return this.packageName;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o nome da classe do metodo
+	 *
+	 * @return String nome da classe do metodo.
+	 * 
+	 */
+
+	public String getClassName() {
+<span class="fc" id="L74">		return this.className;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o nome do metodo.
+	 *
+	 * @return String nome do metodo.
+	 * 
+	 */
+
+	public String getMethodName() {
+<span class="fc" id="L86">		return this.methodName;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o valor do número de linhas de código do metodo.
+	 *
+	 * @return int número de linhas de código.
+	 * 
+	 */
+
+	public int getLoc() {
+<span class="fc" id="L98">		return this.loc;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o valor da complexidade ciclomática do metodo.
+	 *
+	 * @return int valor da complexidade ciclomática.
+	 * 
+	 */
+
+	public int getCyclo() {
+<span class="fc" id="L110">		return this.cyclo;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o valor dos acessos do método a métodos de outras classes do metodo.
+	 *
+	 * @return int número de linhas de código.
+	 * 
+	 */
+
+	public int getAtfd() {
+<span class="fc" id="L122">		return this.atfd;</span>
+	}
+
+	/**
+	 * 
+	 * Getter para o valor do numero de acessos do método a atributos da própria classe do metodo.
+	 *
+	 * @return double numero de acessos do método a atributos da própria classe.
+	 * 
+	 */
+
+	public double getLaa() {
+<span class="fc" id="L134">		return this.laa;</span>
+	}
+
+	/**
+	 * 
+	 * equals para comparar dois metodos.
+	 *
+	 * @param objecto Object para comparar.
+
+	 * @return boolean verdadeiro se os metodos forem iguais falso caso contrário
+	 * 
+	 */
+	@Override
+	public boolean equals(Object objecto) {
+
+		// Se é ele proprio return true   
+<span class="fc bfc" id="L150" title="All 2 branches covered.">		if (objecto == this) { </span>
+<span class="fc" id="L151">			return true; </span>
+		} 
+
+		// Testa se é uma Metodo
+<span class="fc bfc" id="L155" title="All 2 branches covered.">		if (!(objecto instanceof Metodo)) { </span>
+<span class="fc" id="L156">			return false; </span>
+		} 
+
+		// typecast para Metodo para poder comparar  
+<span class="fc" id="L160">		Metodo metodo= (Metodo) objecto; </span>
+
+		// Compara os atibutos  
+<span class="fc bfc" id="L163" title="All 8 branches covered.">		return this.methodID == metodo.getMethodID() &amp;&amp; this.packageName.equals(metodo.getPackageName()) &amp;&amp; this.className.equals(metodo.getClassName()) &amp;&amp; this.methodName.equals(metodo.getMethodName()); </span>
+	}
+
+
+	/**
+	 * 
+	 * toString para a classe do metodo.
+	 *
+	 * @return String com a informação do metodo. 
+	 * 
+	 */
+
+	public String toString() {
+<span class="fc" id="L176">		return getMethodID() +&quot;;&quot;+ getPackageName() +&quot;;&quot;+ getClassName() +&quot;;&quot;+ getMethodName() +&quot;;&quot;+ getLoc() +&quot;;&quot;+ getCyclo() +&quot;;&quot;+ getAtfd() +&quot;;&quot;+ getLaa();</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

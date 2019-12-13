@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AvaliaGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">AvaliaGui.java</span></div><h1>AvaliaGui.java</h1><pre class="source lang-java linenums">/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Avalia
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+
+package pt.iul.ista.esi;
+
+import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class AvaliaGui extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+	private JFrame frmMain;
+	private Ferramenta f1;
+	private Ferramenta f2;
+
+	/**
+	 * 
+	 * Construtor para a classe Avalia
+	 *
+	 * @param nome string nome da ferramenta.
+	 */
+
+<span class="fc" id="L43">	public AvaliaGui(String nome) {</span>
+
+<span class="fc" id="L45">		this.f1 = getDados(nome);</span>
+<span class="fc" id="L46">		this.f2 = getDados(&quot;is_long_method&quot;);</span>
+
+<span class="fc" id="L48">		frmMain = new JFrame(&quot;Analise - &quot; + nome);</span>
+<span class="fc" id="L49">		frmMain.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);</span>
+<span class="fc" id="L50">		frmMain.setResizable(true);</span>
+<span class="fc" id="L51">		frmMain.setLayout(new BorderLayout());</span>
+<span class="fc" id="L52">		frmMain.setSize(300, 200);</span>
+<span class="fc" id="L53">		frmMain.setLocation(200, 150);</span>
+<span class="fc" id="L54">		frmMain.addWindowListener(new WindowAdapter() {</span>
+			@Override
+			public void windowClosing(WindowEvent we) {
+<span class="nc bnc" id="L57" title="All 2 branches missed.">				if (App.confirm(frmMain,&quot;Tem a certeza que quer sair?&quot;)) {</span>
+<span class="nc" id="L58">					 frmMain.dispose();</span>
+				}
+<span class="nc" id="L60">			}</span>
+		});
+
+<span class="fc" id="L63">		addFrameContents();</span>
+<span class="fc" id="L64">		frmMain.setVisible(true);</span>
+<span class="fc" id="L65">	}</span>
+
+
+	/*
+	 * Conteúdos para o frame
+	 * 
+	 */
+
+	private void addFrameContents() {
+
+<span class="fc" id="L75">		int[] indicadores = getIndicadores();</span>
+
+		// frmMain.setBounds(300, 90, 900, 600); 
+  
+<span class="fc" id="L79">		JPanel pnl = new JPanel(null);</span>
+  
+<span class="fc" id="L81">        JLabel dci = new JLabel(&quot;DCI : &quot; + indicadores[0]); </span>
+<span class="fc" id="L82">        dci.setSize(300, 30); </span>
+<span class="fc" id="L83">        dci.setLocation(30, 30); </span>
+<span class="fc" id="L84">        pnl.add(dci); </span>
+  
+<span class="fc" id="L86">        JLabel dii = new JLabel(&quot;DII : &quot; + indicadores[1]); </span>
+<span class="fc" id="L87">        dii.setSize(300, 30); </span>
+<span class="fc" id="L88">        dii.setLocation(30, 60); </span>
+<span class="fc" id="L89">        pnl.add(dii); </span>
+
+<span class="fc" id="L91">        JLabel adci = new JLabel(&quot;ADCI : &quot; + indicadores[2]); </span>
+<span class="fc" id="L92">        adci.setSize(300, 30); </span>
+<span class="fc" id="L93">        adci.setLocation(30, 90); </span>
+<span class="fc" id="L94">        pnl.add(adci); </span>
+
+<span class="fc" id="L96">        JLabel adii = new JLabel(&quot;ADII : &quot; + indicadores[3]); </span>
+<span class="fc" id="L97">        adii.setSize(300, 30); </span>
+<span class="fc" id="L98">        adii.setLocation(30, 120); </span>
+<span class="fc" id="L99">        pnl.add(adii);         </span>
+<span class="fc" id="L100">		frmMain.add(pnl, BorderLayout.CENTER);		</span>
+	
+<span class="fc" id="L102">	}</span>
+
+	/**
+	 * Calcula o getIndicador.
+	 * 
+	 * @return int[] com os Indicatores [dci,dii,adci,adii]
+	 */
+
+	private int[] getIndicadores() {
+
+<span class="fc" id="L112">		int[] ret = {0,0,0,0};</span>
+						
+<span class="fc bfc" id="L114" title="All 2 branches covered.">		for ( Metodo metodo : App.listaMetodos) {</span>
+
+<span class="fc bfc" id="L116" title="All 4 branches covered.">			if(f1.getResultado(metodo.getMethodID()) &amp;&amp; f2.getResultado(metodo.getMethodID()))</span>
+<span class="fc" id="L117">				ret[0]++;</span>
+<span class="fc bfc" id="L118" title="All 4 branches covered.">			if(f1.getResultado(metodo.getMethodID()) &amp;&amp; ! f2.getResultado(metodo.getMethodID()))</span>
+<span class="fc" id="L119">				ret[1]++;</span>
+<span class="pc bpc" id="L120" title="1 of 4 branches missed.">			if(!f1.getResultado(metodo.getMethodID()) &amp;&amp; !f2.getResultado(metodo.getMethodID()))</span>
+<span class="fc" id="L121">				ret[2]++;</span>
+<span class="pc bpc" id="L122" title="1 of 4 branches missed.">			if(!f1.getResultado(metodo.getMethodID()) &amp;&amp; f2.getResultado(metodo.getMethodID()))</span>
+<span class="nc" id="L123">				ret[3]++;</span>
+			}
+		
+<span class="fc" id="L126">		return ret;</span>
+	}
+
+	/**
+	 * Retorna os dados da ferramenta para analizar.
+	 * 
+	 * @param nome String nome da ferramenta.
+	 * @return Ferramenta
+	 */
+
+	private Ferramenta getDados(String nome) {
+
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">		for(Ferramenta f : App.listaFerramentas)</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">			if (f.getNome().equals(nome))</span>
+<span class="fc" id="L140">				return f;</span>
+
+<span class="nc" id="L142">		return null;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

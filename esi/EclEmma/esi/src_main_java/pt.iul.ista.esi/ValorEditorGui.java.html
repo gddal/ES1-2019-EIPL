@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ValorEditorGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">ValorEditorGui.java</span></div><h1>ValorEditorGui.java</h1><pre class="source lang-java linenums">/**
+*
+* Trabalho final de Engenharia de Software I 2019/20
+* 
+* Grupo 85
+* 
+* Projecto Analise de erros de software.
+* 
+* Classe Gui
+*
+* @author Miguel Diaz Gonçalves 82493
+* @author Gonçalo Dias do Amaral 83380
+* @author Miguel Carriço 73745
+* @author André Freitas 82361
+* @author Pedro Jones 82946
+* @version 0.01
+*
+*/
+
+package pt.iul.ista.esi;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+/*
+ * @author André Freitas
+ * 
+ */
+
+
+public class ValorEditorGui {
+	
+<span class="fc" id="L43">	String[] options = {&quot;Yes&quot;,&quot;No&quot;};</span>
+	private JFrame frame;
+	private JPanel panel;
+	private JLabel lbl;
+	private Regra regra;
+	private ValorEditor editor;
+	
+
+	/**
+	 * 
+	 * Construtor para a classe ValueEditorGui
+	 * 
+	 * @param regra	string nome da janela.
+	 *            
+	 * 
+	 */
+	
+<span class="fc" id="L60">	public ValorEditorGui(Regra regra) {</span>
+<span class="fc" id="L61">		this.regra = regra;</span>
+<span class="fc" id="L62">		editor = new ValorEditor(regra);</span>
+<span class="fc" id="L63">		frame = new JFrame(&quot;Value Editor: &quot; +  regra.getExpressao());</span>
+<span class="fc" id="L64">		panel = new JPanel();</span>
+<span class="fc" id="L65">		lbl = new JLabel(&quot;Are you sure?&quot;);</span>
+<span class="fc" id="L66">		panel.add(lbl);</span>
+<span class="fc" id="L67">		frame.setLayout(new BorderLayout());</span>
+<span class="fc" id="L68">		frame.setSize(400,100);</span>
+<span class="fc" id="L69">		frame.setLocationRelativeTo(null);</span>
+<span class="fc" id="L70">		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
+<span class="fc" id="L71">		frame.addWindowListener(new WindowAdapter() {</span>
+			public void windowClosing(WindowEvent e) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">				if (App.confirm(frame, &quot;Deseja sair?&quot;)) {</span>
+<span class="nc" id="L74">					frame.dispose();</span>
+					
+				}
+<span class="nc" id="L77">			}</span>
+		});
+		
+<span class="fc" id="L80">		addFrameContent();</span>
+
+			
+<span class="fc" id="L83">	}</span>
+
+	/*
+	 * Conteúdos para o GUI da classe
+	 * 
+	 *   Adicionar o conteudo aqui
+	 *   
+	 *  	|			|
+	 *  	|			|
+	 *  	V			V
+	 */
+
+	private void addFrameContent() {
+
+<span class="fc" id="L97">		JPanel p = new JPanel();</span>
+<span class="fc" id="L98">		String t = null, t1 = null;</span>
+		
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">		if(regra.getExpressao() == App.listaRegras.get(0).getExpressao()) {</span>
+<span class="nc" id="L101">			t = &quot;LOC: &quot;;</span>
+<span class="nc" id="L102">			t1 = &quot;CYCLO &quot;;</span>
+<span class="nc" id="L103">		}else {</span>
+<span class="fc" id="L104">			t = &quot;ATFD: &quot;;</span>
+<span class="fc" id="L105">			t1 = &quot;LAA: &quot;;</span>
+		}
+<span class="fc" id="L107">		JLabel l = new JLabel(t, JLabel.TRAILING);</span>
+<span class="fc" id="L108">		p.add(l);		</span>
+<span class="fc" id="L109">		JTextField textField = new JTextField(10);</span>
+<span class="fc" id="L110">		l.setLabelFor(textField);</span>
+<span class="fc" id="L111">		p.add(textField);</span>
+		
+<span class="fc" id="L113">		JLabel l1 = new JLabel(t1, JLabel.TRAILING);</span>
+<span class="fc" id="L114">		p.add(l1);</span>
+<span class="fc" id="L115">		JTextField textField1 = new JTextField(10);</span>
+<span class="fc" id="L116">		l1.setLabelFor(textField1);</span>
+<span class="fc" id="L117">		p.add(textField1);</span>
+		
+<span class="fc" id="L119">		JButton applyB = new JButton(&quot;Apply&quot;);</span>
+<span class="fc" id="L120">		applyB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				
+<span class="nc" id="L123">				editor.mudaValores(textField.getText(), textField1.getText());</span>
+<span class="nc" id="L124">				editor.atualizaListas();</span>
+<span class="nc" id="L125">			}</span>
+		});
+		
+		
+<span class="fc" id="L129">		frame.add(applyB, BorderLayout.PAGE_END);</span>
+<span class="fc" id="L130">		frame.add(p, BorderLayout.CENTER);</span>
+		
+		
+		
+<span class="fc" id="L134">	}</span>
+	
+	
+	/**
+	 * Abre a janela.
+	 * 
+	 */
+	public void open() {
+<span class="nc" id="L142">		frame.setVisible(true);</span>
+<span class="nc" id="L143">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>

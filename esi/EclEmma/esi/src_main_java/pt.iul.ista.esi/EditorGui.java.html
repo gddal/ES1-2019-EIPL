@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EditorGui.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">AllTests (1) (13/dez/2019 22:45:25)</a> &gt; <a href="../../index.html" class="el_group">esi</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">pt.iul.ista.esi</a> &gt; <span class="el_source">EditorGui.java</span></div><h1>EditorGui.java</h1><pre class="source lang-java linenums">/**
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe RegrasGUI2
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
+
+package pt.iul.ista.esi;
+
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class EditorGui {
+
+	private String expressao;
+	private String name;
+	private Editor editor;
+	private JFrame frame;
+	private JTextField textField;
+<span class="fc" id="L46">	private ArrayList&lt;String&gt; regra = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L47">	private String temp = &quot;&quot;;</span>
+	private JTextField textField_valor;
+	private JTextField textField_regra;
+	//private ScriptEngineManager factory = new ScriptEngineManager();
+	//private ScriptEngine engine = factory.getEngineByName(&quot;JavaScript&quot;);    
+
+	/**
+	 * 
+	 * Construtor para classe Editor
+	 *
+	 * @param name String nome da regra.
+	 * 
+	 * @param expressao String expressão de calculo.
+	 * 
+	 */
+<span class="fc" id="L62">	public EditorGui (String name, String expressao) {</span>
+<span class="fc" id="L63">		this.name = name;</span>
+<span class="fc" id="L64">		this.expressao = expressao;</span>
+<span class="fc" id="L65">		editor = new Editor(frame);</span>
+<span class="fc" id="L66">		frame = new JFrame(&quot;Editor&quot;);</span>
+<span class="fc" id="L67">		frame.setBounds(100, 100, 475, 315);</span>
+<span class="fc" id="L68">		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
+<span class="fc" id="L69">		frame.getContentPane().setLayout(null);</span>
+<span class="fc" id="L70">		frame.setLocationRelativeTo(null);</span>
+<span class="fc" id="L71">		frame.addWindowListener(new WindowAdapter() {</span>
+			public void windowClosing(WindowEvent e) {
+<span class="nc bnc" id="L73" title="All 2 branches missed.">				if (App.confirm(frame, &quot;Deseja sair?&quot;)) {</span>
+<span class="nc" id="L74">					frame.dispose();</span>
+
+				}
+<span class="nc" id="L77">			}</span>
+		});
+<span class="fc" id="L79">		initialize();</span>
+<span class="fc" id="L80">	}</span>
+
+	/**
+	 * frame torna-se visivel
+	 */
+
+	public void open() {
+<span class="fc" id="L87">		frame.setVisible(true);</span>
+<span class="fc" id="L88">	}</span>
+
+
+
+	/**
+	 * Inicializa o conteudo GUI.
+	 */
+	private void initialize() {
+
+		//----------------------- (Caso seja em modo edit)------------------------------------
+
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		if(expressao != null) {</span>
+<span class="fc" id="L100">			regra.add(expressao);</span>
+		}
+
+		//----------------------- JButton ------------------------------------
+
+<span class="fc" id="L105">		final JButton locB = new JButton(&quot;LOC&quot;);</span>
+<span class="fc" id="L106">		locB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L108">				regra.add(locB.getText());</span>
+<span class="nc" id="L109">				textField.setText(showRegra());</span>
+
+<span class="nc" id="L111">			}</span>
+		});
+<span class="fc" id="L113">		locB.setBounds(27, 47, 89, 35);</span>
+<span class="fc" id="L114">		frame.getContentPane().add(locB);</span>
+
+<span class="fc" id="L116">		final JButton cycloB = new JButton(&quot;CYCLO&quot;);</span>
+<span class="fc" id="L117">		cycloB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L119">				regra.add(cycloB.getText());</span>
+<span class="nc" id="L120">				textField.setText(showRegra());</span>
+<span class="nc" id="L121">			}</span>
+		});
+<span class="fc" id="L123">		cycloB.setBounds(27, 93, 89, 35);</span>
+<span class="fc" id="L124">		frame.getContentPane().add(cycloB);</span>
+
+<span class="fc" id="L126">		final JButton atfdB = new JButton(&quot;ATFD&quot;);</span>
+<span class="fc" id="L127">		atfdB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L129">				regra.add(atfdB.getText());</span>
+<span class="nc" id="L130">				textField.setText(showRegra());</span>
+<span class="nc" id="L131">			}</span>
+		});
+<span class="fc" id="L133">		atfdB.setBounds(27, 139, 89, 35);</span>
+<span class="fc" id="L134">		frame.getContentPane().add(atfdB);</span>
+
+<span class="fc" id="L136">		final JButton laaB = new JButton(&quot;LAA&quot;);</span>
+<span class="fc" id="L137">		laaB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L139">				regra.add(laaB.getText());</span>
+<span class="nc" id="L140">				textField.setText(showRegra());</span>
+<span class="nc" id="L141">			}</span>
+		});
+<span class="fc" id="L143">		laaB.setBounds(27, 185, 89, 35);</span>
+<span class="fc" id="L144">		frame.getContentPane().add(laaB);</span>
+
+<span class="fc" id="L146">		final JButton right_bracketB = new JButton(&quot;)&quot;);</span>
+<span class="fc" id="L147">		right_bracketB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L149">				regra.add(right_bracketB.getText());</span>
+<span class="nc" id="L150">				textField.setText(showRegra());</span>
+<span class="nc" id="L151">			}</span>
+		});
+<span class="fc" id="L153">		right_bracketB.setBounds(342, 48, 89, 35);</span>
+<span class="fc" id="L154">		frame.getContentPane().add(right_bracketB);</span>
+
+<span class="fc" id="L156">		final JButton left_bracketB = new JButton(&quot;(&quot;);</span>
+<span class="fc" id="L157">		left_bracketB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L159">				regra.add(left_bracketB.getText());</span>
+<span class="nc" id="L160">				textField.setText(showRegra());</span>
+<span class="nc" id="L161">			}</span>
+		});
+<span class="fc" id="L163">		left_bracketB.setBounds(243, 48, 89, 35);</span>
+<span class="fc" id="L164">		frame.getContentPane().add(left_bracketB);</span>
+
+<span class="fc" id="L166">		JButton andB = new JButton(&quot;AND&quot;);</span>
+<span class="fc" id="L167">		andB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L169">				regra.add(&quot;&amp;&amp;&quot;);</span>
+<span class="nc" id="L170">				textField.setText(showRegra());</span>
+<span class="nc" id="L171">			}</span>
+		});
+<span class="fc" id="L173">		andB.setBounds(243, 94, 89, 35);</span>
+<span class="fc" id="L174">		frame.getContentPane().add(andB);</span>
+
+<span class="fc" id="L176">		JButton orB= new JButton(&quot;OR&quot;);</span>
+<span class="fc" id="L177">		orB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L179">				regra.add(&quot;||&quot;);</span>
+<span class="nc" id="L180">				textField.setText(showRegra());</span>
+<span class="nc" id="L181">			}</span>
+		});
+<span class="fc" id="L183">		orB.setBounds(342, 94, 89, 35);</span>
+<span class="fc" id="L184">		frame.getContentPane().add(orB);</span>
+
+<span class="fc" id="L186">		JButton cB = new JButton(&quot;C&quot;);</span>
+<span class="fc" id="L187">		cB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L189">				regra.clear();</span>
+<span class="nc" id="L190">				textField.setText(showRegra());</span>
+<span class="nc" id="L191">			}</span>
+		});
+<span class="fc" id="L193">		cB.setBounds(243, 185, 89, 35);</span>
+<span class="fc" id="L194">		frame.getContentPane().add(cB);</span>
+
+<span class="fc" id="L196">		JButton deleteB = new JButton(&quot;DELETE&quot;);</span>
+<span class="fc" id="L197">		deleteB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L199" title="All 2 branches missed.">				if (!regra.isEmpty()) {</span>
+<span class="nc" id="L200">					String s = regra.remove(regra.size() - 1);</span>
+<span class="nc" id="L201">					regra.add(s.substring(0, s.length() - 1));</span>
+<span class="nc" id="L202">					textField.setText(showRegra());</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">					if (regra.get(regra.size() - 1).isEmpty())</span>
+<span class="nc" id="L204">						regra.remove(regra.size() - 1);</span>
+				}
+
+<span class="nc" id="L207">			}</span>
+		});
+<span class="fc" id="L209">		deleteB.setBounds(342, 185, 89, 35);</span>
+<span class="fc" id="L210">		frame.getContentPane().add(deleteB);</span>
+
+<span class="fc" id="L212">		JButton submitB = new JButton(&quot;SUBMIT&quot;);</span>
+<span class="fc" id="L213">		submitB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+				
+<span class="nc" id="L216">				String nome = textField_regra.getText();</span>
+<span class="nc" id="L217">				String expressao = showRegra();</span>
+				
+<span class="nc bnc" id="L219" title="All 2 branches missed.">				if(!editor.camposVazios(nome, expressao) &amp;&amp;</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">						editor.verificaRegra(nome, expressao) &amp;&amp;</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">							editor.testaNome(nome) &amp;&amp;</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">								!editor.existeRegra(nome, expressao)) {</span>
+<span class="nc" id="L223">									editor.criaRegra(nome, expressao);</span>
+<span class="nc" id="L224">									frame.dispose();</span>
+<span class="nc" id="L225">									regra.clear();	</span>
+				}
+<span class="nc" id="L227">			}</span>
+		});
+<span class="fc" id="L229">		submitB.setBounds(342, 231, 89, 35);</span>
+<span class="fc" id="L230">		frame.getContentPane().add(submitB);</span>
+
+
+<span class="fc" id="L233">		final JButton gtB = new JButton(&quot;&gt;&quot;);</span>
+<span class="fc" id="L234">		gtB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L236">				regra.add(gtB.getText());</span>
+<span class="nc" id="L237">				textField.setText(showRegra());</span>
+<span class="nc" id="L238">			}</span>
+		});
+<span class="fc" id="L240">		gtB.setBounds(123, 47, 89, 35);</span>
+<span class="fc" id="L241">		frame.getContentPane().add(gtB);</span>
+
+<span class="fc" id="L243">		final JButton gt_eqB = new JButton(&quot;&gt;=&quot;);</span>
+<span class="fc" id="L244">		gt_eqB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L246">				regra.add(gt_eqB.getText());</span>
+<span class="nc" id="L247">				textField.setText(showRegra());</span>
+<span class="nc" id="L248">			}</span>
+		});
+<span class="fc" id="L250">		gt_eqB.setBounds(123, 93, 89, 35);</span>
+<span class="fc" id="L251">		frame.getContentPane().add(gt_eqB);</span>
+
+<span class="fc" id="L253">		final JButton ltB = new JButton(&quot;&lt;&quot;);</span>
+<span class="fc" id="L254">		ltB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L256">				regra.add(ltB.getText());</span>
+<span class="nc" id="L257">				textField.setText(showRegra());</span>
+<span class="nc" id="L258">			}</span>
+		});
+<span class="fc" id="L260">		ltB.setBounds(123, 139, 89, 35);</span>
+<span class="fc" id="L261">		frame.getContentPane().add(ltB);</span>
+
+<span class="fc" id="L263">		final JButton lt_eqB = new JButton(&quot;&lt;=&quot;);</span>
+<span class="fc" id="L264">		lt_eqB.addActionListener(new ActionListener() {</span>
+			public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L266">				regra.add(lt_eqB.getText());</span>
+<span class="nc" id="L267">				textField.setText(showRegra());</span>
+<span class="nc" id="L268">			}</span>
+		});
+<span class="fc" id="L270">		lt_eqB.setBounds(123, 185, 89, 35);</span>
+<span class="fc" id="L271">		frame.getContentPane().add(lt_eqB);</span>
+
+		//----------------------- JTextField ------------------------------------
+
+<span class="fc" id="L275">		textField = new JTextField();</span>
+<span class="fc" id="L276">		textField.setEditable(false);</span>
+<span class="fc" id="L277">		textField.setBounds(27, 231, 280, 34);</span>
+<span class="fc" id="L278">		frame.getContentPane().add(textField);</span>
+<span class="fc" id="L279">		textField.setColumns(10);</span>
+<span class="pc bpc" id="L280" title="1 of 2 branches missed.">		if(expressao != null) {</span>
+<span class="fc" id="L281">			textField.setText(expressao);</span>
+		}
+
+<span class="fc" id="L284">		textField_valor = new JTextField(&quot;Valores&quot;);</span>
+<span class="fc" id="L285">		textField_valor.setForeground(Color.LIGHT_GRAY);</span>
+<span class="fc" id="L286">		textField_valor.setToolTipText(&quot;Valores&quot;);</span>
+<span class="fc" id="L287">		textField_valor.setBounds(243, 140, 188, 33);</span>
+<span class="fc" id="L288">		frame.getContentPane().add(textField_valor);</span>
+<span class="fc" id="L289">		textField_valor.setColumns(10);</span>
+
+<span class="fc" id="L291">		textField_valor.addMouseListener(new MouseAdapter() {</span>
+			@Override
+			public void mousePressed(MouseEvent e) {
+<span class="nc" id="L294">				textField_valor.setForeground(Color.BLACK);</span>
+<span class="nc" id="L295">				textField_valor.setText(&quot;&quot;);</span>
+<span class="nc" id="L296">			}</span>
+		});
+
+<span class="fc" id="L299">		textField_valor.addKeyListener(new KeyAdapter() {</span>
+			@Override
+			public void keyPressed(KeyEvent e) {
+<span class="nc bnc" id="L302" title="All 4 branches missed.">				if (e.getKeyCode() == KeyEvent.VK_ENTER &amp;&amp; textField_valor.getText().matches(&quot;^[0-9]+$&quot;)) {</span>
+<span class="nc" id="L303">					regra.add(textField_valor.getText());</span>
+<span class="nc" id="L304">					textField.setText(showRegra());</span>
+				}
+<span class="nc" id="L306">			}</span>
+		});
+
+
+
+<span class="fc" id="L311">		textField_regra = new JTextField(&quot;Nome da Regra&quot;);</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">		if(name == null) {</span>
+<span class="nc" id="L313">			textField_regra.setForeground(Color.LIGHT_GRAY);</span>
+<span class="nc" id="L314">			textField_regra.setToolTipText(&quot;Nome da Regra&quot;);</span>
+<span class="nc" id="L315">		}else {</span>
+<span class="fc" id="L316">			textField_regra.setText(name);</span>
+		}
+<span class="fc" id="L318">		textField_regra.setBounds(27, 11, 401, 25);</span>
+<span class="fc" id="L319">		frame.getContentPane().add(textField_regra);</span>
+<span class="fc" id="L320">		textField_regra.setColumns(10);</span>
+
+<span class="fc" id="L322">		textField_regra.addMouseListener(new MouseAdapter() {</span>
+			@Override
+			public void mousePressed(MouseEvent e) {
+<span class="nc" id="L325">				textField_regra.setForeground(Color.BLACK);</span>
+<span class="nc" id="L326">				textField_regra.setText(&quot;&quot;);</span>
+<span class="nc" id="L327">			}</span>
+		});
+
+
+<span class="fc" id="L331">	}</span>
+
+	/**
+	 * 
+	 * Mostra o resultado da regra.
+	 *
+	 * @return String resultado da regra.
+	 * 
+	 */
+
+	private String showRegra() {
+<span class="nc" id="L342">		temp = &quot;&quot;;</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">		for (int i = 0; i &lt; regra.size(); i++) {</span>
+<span class="nc" id="L344">			temp += &quot; &quot; + regra.get(i);</span>
+		}
+<span class="nc" id="L346">		return temp;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span>AllTests (1) (13/dez/2019 22:45:25)</div></body></html>
