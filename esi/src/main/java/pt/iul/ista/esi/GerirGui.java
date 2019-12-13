@@ -204,9 +204,10 @@ public class GerirGui implements ListSelectionListener{
 				// tem que ter um metodo para eliminar um elemento regra 
 				if(index>1) {
 					//App.apagaRegra("regras.cfg", App.listaRegras.get(index));
+					App.listaFerramentas.remove(index);
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
-					App.gravaRegras(App.REGRAS, App.listaRegras);
+//					App.gravaRegras(App.REGRAS, App.listaRegras);
 				}else {
 					JOptionPane.showMessageDialog(frame, "Não pode apagar essa regra");
 				}
@@ -251,18 +252,11 @@ public class GerirGui implements ListSelectionListener{
 						if(index==0 || index==1) {
 							ValorEditorGui gui = new ValorEditorGui(list.getSelectedValue());
 							gui.open();
-						
-
-						if(index==0) {
-							//ThresHoldGui gui = new ThresHoldGui();
-
-						}else if(index==1) {
-							//ThresHoldGui gui = new ThresHoldGui();
 						}else {
 							EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
 							gj.open();						
 						}
-						}
+						
 					}
 				});
 		
