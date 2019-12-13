@@ -105,7 +105,7 @@ public class EditorGui {
 		final JButton locB = new JButton("LOC");
 		locB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + locB.getText());
+				regra.add(locB.getText());
 				textField.setText(showRegra());
 
 			}
@@ -116,7 +116,7 @@ public class EditorGui {
 		final JButton cycloB = new JButton("CYCLO");
 		cycloB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + cycloB.getText());
+				regra.add(cycloB.getText());
 				textField.setText(showRegra());
 			}
 		});
@@ -126,7 +126,7 @@ public class EditorGui {
 		final JButton atfdB = new JButton("ATFD");
 		atfdB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + atfdB.getText());
+				regra.add(atfdB.getText());
 				textField.setText(showRegra());
 			}
 		});
@@ -136,7 +136,7 @@ public class EditorGui {
 		final JButton laaB = new JButton("LAA");
 		laaB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + laaB.getText());
+				regra.add(laaB.getText());
 				textField.setText(showRegra());
 			}
 		});
@@ -146,7 +146,7 @@ public class EditorGui {
 		final JButton right_bracketB = new JButton(")");
 		right_bracketB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + right_bracketB.getText());
+				regra.add(right_bracketB.getText());
 				textField.setText(showRegra());
 			}
 		});
@@ -156,7 +156,7 @@ public class EditorGui {
 		final JButton left_bracketB = new JButton("(");
 		left_bracketB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + left_bracketB.getText());
+				regra.add(left_bracketB.getText());
 				textField.setText(showRegra());
 			}
 		});
@@ -166,7 +166,7 @@ public class EditorGui {
 		JButton andB = new JButton("AND");
 		andB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + "&&");
+				regra.add("&&");
 				textField.setText(showRegra());
 			}
 		});
@@ -176,7 +176,7 @@ public class EditorGui {
 		JButton orB= new JButton("OR");
 		orB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regra.add(" " + "||");
+				regra.add("||");
 				textField.setText(showRegra());
 			}
 		});
