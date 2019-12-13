@@ -62,7 +62,6 @@ public class ComparaGui{
 	private JLabel lbl;
 	private DefaultListModel<Ferramenta> ferramentaList;
 	private JList<Ferramenta> fl;
-	private JButton checkB;
 	private DefaultTableModel model;
 
 
@@ -147,16 +146,10 @@ public class ComparaGui{
 		listPane.add(rscroll);
 		listPane.add(scroll);
 		
-		//---JButton---
-		checkB = new JButton("Apply");
-		CheckListener checkListener = new CheckListener();
-		checkB.setActionCommand("check");
-		checkB.addActionListener(checkListener);
-		
+	
 		
 		//---add to frame---
 		frame.add(listPane, BorderLayout.CENTER);
-		frame.add(checkB, BorderLayout.PAGE_END);
 		
 	}
 	
@@ -192,17 +185,7 @@ public class ComparaGui{
 	 * 
 	 */
 	
-	class CheckListener implements ActionListener {
-		
-		public void actionPerformed(ActionEvent arg0) {
-			//fl.getSelectedValue().getResultado();
-			for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
-				model.setValueAt(fl.getSelectedValue().getResultado(i+1), i, 2);
-			}
-		}
 
-	}
-	
 	
 	
 }
