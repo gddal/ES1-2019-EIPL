@@ -1,21 +1,21 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-* 
-* Classe RegrasGUI2
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe RegrasGUI2
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 
 package pt.iul.ista.esi;
 
@@ -55,15 +55,14 @@ public class EditorGui {
 	private String iPlasma = "iPlasma";
 	//private ScriptEngineManager factory = new ScriptEngineManager();
 	//private ScriptEngine engine = factory.getEngineByName("JavaScript");    
-	
+
 	/**
 	 * 
 	 * Construtor para classe Editor
 	 *
-	 * @param name
-	 *            String nome da regra.
-	 * @param expressao
-	 *            String expressão de calculo.
+	 * @param name String nome da regra.
+	 * 
+	 * @param expressao String expressão de calculo.
 	 * 
 	 */
 	public EditorGui (String name, String expressao) {
@@ -79,35 +78,35 @@ public class EditorGui {
 			public void windowClosing(WindowEvent e) {
 				if (App.confirm(frame, "Deseja sair?")) {
 					frame.dispose();
-					
+
 				}
 			}
 		});
 		initialize();
 	}
-	
+
 	/**
 	 * frame torna-se visivel
 	 */
-	
+
 	public void open() {
 		frame.setVisible(true);
 	}
 
-	
-	
+
+
 	/**
 	 * Inicializa o conteudo GUI.
 	 */
 	private void initialize() {
 
-//----------------------- (Caso seja em modo edit)------------------------------------
-		
+		//----------------------- (Caso seja em modo edit)------------------------------------
+
 		if(expressao != null) {
 			regra.add(expressao);
 		}
-		
-//----------------------- JButton ------------------------------------
+
+		//----------------------- JButton ------------------------------------
 
 		final JButton locB = new JButton("LOC");
 		locB.addActionListener(new ActionListener() {
@@ -236,7 +235,7 @@ public class EditorGui {
 							JOptionPane.showMessageDialog(frame, "Regra criada com sucesso");
 							frame.dispose();
 							regra.clear();	
-							
+
 						} else {
 							JOptionPane.showMessageDialog(frame, "Regra Invalida");
 						}
@@ -249,7 +248,7 @@ public class EditorGui {
 		submitB.setBounds(342, 231, 89, 35);
 		frame.getContentPane().add(submitB);
 
-	
+
 		final JButton gtB = new JButton(">");
 		gtB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -289,9 +288,9 @@ public class EditorGui {
 		});
 		lt_eqB.setBounds(123, 185, 89, 35);
 		frame.getContentPane().add(lt_eqB);
-		
-//----------------------- JTextField ------------------------------------
-		
+
+		//----------------------- JTextField ------------------------------------
+
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(27, 231, 280, 34);
@@ -300,14 +299,14 @@ public class EditorGui {
 		if(expressao != null) {
 			textField.setText(expressao);
 		}
-		
+
 		textField_valor = new JTextField("Valores");
 		textField_valor.setForeground(Color.LIGHT_GRAY);
 		textField_valor.setToolTipText("Valores");
 		textField_valor.setBounds(243, 140, 188, 33);
 		frame.getContentPane().add(textField_valor);
 		textField_valor.setColumns(10);
-		
+
 		textField_valor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -315,7 +314,7 @@ public class EditorGui {
 				textField_valor.setText("");
 			}
 		});
-		
+
 		textField_valor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -325,9 +324,9 @@ public class EditorGui {
 				}
 			}
 		});
-		
 
-		
+
+
 		textField_regra = new JTextField("Nome da Regra");
 		if(name == null) {
 			textField_regra.setForeground(Color.LIGHT_GRAY);
@@ -338,7 +337,7 @@ public class EditorGui {
 		textField_regra.setBounds(27, 11, 401, 25);
 		frame.getContentPane().add(textField_regra);
 		textField_regra.setColumns(10);
-		
+
 		textField_regra.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -351,7 +350,7 @@ public class EditorGui {
 					hasRegraContent=true;
 			}
 		});
-		
+
 
 	}
 
@@ -362,7 +361,7 @@ public class EditorGui {
 	 * @return String resultado da regra.
 	 * 
 	 */
-	
+
 	private String showRegra() {
 		temp = "";
 		for (int i = 0; i < regra.size(); i++) {

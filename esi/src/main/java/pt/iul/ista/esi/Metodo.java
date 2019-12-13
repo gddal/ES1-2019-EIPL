@@ -17,26 +17,17 @@ public class Metodo {
 	 * 
 	 * Construtor para o Objecto Metodo
 	 *
-	 * @param methodID
-	 *            int ID do metodo.
-	 * @param packageName
-	 *            String package do metodo.
-	 * @param className
-	 *            String classe do metodo.
-	 * @param methodName
-	 *            String nome do metodo.
-	 * @param loc
-	 *            int número de linhas de código.
-	 * @param cyclo
-	 *            int complexidade ciclomática.
-	 * @param atfd
-	 *            int acessos do método a métodos de outras classes.
-	 * @param laa
-	 *            double acessos do método a atributos da própria classe.
+	 * @param methodID int ID do metodo.
+	 * @param packageName String package do metodo.
+	 * @param className String classe do metodo.
+	 * @param methodName String nome do metodo.
+	 * @param loc int número de linhas de código.
+	 * @param cyclo int complexidade ciclomática.
+	 * @param atfd int acessos do método a métodos de outras classes.
+	 * @param laa double acessos do método a atributos da própria classe.
 	 * 
 	 */
-	//Construtor
-	//	
+
 	public Metodo (int methodID, String packageName, String className, String methodName, int loc, int cyclo, int atfd, double laa){
 		this.methodID = methodID;
 		this.packageName=packageName;
@@ -48,8 +39,6 @@ public class Metodo {
 		this.laa=laa;
 	}
 
-	
-	//Getters
 	/**
 	 * 
 	 * Getter para o id do metodo
@@ -63,7 +52,6 @@ public class Metodo {
 	}
 
 	/**
-	 * 
 	 * Getter para o nome do pacote do metodo
 	 *
 	 * @return String nome do pacote do metodo.
@@ -152,42 +140,41 @@ public class Metodo {
 	 *
 	 * @param objecto Object para comparar.
 
-	 * @return
-	 *         Boolean verdadeiro se os metodos forem iguais falso caso contrário
+	 * @return boolean verdadeiro se os metodos forem iguais falso caso contrário
 	 * 
 	 */
 	@Override
 	public boolean equals(Object objecto) {
-		
+
 		// Se é ele proprio return true   
-        if (objecto == this) { 
-            return true; 
-        } 
-  
-        // Testa se é uma Metodo
-        if (!(objecto instanceof Metodo)) { 
-            return false; 
-        } 
-          
-        // typecast para Metodo para poder comparar  
-        Metodo metodo= (Metodo) objecto; 
-          
-        // Compara os atibutos  
-        return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
-    }
+		if (objecto == this) { 
+			return true; 
+		} 
+
+		// Testa se é uma Metodo
+		if (!(objecto instanceof Metodo)) { 
+			return false; 
+		} 
+
+		// typecast para Metodo para poder comparar  
+		Metodo metodo= (Metodo) objecto; 
+
+		// Compara os atibutos  
+		return this.methodID == metodo.getMethodID() && this.packageName.equals(metodo.getPackageName()) && this.className.equals(metodo.getClassName()) && this.methodName.equals(metodo.getMethodName()); 
+	}
 
 
 	/**
 	 * 
 	 * toString para a classe do metodo.
 	 *
-	 * @return String getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa().
+	 * @return String com a informação do metodo. 
 	 * 
 	 */
-	
+
 	public String toString() {
 		return getMethodID() +";"+ getPackageName() +";"+ getClassName() +";"+ getMethodName() +";"+ getLoc() +";"+ getCyclo() +";"+ getAtfd() +";"+ getLaa();
 
 	}
-	
+
 }

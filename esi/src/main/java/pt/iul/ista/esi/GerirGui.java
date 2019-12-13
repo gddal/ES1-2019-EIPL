@@ -1,21 +1,21 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-* 
-* Classe Gui
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Gui
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 
 package pt.iul.ista.esi;
 
@@ -41,14 +41,8 @@ import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-/*
- * @author André Freitas
- * 
- */
-
-
 public class GerirGui implements ListSelectionListener{
-	
+
 	private JButton criarB;
 	private JButton eliminarB;
 	private JButton editarB;
@@ -58,17 +52,16 @@ public class GerirGui implements ListSelectionListener{
 	private String name;
 	private JPanel panel;
 	private JLabel lbl;
-	
+
 
 	/**
 	 * 
-	 * Construtor para a classe AvaliaGui
+	 * Construtor para a classe GerirGui
 	 *
-	 * @param name
-	 *            string nome da janela.
+	 * @param name String nome da janela.
 	 * 
 	 */
-	
+
 	public GerirGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
@@ -79,10 +72,10 @@ public class GerirGui implements ListSelectionListener{
 		frame.setSize(350, 450);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		
+
 		addFrameContent();
 
-			
+
 	}
 
 	/*
@@ -98,40 +91,40 @@ public class GerirGui implements ListSelectionListener{
 	private void addFrameContent() {
 
 		//---Jbutton---
-		
+
 		criarB = new JButton("criar regra");
 		CreateListener criarListener = new CreateListener();
 		criarB.setActionCommand("criar");
 		criarB.addActionListener(criarListener);
-		
+
 		eliminarB = new JButton("delete");
 		EliminarListener eliminarListener = new EliminarListener(eliminarB);
 		eliminarB.setActionCommand("delete");
 		eliminarB.addActionListener(eliminarListener);
-		
+
 		editarB = new JButton("edit");
 		EditarListener editarListener = new EditarListener(editarB);
 		editarB.setActionCommand("edit");
 		editarB.addActionListener(editarListener);
-		
-		
-		
+
+
+
 		//---JPANEL---
-		
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
 		buttonPane.add(criarB);
 		buttonPane.add(eliminarB);
 		buttonPane.add(editarB);
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		
+
 		//---JList & DefaultListModel---
-		
+
 		regraList = new DefaultListModel<Regra>();
 		for(int i = 0 ; i < App.listaRegras.size() ; i++) {
 			regraList.addElement(App.listaRegras.get(i));
 		}
-		
+
 		list = new JList<Regra>(regraList);
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.addListSelectionListener(this);
@@ -139,15 +132,15 @@ public class GerirGui implements ListSelectionListener{
 		list.setVisibleRowCount(20);
 		list.setFixedCellWidth(300);
 		JScrollPane scroll = new JScrollPane(list);
-		
-		
-		
+
+
+
 		frame.add(scroll, BorderLayout.CENTER);
 		frame.add(buttonPane, BorderLayout.PAGE_END);
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Abre a janela.
 	 * 
@@ -155,48 +148,56 @@ public class GerirGui implements ListSelectionListener{
 	public void open() {
 		frame.setVisible(true);
 	}
-	
-	
+
+
 	/**
 	 * Classe do botão create.
 	 */
-	
+
 	class CreateListener implements ActionListener {
 
-		
+
 		public void actionPerformed(ActionEvent arg0) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
 					EditorGui gj = new EditorGui(null, null);
 					gj.open();
-					
+
 				}
 			});
 
 		}
 
 	}
-	
+
 	/**
 	 * Classe do botão delete.
 	 */
-	
+
 	class EliminarListener implements ActionListener {
 
 		private JButton button;
 
-		
+
 		public EliminarListener(JButton button) {
 			this.button = button;
 
 		}
 
-		
-		
+
+		/**
+		 * 
+		 * method actionPerformed que avalia a acao
+		 * 
+		 * @param arg0 ActionEvent evento
+		 * 
+		 * 
+		 */
+
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			int index = list.getSelectedIndex();
-			
+
 			if (App.listaRegras.size() == 0) { // Nobody's left, disable button.
 				button.setEnabled(false);
 			} else {
@@ -209,28 +210,35 @@ public class GerirGui implements ListSelectionListener{
 				}else {
 					JOptionPane.showMessageDialog(frame, "Não pode apagar essa regra");
 				}
-				
+
 			}
-			
+
 		}
 
 	}
-	
+
 	/**
 	 * Classe do botão edit.
 	 */
-	
+
 	class EditarListener implements ActionListener {
 
 		private JButton button;
-		
+
 		public EditarListener(JButton button) {
 			this.button = button;
 
 		}
 
-		
-		
+		/**
+		 * 
+		 * method actionPerformed que avalia a acao
+		 * 
+		 * @param arg0 ActionEvent evento
+		 * 
+		 * 
+		 */
+
 		public void actionPerformed(ActionEvent arg0) {
 			int index = list.getSelectedIndex();
 			if (App.listaRegras.size() == 0) { 
@@ -239,38 +247,43 @@ public class GerirGui implements ListSelectionListener{
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						System.out.println(index);
+
 						if(index==0 || index==1) {
 							ValorEditorGui gui = new ValorEditorGui(list.getSelectedValue());
 							gui.open();
 						
+
+						if(index==0) {
+							//ThresHoldGui gui = new ThresHoldGui();
+
+						}else if(index==1) {
+							//ThresHoldGui gui = new ThresHoldGui();
 						}else {
 							EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
 							gj.open();						
 						}
+						}
 					}
 				});
+		
 			}
+
 		}
 
-	}
 
+	}	
+
+	/**
+	 * 
+	 * method valueChange avalia o vlaor alterado
+	 * 
+	 * @param e ListSelectionEvent evento a validar
+	 * 
+	 */
+	
 	@Override
-	public void valueChanged(ListSelectionEvent e) {
-		if (list.getSelectedIndex() == -1) {
-			// No selection, disable button.
-			eliminarB.setEnabled(false);
-			editarB.setEnabled(false);
-			
-
-		} else {
-			// Selection, enable button.
-			eliminarB.setEnabled(true);
-			editarB.setEnabled(true);
-			
-		}
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
-
-
-	
 }

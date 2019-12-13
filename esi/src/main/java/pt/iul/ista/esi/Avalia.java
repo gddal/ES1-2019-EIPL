@@ -1,21 +1,21 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-* 
-* Classe Avalia
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Avalia
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 
 package pt.iul.ista.esi;
 
@@ -34,6 +34,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class Avalia extends JPanel implements ListSelectionListener {
 
+	//Atributos da Class
 	// Lista com todas as regras defenidas
 	public static List<Regra> listaRegras = new ArrayList<Regra>();
 
@@ -43,8 +44,6 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	// Lista com os resultados das ferramentas a analizar
 	public static List<Ferramenta> listaFerramentas = new ArrayList<Ferramenta>();
 
-	
-	
 	private static final long serialVersionUID = 1L;
 	private JFrame frmMain;
 	private Ferramenta f1;
@@ -59,11 +58,11 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	 */
 
 	public Avalia(String nome) {
-		
+
 		this.fName = nome;
 		this.f1 = getDados(fName);
 		this.f2 = getDados("is_long_method");
-		
+
 		frmMain = new JFrame("Analise - " + fName);
 		frmMain.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmMain.setResizable(true);
@@ -82,15 +81,15 @@ public class Avalia extends JPanel implements ListSelectionListener {
 		addFrameContents();
 		frmMain.setVisible(true);
 	}
-	
-	
+
+
 	/*
 	 * Conteúdos para o frame
 	 * 
 	 */
 
 	private void addFrameContents() {
-		
+
 		// Painel de topo
 		JPanel pnlNorth = new JPanel(new BorderLayout());
 
@@ -101,7 +100,7 @@ public class Avalia extends JPanel implements ListSelectionListener {
 		pnlInfo.add(lblConfig, BorderLayout.EAST);
 		pnlNorth.add(pnlInfo, BorderLayout.NORTH);
 		frmMain.add(pnlNorth, BorderLayout.NORTH);
-		
+
 		// Com os dados
 		JPanel pnlData = new JPanel(new BorderLayout());
 		pnlData.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -116,15 +115,16 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	 * Calcula o getIndicador.
 	 * 
 	 * @param  com o Metodo a incluir
-	 * @return linha
+	 * 
+	 * @return int com o Indicator
 	 */
 
 	private int getIndicador(String iName) {
-		
+
 		int ret = 0;
 
 		for ( Metodo metodo : listaMetodos) {
-			
+
 			switch (iName) {
 			case "DCI":
 				if(f1.getResultado(metodo.getMethodID()) && f2.getResultado(metodo.getMethodID()))
@@ -158,21 +158,28 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	 */
 
 	private Ferramenta getDados(String nome) {
-		
+
 		for(Ferramenta f : listaFerramentas)
 			if (f.getNome().equals(nome))
 				return f;
-		
+
 		return null;
 	}
 
-	 
+	/**
+	 * 
+	 * Main method to start application Avalia.
+	 *
+	 * @param args String[] parametros iniciais.
+	 */
+
+
 	public static void main(String[] args) {
 
 		listaRegras = App.carregaRegras(App.REGRAS);
 		listaMetodos = App.carregaMetodos(App.FILE);
 		listaFerramentas = App.carregaFerramentas(App.FILE);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new Avalia("PMD");
@@ -182,12 +189,15 @@ public class Avalia extends JPanel implements ListSelectionListener {
 	}
 
 
-	@Override
+	/**
+	 * 
+	 * method valueChanged
+	 *
+	 * @param e ListSelectionEvent evento a ser verificado
+	 * 
+	 */
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
-	
 }

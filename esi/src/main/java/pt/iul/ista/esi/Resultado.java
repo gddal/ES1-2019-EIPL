@@ -8,14 +8,13 @@ public class Resultado {
 
 	/**
 	 * 
-	 * Construtor para o Objecto resultado da analize
+	 * Construtor para o Objecto resultado da analise
 	 *
 	 * @param methodID  int ID do metodo.
-	 * @param valor Boolean resultado da analize.
+	 * @param valor boolean resultado da analise.
 	 */
-	// Construtor
-	//
-	public Resultado(int methodID, Boolean valor) {
+
+	public Resultado(int methodID, boolean valor) {
 		this.methodID = methodID;
 		this.valor = valor;
 	}
@@ -35,9 +34,9 @@ public class Resultado {
 
 	/**
 	 * 
-	 * Getter para o resultado da analize
+	 * Getter para o resultado da analise
 	 *
-	 * @return Boolean resultado da analize.
+	 * @return boolean resultado da analise.
 	 * 
 	 */
 
@@ -50,29 +49,28 @@ public class Resultado {
 	 * equals para comparar dois resultados.
 	 *
 	 * @param objecto Object para comparar.
-
-	 * @return
-	 *         Boolean verdadeiro se os resultados forem iguais falso caso contrário
+	 * 
+	 * @return boolean verdadeiro se os resultados forem iguais falso caso contrário
 	 * 
 	 */
 	@Override
 	public boolean equals(Object objecto) {
-		
+
 		// Se é ele proprio return true   
-        if (objecto == this) { 
-            return true; 
-        } 
-  
-        // Testa se é uma Resultado
-        if (!(objecto instanceof Resultado)) { 
-            return false; 
-        } 
-          
-        // typecast para Resultado para poder comparar  
-        Resultado resultado= (Resultado) objecto; 
-          
-        // Compara os atibutos  
-        return this.methodID == resultado.getMethodID() && this.valor == resultado.getValor(); 
-    }
+		if (objecto == this) { 
+			return true; 
+		} 
+
+		// Testa se é uma Resultado
+		if (!(objecto instanceof Resultado)) { 
+			return false; 
+		} 
+
+		// typecast para Resultado para poder comparar  
+		Resultado resultado= (Resultado) objecto; 
+
+		// Compara os atibutos  
+		return this.methodID == resultado.getMethodID() && this.valor == resultado.getValor(); 
+	}
 
 }

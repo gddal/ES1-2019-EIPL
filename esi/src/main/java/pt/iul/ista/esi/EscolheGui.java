@@ -1,19 +1,19 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 package pt.iul.ista.esi;
 
 import java.awt.BorderLayout;
@@ -37,6 +37,12 @@ public class EscolheGui {
 	private JPanel panel;
 	private JLabel lbl;
 
+
+	/**
+	 * 
+	 * Construtor para a classe EscolheGui
+	 * 
+	 */
 	public EscolheGui() {
 
 		addFrameContent();

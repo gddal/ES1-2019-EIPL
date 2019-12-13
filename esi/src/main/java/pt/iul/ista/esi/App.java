@@ -87,6 +87,15 @@ public class App {
 
 	}
 
+	/**
+	 * 
+	 * Grava a regras defenidas
+	 * 
+	 * @param file        String com o nome do ficheiro.
+	 * @param regra Regra que vai ser gravada.
+	 *
+	 */
+
 	public static void gravaRegra(String file, Regra regra) {
 
 		PrintWriter printwriter = null;
@@ -109,7 +118,7 @@ public class App {
 
 	/**
 	 * 
-	 * Garrega para listaRegras todas as regras defenidas no ficheiro
+	 * Carrega para listaRegras todas as regras definidas no ficheiro
 	 * 
 	 * @param file String nome do ficheiro.
 	 *
@@ -145,7 +154,7 @@ public class App {
 
 	/**
 	 * 
-	 * Garrega para listaMetodos todos os Metodos defenidos no ficheiro Excel
+	 * Carrega para listaMetodos todos os Metodos definidos no ficheiro Excel
 	 * 
 	 * @param file String nome do ficheiro.
 	 *
@@ -218,7 +227,7 @@ public class App {
 
 	/**
 	 * 
-	 * Carrega para listaFerramentas todos os resultados defenidos no ficheiro Excel
+	 * Carrega para listaFerramentas todos os resultados definidos no ficheiro Excel
 	 * 
 	 * @param file String nome do ficheiro.
 	 *
@@ -273,22 +282,22 @@ public class App {
 	/**
 	 * 
 	 * Calcula os resultados da regra para esta ferramenta
-	 * 
-	 * 
+	 * @param nome String nome da ferramenta.
+	 *
 	 */
 	public static void calcula(String nome) {
-		
-        Ferramenta ferramenta = getFerramenta(nome);
-		Regra regra = getRegra(nome);
-        
-        if( regra == null)
-        	return;
 
-        if( ferramenta == null)
-        	ferramenta = new Ferramenta(nome);
-        else
-    		ferramenta.limpaResultados();
-        					
+		Ferramenta ferramenta = getFerramenta(nome);
+		Regra regra = getRegra(nome);
+
+		if( regra == null)
+			return;
+
+		if( ferramenta == null)
+			ferramenta = new Ferramenta(nome);
+		else
+			ferramenta.limpaResultados();
+
 		for( Metodo metodo : App.listaMetodos)
 			try {
 				ferramenta.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));
@@ -319,7 +328,7 @@ public class App {
 	 * 
 	 * Retorna o objeto Metodo com o ID nome se ele existir na lista
 	 * 
-	 * @param nome String nome da Metodo.
+	 * @param id int Id do Metodo.
 	 *
 	 * @return Metodo se ele existir, null caso contrário.
 	 *
@@ -351,6 +360,16 @@ public class App {
 		return null;
 	}
 
+
+	/**
+	 * 
+	 * Verifica se uma Regra já existe
+	 * 
+	 * @param r Regra que estamso a verificar.
+	 *
+	 * @return int 1 se existir, 0 caso contrário.
+	 *
+	 */
 	public static int contemRegra(Regra r) {
 		String rNome = r.getNome().replace(" ", "");
 		String rExpressao = r.getExpressao().trim();
@@ -377,7 +396,7 @@ public class App {
 	 * @return boolean sim ou não.
 	 *
 	 */
-	
+
 	public static boolean confirm(Component cmp, String msg) {
 		String[] ObjButtons = { "Sim", "Não" };
 		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION,
@@ -385,33 +404,28 @@ public class App {
 		return (PromptResult == JOptionPane.YES_OPTION);
 	}
 
-	
-	
+
+
 	/**
 	 * 
 	 * Devolve um vetor de strings do nome dos cabeçalhos excel.
 	 * 
-	 * 
-	 *
 	 * @return String[] nomes dos cabecalhos
 	 *
 	 */
-	
+
 	public static String[] columnMaker() {
-		
+
 		StringBuilder sb = new StringBuilder("ID;Package Name;Class Name;Method;LOC;CYCLO;ATFD;LAA");
 
 
 		for(int i = 0; i<App.listaFerramentas.size(); i++) {
 			sb.append(";"+App.listaFerramentas.get(i).getNome());
 		}
-		
 
-			
 		return sb.toString().split(";");
-		
 	}
-	
+
 	/**
 	 * 
 	 * Devolve um vetor de strings com a informacao de um metodo.
@@ -421,52 +435,51 @@ public class App {
 	 * @return String[] vetor com informacao de o metodo
 	 *
 	 */
-	
+
 	public static String[] infoFormatter(int i) {
-		
+
 		StringBuilder sb = new StringBuilder();
 		Metodo metodo = App.listaMetodos.get(i);
-		
+
 		sb.append(metodo.toString());
-		
-	/*	App.listaFerramentas.forEach(regra -> {
+
+		/*	App.listaFerramentas.forEach(regra -> {
 			try {
-				
+
 				Boolean resultado = regra.calcula(metodo);
 				sb.append(";" + resultado);
-				
+
 			} catch (ScriptException e) {
 				e.printStackTrace();
 			}
 		});
-		*/
+		 */
 		App.listaFerramentas.forEach(ferramenta -> {
 			Boolean resultado = ferramenta.getResultado(metodo.getMethodID());
-				sb.append(";" + resultado);
-				
+			sb.append(";" + resultado);
+
 		});
-		
+
 		String finalstring;
 		finalstring = sb.toString();
-		
+
 		return finalstring.split(";");
 
 	}
-	
-	
 
-	
 	/**
-	 * da reload as listas para serem atualizadas.
+	 * 
+	 * Faz refresh da Lista de Regras, Metodos e Ferramentas
+	 * 
 	 */
 	public static void refreshLists() {
-		
+
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
 		listaFerramentas = App.carregaFerramentas(FILE);
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * Main method to start application.
