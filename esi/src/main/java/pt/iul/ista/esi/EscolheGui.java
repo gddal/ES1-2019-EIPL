@@ -32,45 +32,38 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class EscolheGui {
-	
+
 	private JFrame frame;
 	private JPanel panel;
 	private JLabel lbl;
 
-	
 	public EscolheGui() {
 
 		addFrameContent();
-		
-	}
-	
-	
-	
 
-	
+	}
+
 	/*
 	 * Conteúdos para o GUI da classe janela
 	 * 
-	 *   Adicionar o conteudo aqui
-	 *   
-	 *  	|			|
-	 *  	|			|
-	 *  	V			V
+	 * Adicionar o conteudo aqui
+	 * 
+	 * | | | | V V
 	 */
 
 	private void addFrameContent() {
-	
-		JFileChooser filechooser = new JFileChooser();
+
+		JFileChooser filechooser = new JFileChooser(".");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Microsoft Excel", "xlsx");
 		filechooser.setFileFilter(filter);
-		
+
 		int i = filechooser.showOpenDialog(null);
-		
+
 		if (i == JFileChooser.APPROVE_OPTION) {
-		String path=filechooser.getSelectedFile().getAbsolutePath();
-		App.FILE = path;
-		System.out.println(App.FILE);
-		App.refreshLists();
+			String path = filechooser.getSelectedFile().getAbsolutePath();
+			App.FILE = path;
+			System.out.println(App.FILE);
+			App.refreshLists();
 		}
 	}
 

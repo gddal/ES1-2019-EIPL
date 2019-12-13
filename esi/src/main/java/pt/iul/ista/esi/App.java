@@ -429,17 +429,6 @@ public class App {
 	 * @param args String[] parametros iniciais
 	 */
 	public static void main(String[] args) {
-		
-		JFileChooser filechooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Microsoft Excel", "xlsx");
-		filechooser.setFileFilter(filter);
-		
-		int i = filechooser.showOpenDialog(null);
-		
-		if (i == JFileChooser.APPROVE_OPTION) {
-			String path=filechooser.getSelectedFile().getAbsolutePath();
-			FILE = path;
-		}
 
 		refreshLists();
 		SwingUtilities.invokeLater(new Runnable() {
