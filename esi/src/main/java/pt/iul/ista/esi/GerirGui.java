@@ -277,7 +277,7 @@ public class GerirGui implements ListSelectionListener{
 	 * 
 	 * method valueChange avalia o vlaor alterado
 	 * 
-	 * @param e ListSelectionEvent evento a validar
+	 * @param arg0 ListSelectionEvent evento a validar
 	 * 
 	 */
 	

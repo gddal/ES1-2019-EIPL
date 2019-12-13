@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import pt.iul.ista.esi.App;
 
-class ComparaGuiTest {
+class ValorEditorGuiTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -50,7 +50,9 @@ class ComparaGuiTest {
 
 	@Test
 	void testApp() {
-		new ComparaGui("nome").open();
+		Regra regra = new Regra("Teste", "LOC==1");
+
+		new ValorEditorGui(regra);
 		assertTrue(true);
 	}
 }
