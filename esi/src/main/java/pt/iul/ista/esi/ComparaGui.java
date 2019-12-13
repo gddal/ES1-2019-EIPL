@@ -55,11 +55,8 @@ import pt.iul.ista.esi.GerirGui.CreateListener;
 public class ComparaGui{
 	
 	private JTable displaytable;
-	String[] options = {"Yes","No"};
 	private JFrame frame;
 	private String name;
-	private JPanel panel;
-	private JLabel lbl;
 	private DefaultListModel<Ferramenta> ferramentaList;
 	private JList<Ferramenta> fl;
 	private DefaultTableModel model;
@@ -76,16 +73,13 @@ public class ComparaGui{
 	public ComparaGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
-		panel = new JPanel();
-		lbl = new JLabel("Are you sure?");
-		panel.add(lbl);
 		frame.setLayout(new BorderLayout());
 		frame.setSize(800, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showOptionDialog(null, panel, "Close Panel", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]) == JOptionPane.YES_OPTION) {
+				if (App.confirm(frame, "Deseja sair?")) {
 					frame.dispose();
 					
 				}

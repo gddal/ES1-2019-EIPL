@@ -56,11 +56,9 @@ public class AvaliaGui implements ListSelectionListener {
 	
 	
 	private JTable displaytable;
-	String[] options = {"Yes","No"};
 	private JFrame frame;
 	private String name;
-	private JPanel panel;
-	private JLabel lbl;
+
 	
 
 	/**
@@ -74,16 +72,13 @@ public class AvaliaGui implements ListSelectionListener {
 	public AvaliaGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
-		panel = new JPanel();
-		lbl = new JLabel("Are you sure?");
-		panel.add(lbl);
 		frame.setLayout(new BorderLayout());
 		frame.setSize(500, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showOptionDialog(null, panel, "Close Panel", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]) == JOptionPane.YES_OPTION) {
+				if (App.confirm(frame, "Deseja sair?")) {
 					frame.dispose();
 					
 				}

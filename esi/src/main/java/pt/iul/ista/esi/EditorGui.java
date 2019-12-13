@@ -43,9 +43,6 @@ public class EditorGui {
 
 	private String expressao;
 	private String name;
-	private String[] options = {"Yes","No"};
-	private JPanel panel;
-	private JLabel lbl;
 	private JFrame frame;
 	private JTextField textField;
 	private ArrayList<String> regra = new ArrayList<String>();
@@ -77,13 +74,10 @@ public class EditorGui {
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		panel = new JPanel();
-		lbl = new JLabel("Are you sure?");
-		panel.add(lbl);
 		hasRegraContent = false;
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				if (JOptionPane.showOptionDialog(null, panel, "Close Panel", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]) == JOptionPane.YES_OPTION) {
+				if (App.confirm(frame, "Deseja sair?")) {
 					frame.dispose();
 					
 				}
