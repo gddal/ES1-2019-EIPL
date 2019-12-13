@@ -50,6 +50,7 @@ public class ValorEditorGui {
 	private JPanel panel;
 	private JLabel lbl;
 	private Regra regra;
+	private ValorEditor editor;
 	
 
 	/**
@@ -63,6 +64,7 @@ public class ValorEditorGui {
 	
 	public ValorEditorGui(Regra regra) {
 		this.regra = regra;
+		editor = new ValorEditor(regra);
 		frame = new JFrame("Value Editor: " +  regra.getExpressao());
 		panel = new JPanel();
 		lbl = new JLabel("Are you sure?");
@@ -122,12 +124,9 @@ public class ValorEditorGui {
 		JButton applyB = new JButton("Apply");
 		applyB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * regra.setExpressao();
-				 * GerirGui.regraList.setElementAt(regra, 0);
-				 * App.listaRegras.set(index, element);
-				 * 
-				 */
+				
+				editor.mudaValores(textField.getText(), textField1.getText());
+				editor.atualizaListas();
 			}
 		});
 		
