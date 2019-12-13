@@ -20,8 +20,6 @@ public class Ferramenta {
 	 * @param nome Srting nome da ferramenta.
 	 * 
 	 */
-	// Construtor
-	//
 	public Ferramenta(String nome) {
 		this.nome = nome;
 		listaResultados = new ArrayList<Resultado>();
@@ -55,9 +53,9 @@ public class Ferramenta {
 
 	/**
 	 * 
-	 * Adiciona resulado à ferramenta.
+	 * Adiciona resultado à ferramenta.
 	 *
-	 * @param resultado Resultado resultado da analize.
+	 * @param resultado Resultado da analise.
 	 * 
 	 */
 
@@ -80,7 +78,7 @@ public class Ferramenta {
 	 * Devolve o resultado do teste para o metodo methodID.
 	 *
 	 * @param methodID int ID do metodo.
-	 * @return Boolean returna o valor do teste.
+	 * @return boolean returna o valor do teste.
 	 * @throws IllegalArgumentException caso o metodo não exeistir
 	 */
 
@@ -96,9 +94,9 @@ public class Ferramenta {
 
 	/**
 	 * 
-	 * toStrin para o objeto ferramenta.
+	 * toString para o objeto ferramenta.
 	 *
-	 * @return String Nome_da_ferramenta
+	 * @return String Nome da ferramenta
 	 * 
 	 */
 	@Override

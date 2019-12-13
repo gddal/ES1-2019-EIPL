@@ -88,10 +88,9 @@ public class Regra {
 
 	/**
 	 * 
-	 * toStrin para o objeto regra.
+	 * toString para o objeto regra.
 	 *
-	 * @return
-	 *         String Nome_da_regra;Expressao
+	 * @return String informação acerca da regra 
 	 * 
 	 */
 	@Override
@@ -105,8 +104,7 @@ public class Regra {
 	 *
 	 * @param objecto Object para comparar.
 
-	 * @return
-	 *         Boolean verdadeiro se as regras forem iguais falso caso contrário
+	 * @return boolean verdadeiro se as regras forem iguais falso caso contrário
 	 * 
 	 */
 	@Override
