@@ -77,14 +77,6 @@ public class ComparaGui{
 		frame.setSize(800, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				if (App.confirm(frame, "Deseja sair?")) {
-					frame.dispose();
-					
-				}
-			}
-		});
 		addFrameContent();
 
 			
