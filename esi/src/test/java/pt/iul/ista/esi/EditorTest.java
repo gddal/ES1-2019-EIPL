@@ -21,6 +21,9 @@ package pt.iul.ista.esi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 
 import org.junit.jupiter.api.AfterAll;
@@ -124,7 +127,11 @@ class EditorTest {
 	 */
 	@Test
 	final void testCriaRegra() {
-		fail("Not yet implemented"); // TODO
+		GerirGui g = new GerirGui("Gerir");
+		g.open();
+		editor.criaRegra("ola", "LOC > 10");
+		List<Regra> listaRegras = App.carregaRegras("regras.cfg");
+		assertNotEquals(App.listaRegras, listaRegras);
 	}
 
 	/**
