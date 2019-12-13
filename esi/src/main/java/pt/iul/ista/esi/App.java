@@ -45,7 +45,7 @@ public class App {
 	// Titulo
 	public static final String TITLE = "Analise de erros de software";
 	// Ficheiro de excel
-	public static final String FILE = "Long-Method.xlsx";
+	public static String FILE = "Long-Method.xlsx";
 	// Ficheiro de regras
 	public static final String REGRAS = "regras.cfg";
 
@@ -404,6 +404,21 @@ public class App {
 		
 		return finalstring.split(";");
 
+	}
+	
+	
+
+	
+	/**
+	 * da reload as listas para serem atualizadas.
+	 */
+	public static void refreshLists() {
+		
+		listaRegras = App.carregaRegras(REGRAS);
+		listaMetodos = App.carregaMetodos(FILE);
+		listaFerramentas = App.carregaFerramentas(FILE);
+		System.out.println(listaRegras.toString());
+		
 	}
 	
 	/**
