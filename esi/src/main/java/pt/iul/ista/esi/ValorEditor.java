@@ -16,16 +16,22 @@
 */
 package pt.iul.ista.esi;
 
-import java.util.ArrayList;
-
 public class ValorEditor {
 	
 	private Regra regra;
 	
+	/**
+	 * @param regra a modificar
+	 */
 	public ValorEditor(Regra regra) {
 		this.regra = regra;
 	}
 	
+	/**
+	 * Dadas duas Strings (valor1 e valor2) muda os thershHolds das expressoes
+	 * @param valor1
+	 * @param valor2
+	 */
 	public void  mudaValores(String valor1, String valor2) {
 		String[] splitRegra = new String[10];
 		String expressao = "";
@@ -40,6 +46,9 @@ public class ValorEditor {
 			regra.setExpressao(expressao);
 	}
 	
+	/**
+	 * Actualiza as listas de regras
+	 */
 	public void atualizaListas() {
 		if(regra.getExpressao() == App.listaRegras.get(0).getExpressao()) {
 		GerirGui.regraList.setElementAt(regra, 0);
