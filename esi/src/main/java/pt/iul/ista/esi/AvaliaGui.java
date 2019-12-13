@@ -75,7 +75,7 @@ public class AvaliaGui implements ListSelectionListener {
 		frame.setLayout(new BorderLayout());
 		frame.setSize(500, 550);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 		addFrameContent();
 

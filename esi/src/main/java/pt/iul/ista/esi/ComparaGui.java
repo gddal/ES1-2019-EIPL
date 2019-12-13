@@ -76,7 +76,7 @@ public class ComparaGui{
 		frame.setLayout(new BorderLayout());
 		frame.setSize(800, 550);
 		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addFrameContent();
 
 			
