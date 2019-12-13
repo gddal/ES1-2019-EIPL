@@ -1,21 +1,21 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-* 
-* Classe Gui
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Gui
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 
 package pt.iul.ista.esi;
 
@@ -53,7 +53,7 @@ import javax.swing.table.DefaultTableModel;
 import pt.iul.ista.esi.GerirGui.CreateListener;
 
 public class ComparaGui{
-	
+
 	private JTable displaytable;
 	private JFrame frame;
 	private String name;
@@ -64,12 +64,12 @@ public class ComparaGui{
 
 	/**
 	 * 
-	 * Construtor para a classe Janela
+	 * Construtor para a classe ComparaGui
 	 * 
-	 * @param name	string nome da janela.
+	 * @param name String nome da janela.
 	 *            
 	 */
-	
+
 	public ComparaGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
@@ -78,8 +78,8 @@ public class ComparaGui{
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		addFrameContent();
-		
-			
+
+
 	}
 
 	/*
@@ -93,8 +93,8 @@ public class ComparaGui{
 	 */
 
 	private void addFrameContent() {
-		
-		
+
+
 		if(App.listaRegras.size() > App.listaFerramentas.size() - 2) {
 			for(int i = App.listaFerramentas.size() - 2; i < App.listaRegras.size(); i++) {
 				Regra temp = App.listaRegras.get(i);
@@ -109,15 +109,15 @@ public class ComparaGui{
 				App.listaFerramentas.add(fer);
 			}
 		}
-		
-		
+
+
 		//---JList & DefaultListModel---
-		 
+
 		ferramentaList = new DefaultListModel<Ferramenta>();
 		for(int i = 0 ; i < App.listaFerramentas.size() ; i++) {
 			ferramentaList.addElement(App.listaFerramentas.get(i));
 		}
-				
+
 		fl = new JList<Ferramenta>(ferramentaList);
 		fl.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		fl.setSelectedIndex(0);
@@ -135,7 +135,7 @@ public class ComparaGui{
 		for(int i = 0 ; i < App.listaMetodos.size() ; i++) {
 			model.addRow(rowMaker(i));
 		}
-	
+
 		fl.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
@@ -144,42 +144,60 @@ public class ComparaGui{
 				}
 			}
 		});
-		
+
 		JScrollPane scroll = new JScrollPane(displaytable);
-				
-				
-		
-		
-		
+
+
+
+
+
 		JPanel listPane = new JPanel();
 		listPane.add(rscroll);
 		listPane.add(scroll);
-		
-	
-		
+
+
+
 		//---add to frame---
 		frame.add(listPane, BorderLayout.CENTER);
-		
+
 	}
-	
+
+
+	/**
+	 * 
+	 * method columnMaker
+	 * 
+	 * @return ArrayList<String> com as colunas resultantes 
+	 * 
+	 */
 	private String[] columnMaker() {
-		
+
 		StringBuilder sb = new StringBuilder("ID;Method;Resultado");
 		sb.append(";");
 		return sb.toString().split(";");
-		
+
 	}
-	
+
+
+	/**
+	 * 
+	 * method rowMaker
+	 * 
+	 * @param i posicao da Lista de metodos onde vai criar as linhas
+	 * 
+	 * @return ArrayList<String> com as linhas resultantes 
+	 * 
+	 */
 	private String[] rowMaker(int i) {
-		
+
 		Metodo metodo = App.listaMetodos.get(i);
 		StringBuilder sb = new StringBuilder(metodo.getMethodID()+";"+metodo.getMethodName() );
 		sb.append(";");
 		return sb.toString().split(";");
-	
+
 	}
-	
-	
+
+
 	/**
 	 * Abre a janela.
 	 * 
@@ -188,13 +206,11 @@ public class ComparaGui{
 		frame.setVisible(true);
 	}
 
-	
+
 	/**
 	 * Classe botao check
 	 * 
 	 */
-	
 
-	
-	
+
 }
