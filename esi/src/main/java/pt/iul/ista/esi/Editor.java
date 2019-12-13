@@ -20,6 +20,10 @@ import javax.script.ScriptException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * @author Mytuga
+ *
+ */
 public class Editor {
 	
 	private JFrame gui;
@@ -28,10 +32,19 @@ public class Editor {
 	private String PMD = "PMD";
 	private String iPlasma = "iPlasma";
 
+	/**
+	 * @param frame da GUI
+	 */
 	public Editor(JFrame frame) {
 		gui = frame;
 	}
 	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se pelo menos uma delas esta vazia
+	 * @param nome da regra
+	 * @param expressao da regra
+	 * @return true se pelo menos uma estiver vazia
+	 */
 	public boolean camposVazios(String nome, String expressao) {
 		if(nome.isEmpty() || expressao.isEmpty()) {
 			JOptionPane.showMessageDialog(gui, "Campo(s) Vazio(s)");
@@ -40,6 +53,12 @@ public class Editor {
 		return false;
 	}
 	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se a regra e valida logicamente
+	 * @param nome da regra
+	 * @param expressao da regra
+	 * @return true se a expressao for valida
+	 */
 	public boolean verificaRegra(String nome, String expressao) {
 		Regra r = new Regra(nome,expressao);
 		try {
@@ -51,6 +70,11 @@ public class Editor {
 		}
 	}
 	
+	/**
+	 * Dada uma String (nome) verifica se o nome é PMD ou iPlasma
+	 * @param nome da regra
+	 * @return false caso o nome seja PMD ou iPlasma
+	 */
 	public boolean testaNome(String nome) {
 		if(nome.equals(PMD) || nome.equals(iPlasma)) {
 			JOptionPane.showMessageDialog(gui, "Esse nome não pode ser utilizado");
@@ -59,6 +83,12 @@ public class Editor {
 			return true;
 	}
 	
+	/**
+	 * Dadas duas Strings (nome e expressao) verifica se existe alguma regra com o mesmo nome ou mesma expressao caso exista returna true
+	 * @param nome nome da regra
+	 * @param expressao expressao da regra
+	 * @return true se houver uma regra com o mesmo nome ou expressao
+	 */
 	public boolean existeRegra(String nome, String expressao) {
 		Regra r = new Regra(nome,expressao);
 		if(App.contemRegra(r)==1) {
@@ -72,6 +102,11 @@ public class Editor {
 			}
 		}
 	
+	/**
+	 * Dadas duas Strings (nome e expressao) cria uma regra e atualiza as listas de Regras.
+	 * @param nome nome da regra
+	 * @param expressao expressao da regra
+	 */
 	public void criaRegra(String nome, String expressao) {
 		Regra r = new Regra(nome,expressao);
 		App.listaRegras.add(r);
@@ -80,9 +115,11 @@ public class Editor {
 		JOptionPane.showMessageDialog(gui, "Regra criada com sucesso");
 	}
 	
+	/**
+	 * Recebe uma regra e gera os resultados da mesma 
+	 * @param r regra
+	 */
 	public void geraResultados(Regra r) {
-		if(App.getFerramenta(r.getNome())==null) {
 			App.calcula(r.getNome());
-		}
 	}
 }
