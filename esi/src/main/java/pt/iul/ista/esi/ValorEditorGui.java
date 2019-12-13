@@ -52,7 +52,7 @@ public class ValorEditorGui {
 	 * 
 	 * Construtor para a classe ValueEditorGui
 	 * 
-	 * @param name	string nome da janela.
+	 * @param regra	string nome da janela.
 	 *            
 	 * 
 	 */
