@@ -41,6 +41,7 @@ public class MenuGui extends JPanel{
 	private JButton gerirB;
 	private JButton avaliarB;
 	private JButton compararB;
+	private JButton escolherficheiroB;
 	
 	
 	/**
@@ -62,7 +63,7 @@ public class MenuGui extends JPanel{
 	public MenuGui() {
 		super(new BorderLayout());
 		frame = new JFrame("MENU");
-		frame.setSize(500, 200);
+		frame.setSize(700, 200);
 		frame.setLocationRelativeTo(null);		
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -100,7 +101,10 @@ public class MenuGui extends JPanel{
 		compararB.setActionCommand("compararAvalicacoes");
 		compararB.addActionListener(compararListener);
 		
-		
+		escolherficheiroB = new JButton("Escolher Ficheiro Excel");
+		EscolherficheiroListener escolherficheirolistener = new EscolherficheiroListener();
+		escolherficheiroB.setActionCommand("escolherficheiroexcel");
+		escolherficheiroB.addActionListener(escolherficheirolistener);
 		
 		
 		//---JPANEL---
@@ -109,6 +113,8 @@ public class MenuGui extends JPanel{
 		buttonPane.add(gerirB);
 		buttonPane.add(avaliarB);
 		buttonPane.add(compararB);
+		buttonPane.add(escolherficheiroB);
+		
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		
 		add(buttonPane, BorderLayout.PAGE_END);
@@ -156,6 +162,24 @@ public class MenuGui extends JPanel{
 				public void run() {
 					AvaliaGui ge = new AvaliaGui("Avaliar metodos");
 					ge.open();
+				}
+			});
+		}
+		
+	}
+	
+	/**
+	 * Classe do botao escolher ficheiro.
+	 */
+	
+	class EscolherficheiroListener implements ActionListener {
+
+		
+		public void actionPerformed(ActionEvent arg0) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					EscolheGui ef = new EscolheGui();
+					
 				}
 			});
 		}
