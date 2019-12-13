@@ -53,6 +53,9 @@ public class EditorGui {
 	private JTextField textField_valor;
 	private JTextField textField_regra;
 	private boolean hasRegraContent;
+	private Metodo metodo = new Metodo(0, "teste", "teste", "teste", 0, 0, 0, 0);
+	private String PMD = "PMD";
+	private String iPlasma = "iPlasma";
 	//private ScriptEngineManager factory = new ScriptEngineManager();
 	//private ScriptEngine engine = factory.getEngineByName("JavaScript");    
 	
@@ -60,24 +63,10 @@ public class EditorGui {
 	 * 
 	 * Construtor para classe Editor
 	 *
-	 * @param panel
-	 *            jpanel painel "Close panel".
-	 * @param options
-	 *            string[] lista de opçoes para o panel.
-	 * @param lbl
-	 *            jlabel label do panel.
-	 * @param textField
-	 *            jtextfield barra de texto que mostra a regra definida pelo user.
-	 * @param Regras
-	 * 			  arraylist<regras> lista de regras que foram criadas.
-	 * @param regra
-	 * 			  arraylist<string> lista de strings selecionados para a regra nova.
-	 * @param textField_valor
-	 * 			  jtextfield caixa de texto para inserir valores numericos na regra nova.
-	 * @param textField_regra
-	 * 			  jtextfield caixa de texto para atribuir o nome da nova regra.
-	 * @param hasRegraContent
-	 * 			  boolean devolve true se existe conteudo no parametro "textField_regra", caso contrario devolve false. 
+	 * @param nome
+	 *            String nome da regra.
+	 * @param expressão
+	 *            String expressão de calculo.
 	 * 
 	 */
 	public EditorGui (String name, String expressao) {
@@ -244,7 +233,8 @@ public class EditorGui {
 					if (!textField_valor.getText().isEmpty() && App.contemRegra(new Regra(textField_regra.getText(), showRegra()))==0) {
 						// TODO
 						// Regras.clear();
-						if(hasRegraContent) {
+						boolean teste = new Regra(textField_regra.getText(), showRegra()).calcula(metodo); 
+						if(hasRegraContent && !textField_regra.getText().equals(PMD) && !textField_regra.getText().equals(iPlasma)) {
 							Regra temp = new Regra(textField_regra.getText(), showRegra());
 							App.listaRegras.add(temp);
 							GerirGui.regraList.addElement(temp);
@@ -258,7 +248,7 @@ public class EditorGui {
 						}
 					}
 				} catch (Exception e2) {
-					//JOptionPane.showMessageDialog(frame, "Regra Invalida");
+					JOptionPane.showMessageDialog(frame, "Regra Invalida");
 				}
 			}
 		});

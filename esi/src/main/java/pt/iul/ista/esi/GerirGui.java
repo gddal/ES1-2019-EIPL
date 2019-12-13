@@ -218,12 +218,13 @@ public class GerirGui implements ListSelectionListener{
 				button.setEnabled(false);
 			} else {
 				// tem que ter um metodo para eliminar um elemento regra 
-				if(list.isSelectedIndex(index)) {
-					App.apagaRegra("regras.cfg", App.listaRegras.get(index));
+				if(index>1) {
+					//App.apagaRegra("regras.cfg", App.listaRegras.get(index));
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
+					App.gravaRegras("regras.cfg", App.listaRegras);
 				}else {
-					System.out.println("Delete Interrupted: não existe tal regra");
+					JOptionPane.showMessageDialog(frame, "Não pode apagar essa regra");
 				}
 				
 			}
@@ -248,15 +249,22 @@ public class GerirGui implements ListSelectionListener{
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-			
+			int index = list.getSelectedIndex();
 			if (App.listaRegras.size() == 0) { 
 				button.setEnabled(false);
 			} else {
-				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
-						gj.open();
+						System.out.println(index);
+						if(index==0) {
+							//ThresHoldGui gui = new ThresHoldGui();
+							
+						}else if(index==1) {
+							//ThresHoldGui gui = new ThresHoldGui();
+						}else {
+							EditorGui gj = new EditorGui(list.getSelectedValue().getNome(), list.getSelectedValue().getExpressao()); 
+							gj.open();						
+						}
 					}
 				});
 			}

@@ -1,9 +1,9 @@
 package pt.iul.ista.esi;
 
+import java.awt.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -45,7 +46,7 @@ public class App {
 	// Ficheiro de excel
 	public static final String FILE = "Long-Method.xlsx";
 	// Ficheiro de regras
-	private static final String REGRAS = "regras.cfg";
+	public static final String REGRAS = "regras.cfg";
 
 	// Lista com todas as regras defenidas
 	public static List<Regra> listaRegras = new ArrayList<Regra>();
@@ -82,7 +83,7 @@ public class App {
 		}
 
 	}
-	
+
 	public static void gravaRegra(String file, Regra regra) {
 
 		PrintWriter printwriter = null;
@@ -137,27 +138,6 @@ public class App {
 		}
 
 		return listaRegras;
-	}
-	
-	//SE HOUVER UMA REGRA : OLA_01 e OLA_02 e mandarmos apagar a "OLA" FICAMOS COM _01 e _02
-	public static void apagaRegra(String file, Regra regra) {
-			
-	        Scanner inputs;
-			try {
-				inputs = new Scanner(new FileReader(file));
-				PrintWriter outputs = new PrintWriter(new FileWriter(file));
-				while(inputs.hasNext()){
-					String s1 = inputs.nextLine();
-					String s2 = s1.replaceAll(regra.toString(), "");
-					outputs.write(s2);
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	}
 
 	/**
@@ -233,6 +213,15 @@ public class App {
 		return lista;
 	}
 
+	/**
+	 * 
+	 * Carrega para listaFerramentas todos os resultados defenidos no ficheiro Excel
+	 * 
+	 * @param file String nome do ficheiro.
+	 *
+	 * @return ArrayList com as Ferramentas.
+	 *
+	 */
 	public static List<Ferramenta> carregaFerramentas(String file) {
 
 		List<Ferramenta> lista = new ArrayList<Ferramenta>();
@@ -260,10 +249,10 @@ public class App {
 
 					linhaExcel = iteradorLinha.next();
 					resultado = new Resultado((int) linhaExcel.getCell(0).getNumericCellValue(),
-					linhaExcel.getCell(i).getBooleanCellValue());
+							linhaExcel.getCell(i).getBooleanCellValue());
 					ferramenta.addResultado(resultado);
 				}
-				
+
 				lista.add(ferramenta);
 			}
 
@@ -277,21 +266,74 @@ public class App {
 		}
 		return lista;
 	}
-	
+
+	/**
+	 * 
+	 * Retorna o objeto Regra com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Regra se ela existir, null caso contrário.
+	 *
+	 */
+	public static Regra getRegra(String nome) {
+
+		for (Regra regra : listaRegras)
+			if (regra.getNome().equals(nome)) {
+				return regra;
+			}
+		return null;
+	}
+
+	/**
+	 * 
+	 * Retorna o objeto Ferramenta com o mesmo nome se ele existir na lista
+	 * 
+	 * @param nome String nome da regra.
+	 *
+	 * @return Ferramenta se ela existir, null caso contrário.
+	 *
+	 */
+	public static Ferramenta getFerramenta(String nome) {
+
+		for (Ferramenta ferramenta : listaFerramentas)
+			if (ferramenta.getNome().equals(nome)) {
+				return ferramenta;
+			}
+		return null;
+	}
+
 	public static int contemRegra(Regra r) {
 		String rNome = r.getNome().replace(" ", "");
 		String rExpressao = r.getExpressao().trim();
-		for(Regra regra : listaRegras) {
+		for (Regra regra : listaRegras) {
 			String regraNome = regra.getNome().trim();
 			String regraExpressao = regra.getExpressao().trim();
-			if(rNome.equals(regraNome))
+			if (rNome.equals(regraNome))
 				return 1;
-			if(rExpressao.equals(regraExpressao))
+			if (rExpressao.equals(regraExpressao))
 				return 2;
-			System.out.println(rNome +" " +rExpressao +" regra da lista");
-			System.out.println(regraNome +" " +regraExpressao);
+			System.out.println(rNome + " " + rExpressao + " regra da lista");
+			System.out.println(regraNome + " " + regraExpressao);
 		}
 		return 0;
+	}
+
+	/**
+	 * 
+	 * Mostra uma janela de confirmação.
+	 * 
+	 * @param cmp Component objecto a que pretence a janela
+	 * @param msg String mensagem a apresentar
+	 *
+	 * @return boolean sim ou não.
+	 *
+	 */
+	public static boolean confirm(Component cmp, String msg) {
+		String[] ObjButtons = { "Sim", "Não" };
+		int PromptResult = JOptionPane.showOptionDialog(cmp, msg, TITLE, JOptionPane.DEFAULT_OPTION,
+				JOptionPane.QUESTION_MESSAGE, null, ObjButtons, ObjButtons[1]);
+		return (PromptResult == JOptionPane.YES_OPTION);
 	}
 
 	/**
@@ -305,6 +347,7 @@ public class App {
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
 		listaFerramentas = App.carregaFerramentas(FILE);
+		System.out.println(listaRegras.toString());
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

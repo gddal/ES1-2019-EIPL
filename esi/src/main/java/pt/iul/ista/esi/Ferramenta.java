@@ -3,6 +3,10 @@ package pt.iul.ista.esi;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 public class Ferramenta {
 
 	// Atributos
@@ -13,7 +17,7 @@ public class Ferramenta {
 	 * 
 	 * Construtor para o Objecto Ferramenta
 	 *
-	 * @param nome            Srting nome da ferramenta.
+	 * @param nome Srting nome da ferramenta.
 	 * 
 	 */
 	// Construtor
@@ -63,16 +67,12 @@ public class Ferramenta {
 
 	/**
 	 * 
-	 * Verifica se o resultado já existe.
+	 * Limpa a lista de resulados da ferramenta.
 	 *
-	 * @param resultado Resultado resultado da analize.
-	 * @return Boolean verdadeiro se o resultado já existir na lista, falso caso
-	 *         contrário.
-	 * 
 	 */
 
-	public boolean existsResultado(Resultado resultado) {
-		return this.listaResultados.contains(resultado);
+	public void limpaResultados() {
+		this.listaResultados.clear();
 	}
 
 	/**
@@ -94,4 +94,34 @@ public class Ferramenta {
 		throw new IllegalArgumentException("Metodo não encontrado");
 	}
 
+	/**
+	 * 
+	 * toStrin para o objeto ferramenta.
+	 *
+	 * @return String Nome_da_ferramenta
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return this.nome;
+	}
+
+	/**
+	 * 
+	 * Calcula os resultados da regra para esta ferramenta
+	 * 
+	 * 
+	 */
+	public void calcula() {
+		
+		Regra regra = App.getRegra(this.nome);
+	
+		this.limpaResultados();
+		for( Metodo metodo : App.listaMetodos)
+			try {
+				this.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));
+			} catch (ScriptException e) {
+				continue;
+			}
+	}
 }

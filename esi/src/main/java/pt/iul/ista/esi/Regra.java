@@ -141,25 +141,25 @@ public class Regra {
 	 * 
 	 */
 	public boolean calcula(Metodo metodo) throws ScriptException {
-
+		String toTest = expressao;
 		int loc = metodo.getLoc();
 		int cyclo = metodo.getCyclo();
 		int atfd = metodo.getAtfd();
 		double laa = metodo.getLaa();
 
-		if (this.expressao.contains("LOC"))
-			this.expressao = this.expressao.replace("LOC", Integer.toString(loc));
-		if (this.expressao.contains("CYCLO"))
-			this.expressao = this.expressao.replace("CYCLO", Integer.toString(cyclo));
-		if (this.expressao.contains("ATFD"))
-			this.expressao = this.expressao.replace("ATFD", Integer.toString(atfd));
-		if (this.expressao.contains("LAA"))
-			this.expressao = this.expressao.replace("LAA", Double.toString(laa));
+		if (toTest.contains("LOC"))
+			toTest = toTest.replace("LOC", Integer.toString(loc));
+		if (toTest.contains("CYCLO"))
+			toTest = toTest.replace("CYCLO", Integer.toString(cyclo));
+		if (toTest.contains("ATFD"))
+			toTest = toTest.replace("ATFD", Integer.toString(atfd));
+		if (toTest.contains("LAA"))
+			toTest = toTest.replace("LAA", Double.toString(laa));
 
 		ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-		boolean result = (boolean) engine.eval(this.expressao);
+		boolean result = (boolean) engine.eval(toTest);
 
-		return result;
+	return result;
 	}
 
 }
