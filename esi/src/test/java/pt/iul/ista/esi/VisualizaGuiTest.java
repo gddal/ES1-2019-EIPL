@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import pt.iul.ista.esi.App;
 
-class AvaliaGuiTest {
+class VisualizaGuiTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

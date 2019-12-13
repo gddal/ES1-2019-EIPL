@@ -50,6 +50,7 @@ class ComparaGuiTest {
 
 	@Test
 	void testApp() {
+		App.refreshLists();
 		new ComparaGui("nome").open();
 		assertTrue(true);
 	}

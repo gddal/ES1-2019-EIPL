@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SelectClasses({ AppTest.class, RegraTest.class, MetodoTest.class, ResultadoTest.class, MenuGuiTest.class,
-		EditorGuiTest.class, EditorTest.class, AvaliaGuiTest.class, GerirGuiTest.class, EscolheGuiTest.class, ComparaGuiTest.class,
+		EditorGuiTest.class, EditorTest.class,  VisualizaGuiTest.class, GerirGuiTest.class, EscolheGuiTest.class, ComparaGuiTest.class,
 		FerramentaTest.class, ValorEditorGuiTest.class })
 public class AllTests {
 

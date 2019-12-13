@@ -53,7 +53,7 @@ public class MenuGui extends JPanel{
 	public MenuGui() {
 		super(new BorderLayout());
 		frame = new JFrame("MENU");
-		frame.setSize(700, 200);
+		frame.setSize(800, 200);
 		frame.setLocationRelativeTo(null);	
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

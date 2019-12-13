@@ -156,10 +156,24 @@ public class ComparaGui{
 		listPane.add(scroll);
 
 
+		JButton but = new JButton("Avaliar ferramenta");
+		but.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						new AvaliaGui(fl.getSelectedValue().getNome());
+					}
+				});
+			}
+			
+		});
+		
+		
 		//---add to frame---
 		frame.add(listPane, BorderLayout.CENTER);
-
+		frame.add(but, BorderLayout.PAGE_END);
 	}
 
 
