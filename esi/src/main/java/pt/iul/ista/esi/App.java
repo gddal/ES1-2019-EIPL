@@ -13,10 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.script.ScriptException;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -380,8 +378,6 @@ public class App {
 				return 1;
 			if (rExpressao.equals(regraExpressao))
 				return 2;
-			System.out.println(rNome + " " + rExpressao + " regra da lista");
-			System.out.println(regraNome + " " + regraExpressao);
 		}
 		return 0;
 	}

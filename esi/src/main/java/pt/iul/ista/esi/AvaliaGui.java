@@ -22,17 +22,11 @@ package pt.iul.ista.esi;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-public class AvaliaGui extends JPanel implements ListSelectionListener {
+public class AvaliaGui extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JFrame frmMain;
@@ -146,20 +140,5 @@ public class AvaliaGui extends JPanel implements ListSelectionListener {
 				return f;
 
 		return null;
-	}
-
-	
-
-
-	/**
-	 * 
-	 * method valueChanged
-	 *
-	 * @param e ListSelectionEvent evento a ser verificado
-	 * 
-	 */
-	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

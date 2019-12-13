@@ -3,10 +3,6 @@ package pt.iul.ista.esi;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
 public class Ferramenta {
 
 	// Atributos

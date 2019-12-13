@@ -22,8 +22,6 @@ package pt.iul.ista.esi;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -203,11 +201,9 @@ public class GerirGui implements ListSelectionListener{
 			} else {
 				// tem que ter um metodo para eliminar um elemento regra 
 				if(index>1) {
-					//App.apagaRegra("regras.cfg", App.listaRegras.get(index));
 					App.listaFerramentas.remove(index);
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
-//					App.gravaRegras(App.REGRAS, App.listaRegras);
 				}else {
 					JOptionPane.showMessageDialog(frame, "Não pode apagar essa regra");
 				}

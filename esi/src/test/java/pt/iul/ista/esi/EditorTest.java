@@ -21,7 +21,6 @@ package pt.iul.ista.esi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -134,12 +133,5 @@ class EditorTest {
 		assertNotEquals(App.listaRegras, listaRegras);
 	}
 
-	/**
-	 * Test method for {@link pt.iul.ista.esi.Editor#geraResultados(pt.iul.ista.esi.Regra)}.
-	 */
-	@Test
-	final void testGeraResultados() {
-		fail("Not yet implemented"); // TODO
-	}
 
 }

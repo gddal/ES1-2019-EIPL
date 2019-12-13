@@ -16,27 +16,10 @@
  */
 package pt.iul.ista.esi;
 
-import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 
 public class EscolheGui {
-
-	private JFrame frame;
-	private JPanel panel;
-	private JLabel lbl;
-
 
 	/**
 	 * 

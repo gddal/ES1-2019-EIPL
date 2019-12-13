@@ -22,35 +22,20 @@ package pt.iul.ista.esi;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
-
 import javax.script.ScriptException;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-
-import pt.iul.ista.esi.GerirGui.CreateListener;
 
 public class ComparaGui{
 
@@ -146,15 +131,10 @@ public class ComparaGui{
 		});
 
 		JScrollPane scroll = new JScrollPane(displaytable);
-
-
-
-
-
 		JPanel listPane = new JPanel();
+		
 		listPane.add(rscroll);
 		listPane.add(scroll);
-
 
 		JButton but = new JButton("Avaliar ferramenta");
 		but.addActionListener(new ActionListener() {
@@ -176,7 +156,6 @@ public class ComparaGui{
 		frame.add(but, BorderLayout.PAGE_END);
 	}
 
-
 	/**
 	 * 
 	 * method columnMaker
@@ -184,6 +163,7 @@ public class ComparaGui{
 	 * @return ArrayList<String> com as colunas resultantes 
 	 * 
 	 */
+	
 	private String[] columnMaker() {
 
 		StringBuilder sb = new StringBuilder("ID;Method;Resultado");
@@ -191,7 +171,6 @@ public class ComparaGui{
 		return sb.toString().split(";");
 
 	}
-
 
 	/**
 	 * 
@@ -211,7 +190,6 @@ public class ComparaGui{
 
 	}
 
-
 	/**
 	 * Abre a janela.
 	 * 
@@ -219,12 +197,4 @@ public class ComparaGui{
 	public void open() {
 		frame.setVisible(true);
 	}
-
-
-	/**
-	 * Classe botao check
-	 * 
-	 */
-
-
 }
