@@ -1,21 +1,21 @@
 /**
-*
-* Trabalho final de Engenharia de Software I 2019/20
-* 
-* Grupo 85
-* 
-* Projecto Analise de erros de software.
-* 
-* Classe Gui
-*
-* @author Miguel Diaz Gonçalves 82493
-* @author Gonçalo Dias do Amaral 83380
-* @author Miguel Carriço 73745
-* @author André Freitas 82361
-* @author Pedro Jones 82946
-* @version 0.01
-*
-*/
+ *
+ * Trabalho final de Engenharia de Software I 2019/20
+ * 
+ * Grupo 85
+ * 
+ * Projecto Analise de erros de software.
+ * 
+ * Classe Gui
+ *
+ * @author Miguel Diaz Gonçalves 82493
+ * @author Gonçalo Dias do Amaral 83380
+ * @author Miguel Carriço 73745
+ * @author André Freitas 82361
+ * @author Pedro Jones 82946
+ * @version 0.01
+ *
+ */
 
 package pt.iul.ista.esi;
 
@@ -52,23 +52,23 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class AvaliaGui implements ListSelectionListener {
-	
-	
-	
+
+
+
 	private JTable displaytable;
 	private JFrame frame;
 	private String name;
 
-	
+
 
 	/**
 	 * 
 	 * Construtor para a classe Janela
 	 *
-	 * @param name
-	 *            string nome da janela.
+	 * @param name String nome da janela.
+	 * 
 	 */
-	
+
 	public AvaliaGui(String name) {
 		this.name = name;
 		frame = new JFrame(this.name);
@@ -76,10 +76,10 @@ public class AvaliaGui implements ListSelectionListener {
 		frame.setSize(500, 550);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		
+
 		addFrameContent();
 
-			
+
 	}
 
 	/*
@@ -93,10 +93,10 @@ public class AvaliaGui implements ListSelectionListener {
 	 */
 
 	private void addFrameContent() {
-	//---JTable & DefaultTableModel---
+		//---JTable & DefaultTableModel---
 		JPanel p = new JPanel();
-		
-		
+
+
 		displaytable = new JTable();
 		DefaultTableModel model = (DefaultTableModel) displaytable.getModel();
 		String[] colunas = App.columnMaker();
@@ -108,31 +108,37 @@ public class AvaliaGui implements ListSelectionListener {
 
 			model.addRow(App.infoFormatter(i));
 		}
-	
+
 		JScrollPane scroll = new JScrollPane(displaytable);
-				
-				
-		
+
+
+
 		frame.add(scroll, BorderLayout.CENTER);
-				
-		
-		
+
+
+
 	}
-	
-	
+
+
 	/**
 	 * Abre a janela.
 	 * 
 	 */
-	
+
 	public void open() {
 		frame.setVisible(true);
 	}
 
-	@Override
+	/**
+	 * 
+	 * method valueChanged
+	 *
+	 * @param arg0 ListSelectionEvent evento a ser verificado
+	 * 
+	 */
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
