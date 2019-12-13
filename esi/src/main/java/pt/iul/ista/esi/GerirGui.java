@@ -64,25 +64,8 @@ public class GerirGui implements ListSelectionListener{
 	 * 
 	 * Construtor para a classe AvaliaGui
 	 *
-	 * @param frane
-	 *            jframe frame da classe janela.
 	 * @param name
 	 *            string nome da janela.
-	 * @param panel 
-	 *            jpanel painel "Close Panel".
-	 * @param lbl
-	 * 		      jlabel label situado no painel "Close Panel".
-	 * @param criarB
-	 *            jbutton que cria uma janela para aplicar uma nova regra.
-	 * @param eliminarB
-	 *            jbutton que elimina uma regra.
-	 * @param editarB
-	 *            jbutton que cria uma janela que edita uma regra existente.
-	 * @param list
-	 * 			  jlist<regra> lista de regras.
-	 * @param regraList
-	 * 			  defaultlistmodel<regra> modelo da "list".
-	 * 
 	 * 
 	 */
 	

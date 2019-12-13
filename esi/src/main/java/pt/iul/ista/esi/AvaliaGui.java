@@ -67,16 +67,8 @@ public class AvaliaGui implements ListSelectionListener {
 	 * 
 	 * Construtor para a classe Janela
 	 *
-	 * @param frane
-	 *            jframe frame da classe janela.
 	 * @param name
 	 *            string nome da janela.
-	 * @param panel 
-	 *            jpanel painel "Close Panel".
-	 * @param lbl
-	 *            jlabel label situado no painel "Close Panel".
-	 * @param displaytable
-	 * 			  jtable tabela que mostra os métodos guardados na "App.listaRegra".
 	 */
 	
 	public AvaliaGui(String name) {

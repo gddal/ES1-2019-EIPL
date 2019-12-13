@@ -39,6 +39,14 @@ class FerramentaTest {
 	}
 
 	@Test
+	void testLimpaResultados() {
+		ferramenta.addResultado(new Resultado(1, true));
+		assertNotNull(ferramenta.getListaResultados());
+		ferramenta.limpaResultados();
+		assertNull(ferramenta.getListaResultados());
+	}
+
+	@Test
 	void testGetListaResultados() {
 		lista = ferramenta.getListaResultados();
 		assertTrue(lista.isEmpty());
@@ -57,5 +65,10 @@ class FerramentaTest {
 			ferramenta.getResultado(99);
 		});
 	}
-
+	
+	@Test
+	void testToString() {
+		assertEquals(ferramenta.toString(), "Ferramenta");
+	}
+	
 }
