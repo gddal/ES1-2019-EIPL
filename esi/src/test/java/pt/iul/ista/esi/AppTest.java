@@ -72,7 +72,6 @@ class AppTest {
 
 		File file = new File("Long-Method.xlsx"); 
 		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
-
 		App.gravaRegra("teste_regras.tmp", regra);
 
 	}
@@ -100,7 +99,23 @@ class AppTest {
 	}
 
 	@Test
-	void testcontemRegra() {
+	void testCarregaFerramentas() {
+
+		assertFalse(App.carregaFerramentas(App.FILE).isEmpty());
+	}
+
+	@Test
+	void testCalcula() {
+
+		App.refreshLists();
+		Ferramenta ferramenta = App.getFerramenta("is_long_method");
+		ferramenta.limpaResultados();
+		assertTrue(ferramenta.getListaResultados().isEmpty());
+		App.calcula(ferramenta.getNome());
+		assertFalse(ferramenta.getListaResultados().isEmpty());
+	}
+	@Test
+	void testContemRegra() {
 		regra = new Regra("is_long_method", "LOC > 80 && CYCLO >10");
 
 		App.contemRegra(regra);

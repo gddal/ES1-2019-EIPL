@@ -105,23 +105,4 @@ public class Ferramenta {
 	public String toString() {
 		return this.nome;
 	}
-
-	/**
-	 * 
-	 * Calcula os resultados da regra para esta ferramenta
-	 * 
-	 * 
-	 */
-	public void calcula() {
-		
-		Regra regra = App.getRegra(this.nome);
-	
-		this.limpaResultados();
-		for( Metodo metodo : App.listaMetodos)
-			try {
-				this.addResultado(new Resultado(metodo.getMethodID(),regra.calcula(metodo)));
-			} catch (ScriptException e) {
-				continue;
-			}
-	}
 }
