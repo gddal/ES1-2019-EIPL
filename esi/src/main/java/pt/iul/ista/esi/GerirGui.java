@@ -205,7 +205,7 @@ public class GerirGui implements ListSelectionListener{
 					//App.apagaRegra("regras.cfg", App.listaRegras.get(index));
 					App.listaRegras.remove(index);
 					regraList.removeElementAt(index);
-					App.gravaRegras("regras.cfg", App.listaRegras);
+					App.gravaRegras(App.REGRAS, App.listaRegras);
 				}else {
 					JOptionPane.showMessageDialog(frame, "Não pode apagar essa regra");
 				}

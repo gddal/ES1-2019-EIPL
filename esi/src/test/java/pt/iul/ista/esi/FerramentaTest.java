@@ -43,7 +43,7 @@ class FerramentaTest {
 		ferramenta.addResultado(new Resultado(1, true));
 		assertNotNull(ferramenta.getListaResultados());
 		ferramenta.limpaResultados();
-		assertNull(ferramenta.getListaResultados());
+		assertTrue(ferramenta.getListaResultados().isEmpty());
 	}
 
 	@Test

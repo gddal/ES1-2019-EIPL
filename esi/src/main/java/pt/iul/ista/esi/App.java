@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.script.ScriptException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -417,7 +419,6 @@ public class App {
 		listaRegras = App.carregaRegras(REGRAS);
 		listaMetodos = App.carregaMetodos(FILE);
 		listaFerramentas = App.carregaFerramentas(FILE);
-		System.out.println(listaRegras.toString());
 		
 	}
 	
@@ -428,12 +429,19 @@ public class App {
 	 * @param args String[] parametros iniciais
 	 */
 	public static void main(String[] args) {
+		
+		JFileChooser filechooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Microsoft Excel", "xlsx");
+		filechooser.setFileFilter(filter);
+		
+		int i = filechooser.showOpenDialog(null);
+		
+		if (i == JFileChooser.APPROVE_OPTION) {
+			String path=filechooser.getSelectedFile().getAbsolutePath();
+			FILE = path;
+		}
 
-		listaRegras = App.carregaRegras(REGRAS);
-		listaMetodos = App.carregaMetodos(FILE);
-		listaFerramentas = App.carregaFerramentas(FILE);
-		System.out.println(listaRegras.toString());
-
+		refreshLists();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new MenuGui().open();

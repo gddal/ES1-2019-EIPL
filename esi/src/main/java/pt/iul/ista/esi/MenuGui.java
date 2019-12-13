@@ -37,6 +37,7 @@ import javax.swing.WindowConstants;
 
 public class MenuGui extends JPanel{
 	
+	private static final long serialVersionUID = 1L;
 	private static JFrame frame;
 	private JButton gerirB;
 	private JButton avaliarB;
